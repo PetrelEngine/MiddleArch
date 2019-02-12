@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(PetrelEngine)
+
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/Cmake/Modules)
+
+add_subdirectory(Source)
+
+add_subdirectory(Docs)
+
+add_subdirectory(PetrelSample)

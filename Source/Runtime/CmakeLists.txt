@@ -1,0 +1,6 @@
+
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/ DIR_RUNTIME_SRCS)
+
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/CoreObject DIR_RUNTIME_SRCS)
+
+add_library(Runtime ${DIR_RUNTIME_SRCS})
