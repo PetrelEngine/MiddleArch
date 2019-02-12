@@ -1,3 +1,0 @@
-aux_source_directory(. DIR_EDITOR_SRCS)
-
-add_library(Editor ${DIR_EDITOR_SRCS})

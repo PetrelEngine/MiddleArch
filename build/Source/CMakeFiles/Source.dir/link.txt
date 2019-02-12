@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libSource.a  CMakeFiles/Source.dir/Editor/editor.cpp.o CMakeFiles/Source.dir/Programs/programs.cpp.o CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libSource.a

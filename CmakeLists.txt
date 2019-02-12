@@ -4,8 +4,36 @@ project(PetrelEngine)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/Cmake/Modules)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
+set(DIRSRCS     ${CMAKE_CURRENT_SOURCE_DIR}/Source/Editor
+                ${CMAKE_CURRENT_SOURCE_DIR}/Source/Programs/
+                ${CMAKE_CURRENT_SOURCE_DIR}/Source/Runtime/
+                ${CMAKE_CURRENT_SOURCE_DIR}/Source/Runtime/CoreObject/
+                ${CMAKE_CURRENT_SOURCE_DIR}/Source/ThirdParty/)
+
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/ DIRSRCS)
+
+
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/Source 
+                    ${CMAKE_CURRENT_SOURCE_DIR}/Source/Editor/ 
+                    ${CMAKE_CURRENT_SOURCE_DIR}/Source/Programs/ 
+                    ${CMAKE_CURRENT_SOURCE_DIR}/Source/Runtime/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/Source/Runtime/CoreObject/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/Source/ThirdParty/)
+
 add_subdirectory(Source)
 
-add_subdirectory(Docs)
+#add_subdirectory(Docs)
 
-add_subdirectory(PetrelSample)
+#add_subdirectory(PetrelSample)
+
+add_executable(PetrelEngine ${DIRSRCS})
+
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+
+set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+
+target_link_libraries(PetrelEngine Source)

@@ -1,3 +1,0 @@
-aux_source_directory(. DIR_PROGRAMS_SRCS)
-
-add_library(Programs ${DIR_PROGRAMS_SRCS})
