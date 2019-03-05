@@ -60,15 +60,15 @@ include Source/CMakeFiles/Source.dir/flags.make
 Source/CMakeFiles/Source.dir/Editor/editor.cpp.o: Source/CMakeFiles/Source.dir/flags.make
 Source/CMakeFiles/Source.dir/Editor/editor.cpp.o: ../Source/Editor/editor.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object Source/CMakeFiles/Source.dir/Editor/editor.cpp.o"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Source.dir/Editor/editor.cpp.o -c /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Editor/editor.cpp
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Source.dir/Editor/editor.cpp.o -c /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Editor/editor.cpp
 
 Source/CMakeFiles/Source.dir/Editor/editor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Source.dir/Editor/editor.cpp.i"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Editor/editor.cpp > CMakeFiles/Source.dir/Editor/editor.cpp.i
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Editor/editor.cpp > CMakeFiles/Source.dir/Editor/editor.cpp.i
 
 Source/CMakeFiles/Source.dir/Editor/editor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Source.dir/Editor/editor.cpp.s"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Editor/editor.cpp -o CMakeFiles/Source.dir/Editor/editor.cpp.s
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Editor/editor.cpp -o CMakeFiles/Source.dir/Editor/editor.cpp.s
 
 Source/CMakeFiles/Source.dir/Editor/editor.cpp.o.requires:
 
@@ -84,15 +84,15 @@ Source/CMakeFiles/Source.dir/Editor/editor.cpp.o.provides.build: Source/CMakeFil
 Source/CMakeFiles/Source.dir/Programs/programs.cpp.o: Source/CMakeFiles/Source.dir/flags.make
 Source/CMakeFiles/Source.dir/Programs/programs.cpp.o: ../Source/Programs/programs.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object Source/CMakeFiles/Source.dir/Programs/programs.cpp.o"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Source.dir/Programs/programs.cpp.o -c /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Programs/programs.cpp
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Source.dir/Programs/programs.cpp.o -c /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Programs/programs.cpp
 
 Source/CMakeFiles/Source.dir/Programs/programs.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Source.dir/Programs/programs.cpp.i"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Programs/programs.cpp > CMakeFiles/Source.dir/Programs/programs.cpp.i
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Programs/programs.cpp > CMakeFiles/Source.dir/Programs/programs.cpp.i
 
 Source/CMakeFiles/Source.dir/Programs/programs.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Source.dir/Programs/programs.cpp.s"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Programs/programs.cpp -o CMakeFiles/Source.dir/Programs/programs.cpp.s
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Programs/programs.cpp -o CMakeFiles/Source.dir/Programs/programs.cpp.s
 
 Source/CMakeFiles/Source.dir/Programs/programs.cpp.o.requires:
 
@@ -108,15 +108,15 @@ Source/CMakeFiles/Source.dir/Programs/programs.cpp.o.provides.build: Source/CMak
 Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o: Source/CMakeFiles/Source.dir/flags.make
 Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o: ../Source/Runtime/CoreObject/Object.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o -c /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.cpp
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o -c /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.cpp
 
 Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.i"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.cpp > CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.i
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.cpp > CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.i
 
 Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.s"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.cpp -o CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.s
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.cpp -o CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.s
 
 Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o.requires:
 
@@ -132,15 +132,15 @@ Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o.provides.build: Sou
 Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o: Source/CMakeFiles/Source.dir/flags.make
 Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o: ../Source/ThirdParty/ThirdParty.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o -c /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/ThirdParty/ThirdParty.cpp
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o -c /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/ThirdParty/ThirdParty.cpp
 
 Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.i"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/ThirdParty/ThirdParty.cpp > CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.i
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/ThirdParty/ThirdParty.cpp > CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.i
 
 Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.s"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/ThirdParty/ThirdParty.cpp -o CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.s
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/ThirdParty/ThirdParty.cpp -o CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.s
 
 Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o.requires:
 

@@ -60,15 +60,15 @@ include CMakeFiles/PetrelEngine.dir/flags.make
 CMakeFiles/PetrelEngine.dir/main.cpp.o: CMakeFiles/PetrelEngine.dir/flags.make
 CMakeFiles/PetrelEngine.dir/main.cpp.o: ../main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PetrelEngine.dir/main.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PetrelEngine.dir/main.cpp.o -c /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/main.cpp
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/PetrelEngine.dir/main.cpp.o -c /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/main.cpp
 
 CMakeFiles/PetrelEngine.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PetrelEngine.dir/main.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/main.cpp > CMakeFiles/PetrelEngine.dir/main.cpp.i
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/main.cpp > CMakeFiles/PetrelEngine.dir/main.cpp.i
 
 CMakeFiles/PetrelEngine.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PetrelEngine.dir/main.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/main.cpp -o CMakeFiles/PetrelEngine.dir/main.cpp.s
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/main.cpp -o CMakeFiles/PetrelEngine.dir/main.cpp.s
 
 CMakeFiles/PetrelEngine.dir/main.cpp.o.requires:
 

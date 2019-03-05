@@ -9,7 +9,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.cpp" "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o"
   "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/ThirdParty/ThirdParty.cpp" "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "Clang")
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

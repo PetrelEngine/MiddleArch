@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-../Source/Runtime/CoreObject/Object.h
-
 /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/main.cpp
 iostream
 -
 Object.h
 /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Object.h
+
+Source/Runtime/CoreObject/Object.h
 
