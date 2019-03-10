@@ -13,7 +13,7 @@ extern "C" {
 
 JNI_METHOD(jstring,stringFromJNI)(JNIEnv *env,jobject jobject1)
 {
-    std::string hello = "Hello from C++";
+    std::string hello = "学习Ue4的CoreObject部分的Demo！";
     return env->NewStringUTF(hello.c_str());
 }
 
