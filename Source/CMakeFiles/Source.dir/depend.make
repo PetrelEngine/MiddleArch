@@ -7,8 +7,8 @@ Source/CMakeFiles/Source.dir/Editor/editor.cpp.o: Source/Editor/editor.h
 Source/CMakeFiles/Source.dir/Programs/programs.cpp.o: Source/Programs/programs.cpp
 Source/CMakeFiles/Source.dir/Programs/programs.cpp.o: Source/Programs/programs.h
 
-Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o: Source/Runtime/CoreObject/Object.cpp
-Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o: Source/Runtime/CoreObject/Object.h
+Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o: Source/Runtime/CoreObject/PObject.cpp
+Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o: Source/Runtime/CoreObject/PObject.h
 
 Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o: Source/ThirdParty/ThirdParty.cpp
 Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o: Source/ThirdParty/ThirdParty.h

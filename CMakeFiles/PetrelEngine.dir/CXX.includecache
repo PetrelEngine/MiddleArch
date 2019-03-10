@@ -9,8 +9,8 @@
 /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/main.cpp
 iostream
 -
-Object.h
-/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Object.h
+PObject.h
+/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/PObject.h
 
-Source/Runtime/CoreObject/Object.h
+Source/Runtime/CoreObject/PObject.h
 

@@ -18,13 +18,13 @@ programs.h
 
 /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Programs/programs.h
 
-/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.cpp
-Object.h
-/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.h
+/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/PObject.cpp
+PObject.h
+/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/PObject.h
 stdio.h
 -
 
-/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.h
+/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/PObject.h
 
 /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/ThirdParty/ThirdParty.cpp
 ThirdParty.h

@@ -105,28 +105,28 @@ Source/CMakeFiles/Source.dir/Programs/programs.cpp.o.provides: Source/CMakeFiles
 Source/CMakeFiles/Source.dir/Programs/programs.cpp.o.provides.build: Source/CMakeFiles/Source.dir/Programs/programs.cpp.o
 
 
-Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o: Source/CMakeFiles/Source.dir/flags.make
-Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o: ../Source/Runtime/CoreObject/Object.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o -c /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.cpp
+Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o: Source/CMakeFiles/Source.dir/flags.make
+Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o: ../Source/Runtime/CoreObject/PObject.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o"
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o -c /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/PObject.cpp
 
-Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.i"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.cpp > CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.i
+Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.i"
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/PObject.cpp > CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.i
 
-Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.s"
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.cpp -o CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.s
+Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.s"
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/build/Source && /usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/PObject.cpp -o CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.s
 
-Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o.requires:
+Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o.requires:
 
-.PHONY : Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o.requires
+.PHONY : Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o.requires
 
-Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o.provides: Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o.requires
-	$(MAKE) -f Source/CMakeFiles/Source.dir/build.make Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o.provides.build
-.PHONY : Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o.provides
+Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o.provides: Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o.requires
+	$(MAKE) -f Source/CMakeFiles/Source.dir/build.make Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o.provides.build
+.PHONY : Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o.provides
 
-Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o.provides.build: Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o
+Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o.provides.build: Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o
 
 
 Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o: Source/CMakeFiles/Source.dir/flags.make
@@ -157,7 +157,7 @@ Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o.provides.build: Source/
 Source_OBJECTS = \
 "CMakeFiles/Source.dir/Editor/editor.cpp.o" \
 "CMakeFiles/Source.dir/Programs/programs.cpp.o" \
-"CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o" \
+"CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o" \
 "CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o"
 
 # External object files for target Source
@@ -165,7 +165,7 @@ Source_EXTERNAL_OBJECTS =
 
 Source/libSource.a: Source/CMakeFiles/Source.dir/Editor/editor.cpp.o
 Source/libSource.a: Source/CMakeFiles/Source.dir/Programs/programs.cpp.o
-Source/libSource.a: Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o
+Source/libSource.a: Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o
 Source/libSource.a: Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o
 Source/libSource.a: Source/CMakeFiles/Source.dir/build.make
 Source/libSource.a: Source/CMakeFiles/Source.dir/link.txt
@@ -180,7 +180,7 @@ Source/CMakeFiles/Source.dir/build: Source/libSource.a
 
 Source/CMakeFiles/Source.dir/requires: Source/CMakeFiles/Source.dir/Editor/editor.cpp.o.requires
 Source/CMakeFiles/Source.dir/requires: Source/CMakeFiles/Source.dir/Programs/programs.cpp.o.requires
-Source/CMakeFiles/Source.dir/requires: Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o.requires
+Source/CMakeFiles/Source.dir/requires: Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o.requires
 Source/CMakeFiles/Source.dir/requires: Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o.requires
 
 .PHONY : Source/CMakeFiles/Source.dir/requires

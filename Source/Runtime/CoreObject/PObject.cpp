@@ -1,11 +1,11 @@
-#include "Object.h"
+#include "PObject.h"
 #include <stdio.h>
-Object::Object()
+PObject::PObject()
 {
 	printf("lq test: create Object! \n");
 }
 
-Object::~Object()
+PObject::~PObject()
 {
     
 }

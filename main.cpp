@@ -1,7 +1,7 @@
 #include <iostream>
-#include "Object.h"
+#include "PObject.h"
 int main(int argc, char* argv[])
 {
-    Object* object_ = new Object();
+    PObject* object_ = new PObject();
     return 0;
 }

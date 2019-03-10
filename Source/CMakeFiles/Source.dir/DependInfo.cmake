@@ -6,7 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Editor/editor.cpp" "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/CMakeFiles/Source.dir/Editor/editor.cpp.o"
   "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Programs/programs.cpp" "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/CMakeFiles/Source.dir/Programs/programs.cpp.o"
-  "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/Object.cpp" "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o"
+  "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/Runtime/CoreObject/PObject.cpp" "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o"
   "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/ThirdParty/ThirdParty.cpp" "/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "Clang")

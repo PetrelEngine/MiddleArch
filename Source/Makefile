@@ -179,32 +179,32 @@ Programs/programs.cpp.s:
 	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch && $(MAKE) -f Source/CMakeFiles/Source.dir/build.make Source/CMakeFiles/Source.dir/Programs/programs.cpp.s
 .PHONY : Programs/programs.cpp.s
 
-Runtime/CoreObject/Object.o: Runtime/CoreObject/Object.cpp.o
+Runtime/CoreObject/PObject.o: Runtime/CoreObject/PObject.cpp.o
 
-.PHONY : Runtime/CoreObject/Object.o
+.PHONY : Runtime/CoreObject/PObject.o
 
 # target to build an object file
-Runtime/CoreObject/Object.cpp.o:
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch && $(MAKE) -f Source/CMakeFiles/Source.dir/build.make Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.o
-.PHONY : Runtime/CoreObject/Object.cpp.o
+Runtime/CoreObject/PObject.cpp.o:
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch && $(MAKE) -f Source/CMakeFiles/Source.dir/build.make Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o
+.PHONY : Runtime/CoreObject/PObject.cpp.o
 
-Runtime/CoreObject/Object.i: Runtime/CoreObject/Object.cpp.i
+Runtime/CoreObject/PObject.i: Runtime/CoreObject/PObject.cpp.i
 
-.PHONY : Runtime/CoreObject/Object.i
+.PHONY : Runtime/CoreObject/PObject.i
 
 # target to preprocess a source file
-Runtime/CoreObject/Object.cpp.i:
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch && $(MAKE) -f Source/CMakeFiles/Source.dir/build.make Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.i
-.PHONY : Runtime/CoreObject/Object.cpp.i
+Runtime/CoreObject/PObject.cpp.i:
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch && $(MAKE) -f Source/CMakeFiles/Source.dir/build.make Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.i
+.PHONY : Runtime/CoreObject/PObject.cpp.i
 
-Runtime/CoreObject/Object.s: Runtime/CoreObject/Object.cpp.s
+Runtime/CoreObject/PObject.s: Runtime/CoreObject/PObject.cpp.s
 
-.PHONY : Runtime/CoreObject/Object.s
+.PHONY : Runtime/CoreObject/PObject.s
 
 # target to generate assembly for a file
-Runtime/CoreObject/Object.cpp.s:
-	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch && $(MAKE) -f Source/CMakeFiles/Source.dir/build.make Source/CMakeFiles/Source.dir/Runtime/CoreObject/Object.cpp.s
-.PHONY : Runtime/CoreObject/Object.cpp.s
+Runtime/CoreObject/PObject.cpp.s:
+	cd /Users/liuqian8/Desktop/MiddleStudy/MiddleArch && $(MAKE) -f Source/CMakeFiles/Source.dir/build.make Source/CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.s
+.PHONY : Runtime/CoreObject/PObject.cpp.s
 
 ThirdParty/ThirdParty.o: ThirdParty/ThirdParty.cpp.o
 
@@ -248,9 +248,9 @@ help:
 	@echo "... Programs/programs.o"
 	@echo "... Programs/programs.i"
 	@echo "... Programs/programs.s"
-	@echo "... Runtime/CoreObject/Object.o"
-	@echo "... Runtime/CoreObject/Object.i"
-	@echo "... Runtime/CoreObject/Object.s"
+	@echo "... Runtime/CoreObject/PObject.o"
+	@echo "... Runtime/CoreObject/PObject.i"
+	@echo "... Runtime/CoreObject/PObject.s"
 	@echo "... ThirdParty/ThirdParty.o"
 	@echo "... ThirdParty/ThirdParty.i"
 	@echo "... ThirdParty/ThirdParty.s"
