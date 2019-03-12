@@ -7,12 +7,16 @@ SET(Source_Dir "${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp")
 
 file(GLOB srcSource "${Source_Dir}/CoreObject/*.cpp"
                     "${Source_Dir}/*.cpp"
+                    "${Source_Dir}/PostProcess/*.cpp"
+                    "${Source_Dir}/Android/*.cpp"
     )
 
 add_library(StudyCoreObjec SHARED ${srcSource})
 
 target_include_directories( StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Dir}>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Dir}/CoreObject/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Dir}/PostProcess/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Dir}/Android/>
                           )
 
 target_link_libraries(StudyCoreObjec
