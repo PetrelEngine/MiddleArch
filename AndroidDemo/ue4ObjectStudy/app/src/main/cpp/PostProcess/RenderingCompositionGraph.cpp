@@ -23,23 +23,24 @@ void RenderingCompositionGraph::RecursivelyGatherDependencies(RenderingComposite
     }
 
     Pass->bComputeOutputDescWasCalled = true;
-    LOGE("RecursivelyGatherDependencies start iterate.");
+    LOGI("RecursivelyGatherDependencies start iterate.");
     //iterate through all inputs and additional dependencies of this pass
     unsigned Index = 0;
     while(const RenderingCompositeOutputRef* OutputRefIt = Pass->GetDependency(Index++))
     {
-        LOGE("RecursivelyGatherDependencies contains iterate.");
+        LOGI("RecursivelyGatherDependencies contains iterate.");
         RenderingCompositeOutput* InputOutput = OutputRefIt->GetOutput();
-        LOGE("InputOutput is NULL.: %p",InputOutput);
+        LOGI("InputOutput is NULL.: %p",InputOutput);
         if(InputOutput)
         {
-            LOGE("RecursivelyGatherDependencies add dependency.");
+            LOGI("RecursivelyGatherDependencies add dependency.");
             //add a dependency to this output as we are referencing to it
             InputOutput->AddDependency();
         }
 
         if(RenderingCompositePass* OutputRefItPass = OutputRefIt->GetPass())
         {
+            LOGI("RecursivelyGatherDependencies Recursively Gather Dependencies.");
             // recursively process all inputs of this Pass
             RecursivelyGatherDependencies(OutputRefItPass);
         }
@@ -64,11 +65,33 @@ void RenderingCompositePassContext::Process(const vector<RenderingCompositePass 
     {
         return;
     }
-    LOGE("Process..");
+    LOGI("Process..");
     for(RenderingCompositePass* Root:TargetRoots)
     {
-        LOGE("Process for iterate.");
+        LOGI("Process for iterate.");
         Graph.RecursivelyGatherDependencies(Root);
+    }
+}
+
+unsigned RenderingCompositePass::ComputeInputCount()
+{
+    for(unsigned i = 0; ; ++i)
+    {
+        if(!GetInput((EPassInputId)i))
+        {
+            return i;
+        }
+    }
+}
+
+unsigned RenderingCompositePass::ComputeOutputCount()
+{
+    for(unsigned i = 0; ; ++i)
+    {
+        if(!GetOutput((EPassOutputId)i))
+        {
+            return i;
+        }
     }
 }
 
@@ -80,10 +103,11 @@ RenderingCompositePass* RenderingCompositeOutputRef::GetPass() const
 
 RenderingCompositeOutput* RenderingCompositeOutputRef::GetOutput() const
 {
-    if(Source == 0)
+    LOGI("GetOutput() start.");
+    if(Source == NULL)
     {
         return NULL;
     }
-
+    LOGI("GetOutput() source not null.");
     return Source->GetOutput(PassOutputId);
 }

@@ -15,14 +15,18 @@ public:
 
     void DAGTest()
     {
+        RenderingCompositeOutputRef PostProcessDownsample;
         PassPostProcessAA* nodes = new PassPostProcessAA();
         renderProcessContext_ = new RenderingCompositePassContext();
 
         PassDag_->RegisterPass(nodes);
 
+        PostProcessDownsample = RenderingCompositeOutputRef(nodes);
+        nodes->SetInput(ePId_Input0,PostProcessDownsample);
 //        renderProcessContext_ = new RenderingCompositePassContext();
 
         renderProcessContext_->Process(nodes);
+
 
     }
 

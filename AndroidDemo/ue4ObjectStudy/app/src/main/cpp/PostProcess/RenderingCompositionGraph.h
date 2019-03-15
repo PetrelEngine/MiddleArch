@@ -26,7 +26,7 @@ public:
     template<class T> T* RegisterPass(T* InPass)
     {
         Nodes.push_back(InPass);
-        LOGE("nodes length:%d",Nodes.size());
+        LOGI("nodes length:%d",Nodes.size());
         return InPass;
     }
 
@@ -75,9 +75,26 @@ struct RenderingCompositePass
 
     virtual ~RenderingCompositePass(){}
 
+    /**
+     * const version of GetInput()
+     * @return 0 if outside the range
+     */
     virtual RenderingCompositeOutputRef* GetInput(EPassInputId InPassInputId) = 0;
 
     virtual const RenderingCompositeOutputRef* GetInput(EPassInputId InPassInputId) const = 0;
+    /**
+     * Each input is a dependency and will be processed before the node itself (don't generate cycles)
+     * The index allows to access the input in Process() and on the shader side
+     * @param InInputIndex silently ignores calls outside the range
+     */
+    virtual void SetInput(EPassInputId InPassInputId, const RenderingCompositeOutputRef& InOutputRef) = 0;
+    /**
+     * Allows to add additional dependencies (cannot be accessed by the node but need to be processed before the node)
+     */
+    virtual void AddDependency(const RenderingCompositeOutputRef& InOutputRef) = 0;
+
+    /** @param Parent the one that was pointing to *this */
+    virtual void Process(RenderingCompositePassContext& Context) = 0;
 
     //Allows to iterate through all dependencies (inputs and additional dependency)
     virtual RenderingCompositeOutputRef* GetDependency(unsigned Index) = 0;
@@ -88,6 +105,11 @@ struct RenderingCompositePass
     //return 0 if outside the range
     virtual RenderingCompositeOutput* GetOutput(EPassOutputId InPassOutputId) = 0;
 
+    /** Convenience method as this could have been done with GetInput() alone, performance: O(n) */
+    unsigned ComputeInputCount();
+
+    /** Convenience method as this could have been done with GetOutput() alone, performance: O(n) */
+    unsigned ComputeOutputCount();
 
 protected:
     //to avoid wasteful recomputation and to support graph/DAG traversal, if ComputeOutputDesc() was called
@@ -142,8 +164,9 @@ struct RenderingCompositeOutput
 
     void AddDependency()
     {
+        LOGI("DAG 0: %d:",Dependencies);
         ++Dependencies;
-        LOGE("DAG %d:",Dependencies);
+        LOGI("DAG 1: %d:",Dependencies);
     }
 
     unsigned GetDependencyCount() const
@@ -169,38 +192,61 @@ private:
     unsigned Dependencies;
 };
 
-template <unsigned InputCount,unsigned OutPutCount> struct RenderingCompositePassBase:public RenderingCompositePass
-{
-    RenderingCompositePassBase()
-    {
+template <unsigned InputCount,unsigned OutPutCount> struct RenderingCompositePassBase:public RenderingCompositePass {
+    RenderingCompositePassBase() {
 //        for(unsigned i = 0; i < OutPutCount; ++i)
 //        {
 //        }
+        LOGI("InputCount:%d,  OutPutCount：%d", InputCount, OutPutCount);
     }
 
-    virtual RenderingCompositeOutputRef* GetInput(EPassInputId InPassInputId)
-    {
-        if((unsigned)InPassInputId < InputCount)
-        {
+    virtual RenderingCompositeOutputRef *GetInput(EPassInputId InPassInputId) {
+        if ((unsigned) InPassInputId < InputCount) {
             return &PassInputs[InPassInputId];
         }
         return 0;
     }
 
-    virtual const RenderingCompositeOutputRef* GetInput(EPassInputId InPassInputId) const
-    {
-        if((unsigned)InPassInputId < InputCount)
-        {
+    virtual const RenderingCompositeOutputRef *GetInput(EPassInputId InPassInputId) const {
+        if ((unsigned) InPassInputId < InputCount) {
             return &PassInputs[InPassInputId];
+        }
+        return 0;
+    }
+
+    virtual void SetInput(EPassInputId InPassInputId, const RenderingCompositeOutputRef& VirtualBuffer)
+    {
+        if((int)InPassInputId < InputCount)
+        {
+            PassInputs[InPassInputId] = VirtualBuffer;
+        }else{
+            //this node doesn't have this input.
+            return;
+        }
+    }
+
+    void AddDependency(const RenderingCompositeOutputRef& InOutputRef)
+    {
+        AdditionalDependencies.push_back(InOutputRef);
+    }
+
+    virtual RenderingCompositeOutput* GetOutput(EPassOutputId InPassOutputId)
+    {
+        LOGI("OutPutCount:%d",OutPutCount);
+        if((unsigned)InPassOutputId < OutPutCount)
+        {
+            return &PassOutputs[InPassOutputId];
         }
         return 0;
     }
 
     virtual RenderingCompositeOutputRef* GetDependency(unsigned Index)
     {
+        // first through all inputs
         RenderingCompositeOutputRef* Ret = GetInput((EPassInputId)Index);
         if(!Ret)
         {
+            // then all additional dependencies
             Ret = GetAdditionalDependency(Index - InputCount);
         }
         return Ret;
@@ -215,15 +261,6 @@ template <unsigned InputCount,unsigned OutPutCount> struct RenderingCompositePas
             return &AdditionalDependencies[Index];
         }
 
-        return 0;
-    }
-
-    virtual RenderingCompositeOutput* GetOutput(EPassOutputId InPassOutputId)
-    {
-        if((unsigned)InPassOutputId < OutPutCount)
-        {
-            return &PassOutputs[InPassOutputId];
-        }
         return 0;
     }
 
