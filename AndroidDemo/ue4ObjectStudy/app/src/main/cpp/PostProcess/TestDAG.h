@@ -30,6 +30,15 @@ public:
 
     }
 
+    int Sum_Solution(int n)
+    {
+        int result = 0;
+        int temp = 0;
+        bool flag = (n>0) && temp == (result = Sum_Solution(n - 1));
+        result += n;
+        return result;
+    }
+
 private:
     RenderingCompositionGraph*  PassDag_;
     RenderingCompositePassContext* renderProcessContext_;
