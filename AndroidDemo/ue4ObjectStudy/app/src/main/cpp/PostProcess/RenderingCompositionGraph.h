@@ -230,6 +230,11 @@ template <unsigned InputCount,unsigned OutPutCount> struct RenderingCompositePas
         AdditionalDependencies.push_back(InOutputRef);
     }
 
+    virtual void Process(RenderingCompositePassContext& Context)
+    {
+
+    }
+
     virtual RenderingCompositeOutput* GetOutput(EPassOutputId InPassOutputId)
     {
         LOGI("OutPutCount:%d",OutPutCount);

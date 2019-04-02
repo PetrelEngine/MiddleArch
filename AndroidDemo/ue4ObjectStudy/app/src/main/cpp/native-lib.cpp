@@ -15,7 +15,7 @@ extern "C" {
 static TestDAG* dag_;
 JNI_METHOD(jstring,stringFromJNI)(JNIEnv *env,jobject jobject1)
 {
-    std::string hello = "CoreObject和Render部分的Demo！";
+    std::string hello = "CoreObject";
     if(dag_ == NULL)
     {
         dag_ = new TestDAG();
@@ -23,7 +23,7 @@ JNI_METHOD(jstring,stringFromJNI)(JNIEnv *env,jobject jobject1)
     dag_->DAGTest();
 
     int result = dag_->Sum_Solution(10);
-//    hello = hello + to_string(result);
+    hello += "::"+std::to_string(result);
     return env->NewStringUTF(hello.c_str());
 }
 
