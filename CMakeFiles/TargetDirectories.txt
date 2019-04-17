@@ -1,6 +1,0 @@
-/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/CMakeFiles/rebuild_cache.dir
-/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/CMakeFiles/edit_cache.dir
-/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/CMakeFiles/PetrelEngine.dir
-/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/CMakeFiles/rebuild_cache.dir
-/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/CMakeFiles/edit_cache.dir
-/Users/liuqian8/Desktop/MiddleStudy/MiddleArch/Source/CMakeFiles/Source.dir

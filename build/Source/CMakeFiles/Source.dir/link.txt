@@ -1,2 +1,0 @@
-/usr/bin/ar qc libSource.a  CMakeFiles/Source.dir/Editor/editor.cpp.o CMakeFiles/Source.dir/Programs/programs.cpp.o CMakeFiles/Source.dir/Runtime/CoreObject/PObject.cpp.o CMakeFiles/Source.dir/ThirdParty/ThirdParty.cpp.o
-/usr/bin/ranlib libSource.a

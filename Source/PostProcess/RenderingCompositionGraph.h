@@ -7,7 +7,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <Android/AndroidLog.h>
+#include "Common.h"
 #include "PostProcessParameters.h"
 using namespace std;
 

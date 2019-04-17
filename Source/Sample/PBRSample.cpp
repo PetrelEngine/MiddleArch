@@ -22,8 +22,8 @@ void PBRSample::CreateScence(Context *context, int width, int height)
 
     File* file = new File(Context_);
 
-    std::string vertexShaderSource = file->getStringFromFileAssets("PBRFragment.glsl");
-    std::string fragShaderSource = file->getStringFromFileAssets("PBRVertex.glsl");
+    std::string vertexShaderSource = file->getStringFromFileAssets("PBRVertex.glsl");
+    std::string fragShaderSource = file->getStringFromFileAssets("PBRFragment.glsl");
 
     loadObj_ = new LoadObj();
     bool loadout = loadObj_->LoadFile("/sdcard/PBRObj/Box/box_stack.obj");

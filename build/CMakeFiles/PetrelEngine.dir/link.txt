@@ -1,1 +1,0 @@
-/usr/local/bin/g++-8   -std=c++11 -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/PetrelEngine.dir/main.cpp.o  -o bin/PetrelEngine Source/libSource.a 
