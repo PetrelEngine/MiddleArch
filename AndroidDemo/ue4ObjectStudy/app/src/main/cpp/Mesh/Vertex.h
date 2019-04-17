@@ -2,11 +2,18 @@
 // Created by liuqian8 on 2019/4/16.
 //
 #pragma once
-#include <glm/vec3.hpp>
-#include <glm/vec2.hpp>
+
+#include "Vector3.h"
+#include "Vector2.h"
+
 struct Vertex
 {
-    glm::vec3 Position_;
-    glm::vec3 Normal_;
-    glm::vec2 TextureCoordinate_;
+    // Position Vector
+    Vector3 Position;
+
+    // Normal Vector
+    Vector3 Normal;
+
+    // Texture Coordinate Vector
+    Vector2 TextureCoordinate;
 };

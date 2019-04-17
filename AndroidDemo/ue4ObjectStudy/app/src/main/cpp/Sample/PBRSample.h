@@ -3,6 +3,8 @@
 //
 #pragma once
 
+#include <Mesh/LoadObj.h>
+#include "ShaderProgram.h"
 #include "Application.h"
 
 class PBRSample: public Application
@@ -17,4 +19,13 @@ public:
 
 private:
     Context* Context_;
+
+    LoadObj* loadObj_;
+
+    ShaderProgram* ShaderProgram_;
+
+    unsigned TextureHandle_;
+    unsigned PositionHandle_;
+    unsigned MVPMatrixHandle_;
+    unsigned TexcoordHandle_;
 };
