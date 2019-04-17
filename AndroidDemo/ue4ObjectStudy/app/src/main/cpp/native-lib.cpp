@@ -1,7 +1,13 @@
 #include <jni.h>
 #include <string>
 #include "TestDAG.h"
+#include "Context.h"
 #include <iostream>
+#include <android/asset_manager.h>
+#include <android/asset_manager_jni.h>
+#include "ApplicationSystem.h"
+#include "PBRSample.h"
+
 using namespace std;
 
 #define JNI_METHOD(return_type, method_name) \
@@ -27,6 +33,34 @@ JNI_METHOD(jstring,stringFromJNI)(JNIEnv *env,jobject jobject1)
     return env->NewStringUTF(hello.c_str());
 }
 
+JNI_METHOD(jlong ,setAssetsManagerJNI)(JNIEnv *env,jobject jobject1,jobject assetManager)
+{
+    jobject assetManagerTemp_ = env->NewGlobalRef(assetManager);
+    AAssetManager* mgr = AAssetManager_fromJava(env,assetManagerTemp_);
+    Context* context_ = new (std::nothrow)Context();
+    context_->setSetAssetManager(mgr);
+    return (uintptr_t)(context_);
+}
+
+
+JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextClassId,jint width,jint height)
+{
+    Context* context_ = ((Context*)contextClassId);
+    ApplicationSystem* applicationSystem_ = new (std::nothrow)ApplicationSystem();
+    PBRSample* pbrSample = new PBRSample();
+
+    applicationSystem_->RegisteredApplication(pbrSample);
+
+    applicationSystem_->CreateScence(context_,width,height);
+    return (uintptr_t)(applicationSystem_);
+}
+
+JNI_METHOD(void,RendererFrameJNI)(JNIEnv *env,jobject jobject1,jlong contextClassId,jlong ApplicationSystemClassId)
+{
+    Context* context_ = ((Context*)contextClassId);
+    ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
+    applicationSystem_->RenderOneFrame(context_);
+}
 
 
 #ifdef __cplusplus

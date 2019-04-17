@@ -9,6 +9,10 @@ file(GLOB srcSource "${Source_Dir}/CoreObject/*.cpp"
                     "${Source_Dir}/*.cpp"
                     "${Source_Dir}/PostProcess/*.cpp"
                     "${Source_Dir}/SkeletalAnimation/*.cpp"
+                    "${Source_Dir}/SkeletalAnimation/*.cpp"
+                    "${Source_Dir}/Mesh/*.cpp"
+                    "${Source_Dir}/File/*.cpp"
+                    "${Source_Dir}/Sample/*.cpp"
                     "${Source_Dir}/Android/*.cpp"
     )
 
@@ -16,6 +20,9 @@ add_library(StudyCoreObjec SHARED ${srcSource})
 
 target_include_directories( StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Dir}>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Dir}/CoreObject/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Dir}/Mesh/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Dir}/File/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Dir}/Sample/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Dir}/PostProcess/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Dir}/SkeletalAnimation/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Dir}/Android/>
