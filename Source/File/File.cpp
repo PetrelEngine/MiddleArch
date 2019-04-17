@@ -18,36 +18,36 @@ std::string File::getStringFromFile(const string filename)
 std::string File::getStringFromFileAssets(const string filename)
 {
 //    std::string s;
+    char* pData;
 #if PLATFORM == PLATFORM_ANDROID
     AAssetManager* mgr_ = context_->getAAssetManager();
-    AAsset *asset = AAssetManager_open(mgr_, filename.c_str(), AASSET_MODE_BUFFER);
+    AAsset *asset = AAssetManager_open(mgr_, filename.c_str(), AASSET_MODE_UNKNOWN);
     if(!asset){
         LOGE("asset not found");
         return NULL;
     }
-    long size = AAsset_getLength(asset);
-    char* buffer = (char*) malloc (sizeof(char)*size);
-    AAsset_read (asset,buffer,size);
-    LOGI("load file success! Data is:\n%s\n",buffer);
-    if(buffer != NULL){
-        LOGI("load file success! %s\n",filename.c_str());
-    }else{
-        LOGE("load file failure! %s\n",filename.c_str());
+    size_t size = AAsset_getLength(asset);
+    if(size > 0)
+    {
+        pData = new char[size];
+        int iRet = AAsset_read(asset,pData,size);
+        if(iRet <= 0)
+        {
+            delete [] pData;
+            pData = NULL;
+            LOGE("load file failure! %s\n",filename.c_str());
+        }else{
+            LOGI("load file success! %s\n",filename.c_str());
+            LOGI("load file success! Data is:\n%s\n",pData);
+        }
     }
     AAsset_close(asset);
-//    ResizableBuffer *buffer = getResizableBuffer(buffer);
-//    buffer->resize(size);
-//    int readsize = AAsset_read(asset, buffer->buffer(), size);
-//    AAsset_close(asset);
-//    if (readsize < size) {
-//        if (readsize >= 0)
-//            buffer->resize(readsize);
-//        LOGE("ReadFailed! --- File.cpp");
-//        return nullptr;
-//    }
-    return buffer;
+    if( asset == NULL )
+        size = 0;
+
+    return pData;
 #endif
-    return buffer;
+    return pData;
 }
 
 Status File::getContents(const std::string &filename, ResizableBuffer *buffer)

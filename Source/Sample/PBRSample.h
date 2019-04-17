@@ -18,14 +18,21 @@ public:
     virtual void RenderOneFrame(Context* context);
 
 private:
-    Context* Context_;
+    Context*                    Context_;
 
-    LoadObj* loadObj_;
+    LoadObj*                    loadObj_;
 
-    ShaderProgram* ShaderProgram_;
+    ShaderProgram*              ShaderProgram_;
 
-    unsigned TextureHandle_;
-    unsigned PositionHandle_;
-    unsigned MVPMatrixHandle_;
-    unsigned TexcoordHandle_;
+    std::vector<Vector3>        PositionData_;
+    std::vector<Vector2>        TexCoordData_;
+    std::vector<Vector3>        NormalData_;
+    std::vector<unsigned int>   IndexData_;
+
+
+    unsigned                    TextureHandle_;
+    unsigned                    PositionHandle_;
+    unsigned                    MVPMatrixHandle_;
+    unsigned                    TexcoordHandle_;
+    unsigned                    NormalHandle_;
 };

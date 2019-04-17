@@ -29,6 +29,64 @@ private:
 
     // Load Materials from .mtl file
     bool LoadMaterials(std::string path);
+public:
+    std::vector<Mesh> getMeshList()
+    {
+        return LoadedMeshes;
+    }
+    std::vector<Vector3>& getVertices()
+    {
+        std::vector<Vector3> position;
+        for(int i = 0; i < LoadedVertices.size(); i ++)
+        {
+            Vertex vertex_ = LoadedVertices[i];
+            Vector3 p;
+            p.X = vertex_.Position.X;
+            p.Y = vertex_.Position.Y;
+            p.Z = vertex_.Position.Z;
+            position.push_back(p);
+        }
+        return position;
+    }
+
+    std::vector<Vector2>& getTexCoord()
+    {
+        std::vector<Vector2> texCoord;
+        for(int i = 0; i < LoadedVertices.size(); i ++)
+        {
+            Vertex vertex_ = LoadedVertices[i];
+            Vector2 t;
+            t.X = vertex_.TextureCoordinate.X;
+            t.Y = vertex_.TextureCoordinate.Y;
+            texCoord.push_back(t);
+        }
+        return texCoord;
+    }
+    std::vector<Vector3>& getNormal()
+    {
+        std::vector<Vector3> normal;
+        for(int i = 0; i < LoadedVertices.size(); i ++)
+        {
+            Vertex vertex_ = LoadedVertices[i];
+            Vector3 n;
+            n.X = vertex_.Normal.X;
+            n.Y = vertex_.Normal.Y;
+            n.Z = vertex_.Normal.Z;
+            normal.push_back(n);
+        }
+        return normal;
+    }
+
+    std::vector<unsigned int>& getIndices()
+    {
+        return LoadedIndices;
+    }
+
+    std::vector<Material>& getMaterials()
+    {
+        return LoadedMaterials;
+    }
+
 private:
     // Loaded Mesh Objects
     std::vector<Mesh> LoadedMeshes;
