@@ -5,6 +5,6 @@ varying vec2 vTexCoord;
 uniform mat4 uMVPMatix;
 void main()
 {
-    gl_Position = position;//uMVPMatix *
+    gl_Position = uMVPMatix * position;
     vTexCoord = texCoord.xy;
-}
+   }

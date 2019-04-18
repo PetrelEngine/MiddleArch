@@ -24,10 +24,10 @@ private:
 
     ShaderProgram*              ShaderProgram_;
 
-    std::vector<Vector3>        PositionData_;
-    std::vector<Vector2>        TexCoordData_;
-    std::vector<Vector3>        NormalData_;
-    std::vector<unsigned int>   IndexData_;
+    std::vector<float>          PositionData_;
+    std::vector<float>          TexCoordData_;
+    std::vector<float>          NormalData_;
+    int*                        IndexData_;
 
 
     unsigned                    TextureHandle_;
@@ -35,4 +35,9 @@ private:
     unsigned                    MVPMatrixHandle_;
     unsigned                    TexcoordHandle_;
     unsigned                    NormalHandle_;
+
+    glm::mat4                   ModelMatrix_;
+    glm::mat4                   CameraMatrix_;
+    glm::mat4                   ProjectMatrix_;
+    glm::mat4                   MVPMatrix_;
 };
