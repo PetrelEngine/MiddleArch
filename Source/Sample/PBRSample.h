@@ -3,7 +3,8 @@
 //
 #pragma once
 
-#include <Mesh/LoadObj.h>
+#include "WBGLProgram.hpp"
+#include "LoadObj.h"
 #include "ShaderProgram.h"
 #include "Application.h"
 
@@ -19,22 +20,26 @@ public:
 
 private:
     Context*                    Context_;
-
+//    ShaderProgram*              ShaderProgram_;
+    WBGLProgram*                glProgram;
     LoadObj*                    loadObj_;
 
-    ShaderProgram*              ShaderProgram_;
-
-
-    unsigned                    TextureHandle_;
-    unsigned                    PositionHandle_;
-    unsigned                    MVPMatrixHandle_;
-    unsigned                    TexcoordHandle_;
-    unsigned                    NormalHandle_;
+    GLuint                      PositionHandle_;
+    GLuint                      MVPMatrixHandle_;
+    GLuint                      TexcoordHandle_;
 
     glm::mat4                   ModelMatrix_;
     glm::mat4                   CameraMatrix_;
     glm::mat4                   ProjectMatrix_;
     glm::mat4                   MVPMatrix_;
 
-    GLuint                      m_VboIds[3];
+    std::vector<Vertex>         vertexList;
+    std::vector<unsigned int>   indexList;
+    int*                        indexPointer_;
+
+    float*        Position;
+    float*        TexCoord;
+    float*        Normal;
+
+
 };

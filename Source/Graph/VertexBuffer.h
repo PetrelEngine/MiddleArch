@@ -13,4 +13,8 @@ public:
     VertexBuffer(Context* context,bool forceHeadless = false);
 
     ~VertexBuffer();
+
+private:
+    bool Create();
+
 };

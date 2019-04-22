@@ -6,12 +6,17 @@
 
 VertexBuffer::VertexBuffer(Context *context, bool forceHeadless):
     Object(context),
-    GPUObject(forceHeadless?NULL:getSubsystem<Graphics>())
+    GPUObject(NULL)
 {
 
 }
 
 VertexBuffer::~VertexBuffer()
+{
+
+}
+
+bool VertexBuffer::Create()
 {
 
 }
