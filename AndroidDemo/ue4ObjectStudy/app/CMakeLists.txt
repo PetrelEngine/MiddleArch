@@ -14,6 +14,7 @@ file(GLOB srcSource "${Source_Common_Dir}/CoreObject/*.cpp"
                     "${Source_Common_Dir}/Mesh/*.cpp"
                     "${Source_Common_Dir}/File/*.cpp"
                     "${Source_Common_Dir}/Graph/*.cpp"
+                    "${Source_Common_Dir}/Graph/gles/*.cpp"
                     "${Source_Common_Dir}/Sample/*.cpp"
                     "${Source_Android_Dir}/Android/*.cpp"
     )
@@ -25,6 +26,7 @@ target_include_directories( StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Co
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Mesh/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/File/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Graph/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Graph/gles/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Sample/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/PostProcess/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/SkeletalAnimation/>

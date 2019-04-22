@@ -2,17 +2,21 @@
 // Created by liuqian8 on 2019/4/16.
 //
 #include "Context.h"
-Context::Context()
-{
-    tempId_ = 0;
-}
+#include "Object.h"
 
 Context::~Context()
 
 {
+    subsystem_.clear();
     textureList_.clear();
 }
 
+void Context::registerSubsystem(Object* subsystem)
+{
+    if(!subsystem)
+        return;
+    subsystem_[subsystem->getType()] = subsystem;
+}
 
 void Context::setTextureId(string nameType, int textureId)
 {
@@ -28,4 +32,20 @@ int Context::getTextureId(string name)
         return i->second;
     else
         return -1;
+}
+
+Object* Context::getSubsystem(string type) const
+{
+    SN_HashMap<string,Object*>::const_iterator i = subsystem_.find(type);
+    if(i != subsystem_.end())
+        return i ->second;
+    else
+        return 0;
+}
+
+void Context::removeSubsystem(string ObjectType)
+{
+    SN_HashMap<string , Object*>::iterator i = subsystem_.find(ObjectType);
+    if(i != subsystem_.end())
+        subsystem_.erase(i);
 }
