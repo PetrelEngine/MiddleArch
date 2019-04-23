@@ -7,7 +7,9 @@
 #include "LoadObj.h"
 #include "ShaderProgram.h"
 #include "Application.h"
-
+#include "Common.h"
+#include "type_mat.hpp"
+#include "type_mat4x4.hpp"
 class PBRSample: public Application
 {
 public:
@@ -20,26 +22,17 @@ public:
 
 private:
     Context*                    Context_;
-//    ShaderProgram*              ShaderProgram_;
     WBGLProgram*                glProgram;
     LoadObj*                    loadObj_;
 
     GLuint                      PositionHandle_;
     GLuint                      MVPMatrixHandle_;
     GLuint                      TexcoordHandle_;
+    GLuint                      NormalHandle_;
 
     glm::mat4                   ModelMatrix_;
     glm::mat4                   CameraMatrix_;
     glm::mat4                   ProjectMatrix_;
     glm::mat4                   MVPMatrix_;
-
-    std::vector<Vertex>         vertexList;
-    std::vector<unsigned int>   indexList;
-    int*                        indexPointer_;
-
-    float*        Position;
-    float*        TexCoord;
-    float*        Normal;
-
 
 };
