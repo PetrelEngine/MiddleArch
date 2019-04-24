@@ -42,6 +42,12 @@ JNI_METHOD(jlong ,setAssetsManagerJNI)(JNIEnv *env,jobject jobject1,jobject asse
     return (uintptr_t)(context_);
 }
 
+JNI_METHOD(void,setTexture2DId)(JNIEnv *env,jobject jobject1,jlong contextClassId,jstring name,jint textureId)
+{
+    Context* context_ = ((Context*)contextClassId);
+    context_->setTextureId("fish",textureId);
+}
+
 
 JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextClassId,jint width,jint height)
 {

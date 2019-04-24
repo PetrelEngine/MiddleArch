@@ -30,6 +30,8 @@ private:
     GLuint                      TexcoordHandle_;
     GLuint                      NormalHandle_;
 
+    GLuint                      TextureHandle_;
+
     glm::mat4                   ModelMatrix_;
     glm::mat4                   CameraMatrix_;
     glm::mat4                   ProjectMatrix_;

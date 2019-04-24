@@ -4,6 +4,8 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.skysnow.com.ue4objectstudy.JNIAPI.CoreObjectJNI;
+import android.skysnow.com.ue4objectstudy.R;
+import android.util.Log;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -33,6 +35,9 @@ public class BaseRenderer implements GLSurfaceView.Renderer
     {
         mRendererContextClassId = mCoreObjectJNI.setAssetsManager(mContext.getAssets());
         mApplicationSystemClassId = mCoreObjectJNI.RendererCreate(mRendererContextClassId,width,height);
+        int fishID = BitmapToTextureId.getInstence().getTextureId(R.drawable.fish,mContext);
+        Log.i("SkySnow:", "onSurfaceChanged: "+fishID);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"fish",fishID);
     }
 
     @Override

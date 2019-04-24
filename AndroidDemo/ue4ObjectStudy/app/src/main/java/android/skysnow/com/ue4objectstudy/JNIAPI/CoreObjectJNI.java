@@ -32,8 +32,14 @@ public class CoreObjectJNI
     {
         RendererFrameJNI(RendererContextClassId,ApplicationSystemClassId);
     }
+    public void setTextureId(long RendererContextClassId,String name,int texture2DId)
+    {
+        setTexture2DId(RendererContextClassId,name,texture2DId);
+    }
 
     //=========================================================================================
+
+    protected native void setTexture2DId(long RendererContextClassId,String name,int texture2DId);
 
     protected native long setAssetsManagerJNI(AssetManager ass);
 

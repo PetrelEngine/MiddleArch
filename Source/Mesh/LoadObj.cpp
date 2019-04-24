@@ -274,6 +274,15 @@ void LoadObj::GenVerticesFromRawOBJ(std::vector<Vertex> &oVerts,
     Vertex vVert;
     algorithm::split(algorithm::tail(icurline), sface, " ");
 
+    vector<std::string>::iterator it;
+    for(it = sface.begin();it != sface.end();)
+    {
+        if(*it  == "\r"){
+            it = sface.erase(it);
+        }else {
+            ++it;
+        }
+    }
     bool noNormal = false;
 
     // For every given vertex do this
