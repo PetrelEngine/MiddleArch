@@ -55,52 +55,52 @@ bool LoadObj::LoadFile(std::string Path)
     while (std::getline(file, curline))
     {
 
-        // Generate a Mesh Object or Prepare for an object to be created
-        if (algorithm::firstToken(curline) == "o" || algorithm::firstToken(curline) == "g" || curline[0] == 'g')
-        {
-            if (!listening)
-            {
-                listening = true;
-
-                if (algorithm::firstToken(curline) == "o" || algorithm::firstToken(curline) == "g")
-                {
-                    meshname = algorithm::tail(curline);
-                }
-                else
-                {
-                    meshname = "unnamed";
-                }
-            }else
-            {
-                // Generate the mesh to put into the array
-
-                if (!Indices.empty() && !Vertices.empty())
-                {
-                    // Create Mesh
-                    tempMesh.MeshName = meshname;
-
-                    // Insert Mesh
-                    LoadedMeshes.push_back(tempMesh);
-
-                    // Cleanup
-                    Vertices.clear();
-                    Indices.clear();
-                    meshname.clear();
-
-                    meshname = algorithm::tail(curline);
-                }else
-                {
-                    if (algorithm::firstToken(curline) == "o" || algorithm::firstToken(curline) == "g")
-                    {
-                        meshname = algorithm::tail(curline);
-                    }
-                    else
-                    {
-                        meshname = "unnamed";
-                    }
-                }
-            }
-        }
+//        // Generate a Mesh Object or Prepare for an object to be created
+//        if (algorithm::firstToken(curline) == "o" || algorithm::firstToken(curline) == "g" || curline[0] == 'g')
+//        {
+//            if (!listening)
+//            {
+//                listening = true;
+//
+//                if (algorithm::firstToken(curline) == "o" || algorithm::firstToken(curline) == "g")
+//                {
+//                    meshname = algorithm::tail(curline);
+//                }
+//                else
+//                {
+//                    meshname = "unnamed";
+//                }
+//            }else
+//            {
+//                // Generate the mesh to put into the array
+//
+//                if (!Indices.empty() && !Vertices.empty())
+//                {
+//                    // Create Mesh
+//                    tempMesh.MeshName = meshname;
+//
+//                    // Insert Mesh
+//                    LoadedMeshes.push_back(tempMesh);
+//
+//                    // Cleanup
+//                    Vertices.clear();
+//                    Indices.clear();
+//                    meshname.clear();
+//
+//                    meshname = algorithm::tail(curline);
+//                }else
+//                {
+//                    if (algorithm::firstToken(curline) == "o" || algorithm::firstToken(curline) == "g")
+//                    {
+//                        meshname = algorithm::tail(curline);
+//                    }
+//                    else
+//                    {
+//                        meshname = "unnamed";
+//                    }
+//                }
+//            }
+//        }
         // Generate a Vertex Position
         if (algorithm::firstToken(curline) == "v")
         {
@@ -122,8 +122,7 @@ bool LoadObj::LoadFile(std::string Path)
             algorithm::split(algorithm::tail(curline), stex, " ");
 
             vtex.X = std::stof(stex[0]);
-            vtex.Y = std::stof(stex[1]);
-
+            vtex.Y = 1.0f - std::stof(stex[1]);
             TCoords.push_back(vtex);
         }
         // Generate a Vertex Normal;
@@ -292,8 +291,35 @@ bool LoadObj::LoadFile(std::string Path)
 //            LoadMaterials(pathtomat);
 //        }
     }//循环读取obj文件结束
-    return true;
 
+
+    for(int i = 0; i < PositionsIndex.size(); i ++)
+    {
+        Vertex vertex;
+        Vector3 position;
+        position = Positions[PositionsIndex[i] - 1];
+        vertex.Position = position;
+        LoadedVertices.push_back(vertex);
+        LoadedIndices.push_back((unsigned)i);
+    }
+
+    for(int i = 0; i < TCoordsIndex.size(); i ++)
+    {
+        Vector2 textureCoordinate;
+        textureCoordinate = TCoords[TCoordsIndex[i] - 1];
+//        textureCoordinate.X = textureCoordinate.X;
+//        textureCoordinate.Y = 1.0f - textureCoordinate.Y;
+        LoadedVertices[i].TextureCoordinate = textureCoordinate;
+    }
+
+    for(int i = 0; i < NormalsIndex.size(); i ++)
+    {
+        Vector3 normal;
+        normal = Normals[NormalsIndex[i] - 1];
+        LoadedVertices[i].Normal = normal;
+    }
+
+    return true;
 //    // Deal with last mesh
 //
 //    if (!Indices.empty() && !Vertices.empty())

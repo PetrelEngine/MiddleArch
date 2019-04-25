@@ -15,25 +15,18 @@ struct Mesh
     {
 
     }
-//    // Variable Set Constructor
-//    Mesh(std::vector<Vertex>& _Vertices, std::vector<unsigned int>& _vIndices,std::vector<unsigned int>& _vtIndices,std::vector<unsigned int>& _vnIndices)
-//    {
-//        Vertices = _Vertices;
-//    }
+    // Variable Set Constructor
+    Mesh(std::vector<Vertex>& _Vertices, std::vector<unsigned int>& _Indices)
+    {
+        Vertices = _Vertices;
+        Indices = _Indices;
+    }
     // Mesh Name
     std::string MeshName;
     // Vertex List
     std::vector<Vertex> Vertices;
     // Index List
-    std::vector<unsigned int> FinalIndices;
-
-    std::vector<Vector3>      Position;
-    std::vector<Vector2>      TextureCoordinate;
-    std::vector<Vector3>      Normal;
-
-    std::vector<unsigned int> VertexIndices;
-    std::vector<unsigned int> TexCoordIndices;
-    std::vector<unsigned int> NormalIndices;
+    std::vector<unsigned int> Indices;
 
     // Material
     Material MeshMaterial;

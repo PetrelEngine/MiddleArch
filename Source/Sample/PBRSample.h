@@ -24,6 +24,7 @@ private:
     Context*                    Context_;
     WBGLProgram*                glProgram;
     LoadObj*                    loadObj_;
+    int                         textureId_;
 
     GLuint                      PositionHandle_;
     GLuint                      MVPMatrixHandle_;
