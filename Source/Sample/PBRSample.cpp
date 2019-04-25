@@ -42,7 +42,7 @@ void PBRSample::CreateScence(Context *context, int width, int height)
     LOGI("TextureHandle_:%d",TextureHandle_);
     loadObj_ = new LoadObj();
 
-    bool loadout = loadObj_->LoadFile("/sdcard/PBRObj/Fish/fish.obj");
+    bool loadout = loadObj_->LoadFile("/sdcard/PBRObj/Fish/fish.obj");// Fish/fish.obj   Box/box_stack.obj
     if(loadout)
     {
         LOGI("obj加载成功！");
@@ -63,19 +63,6 @@ void PBRSample::CreateScence(Context *context, int width, int height)
 
     MVPMatrix_ = ProjectMatrix_*CameraMatrix_* ModelMatrix_;
 
-    for(int i = 0; i < loadObj_->LoadedVertices.size(); i ++)
-    {
-        Vertex  vertex= loadObj_->LoadedVertices[i];
-        LOGI("======================");
-        LOGI("vertex坐标：%f，%f,%f",vertex.Position.X,vertex.Position.Y,vertex.Position.Z);
-        LOGI("======================");
-        LOGI("TextureCoordinate坐标：%f，%f",vertex.TextureCoordinate.X,vertex.TextureCoordinate.Y);
-        LOGI("======================");
-    }
-    for(int i =0;i < loadObj_->LoadedIndices.size(); i ++)
-    {
-        LOGI("vertex坐标：%d",loadObj_->LoadedIndices[i]);
-    }
 }
 
 void PBRSample::RenderOneFrame(Context *context)
@@ -86,23 +73,23 @@ void PBRSample::RenderOneFrame(Context *context)
     glBindTexture(GL_TEXTURE_2D, 1);
     glUniform1i(TextureHandle_,0);
     glCullFace(GL_CCW);
-//    for(int i = 0; i < loadObj_->LoadedMeshes.size(); i ++)
-//    {
-        glEnableVertexAttribArray(PositionHandle_);
-        glEnableVertexAttribArray(TexcoordHandle_);
-        glEnableVertexAttribArray(NormalHandle_);
-
-//        Mesh mesh = loadObj_->LoadedMeshes[i];
-//        std::vector<Vertex> Vertices = mesh.Vertices;
-
-        glVertexAttribPointer(PositionHandle_, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), loadObj_->LoadedVertices.data());
-        glVertexAttribPointer(TexcoordHandle_, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), loadObj_->LoadedVertices.data());
-        glVertexAttribPointer(NormalHandle_, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), loadObj_->LoadedVertices.data());
-
-//        std::vector<unsigned int> index = mesh.Indices;
-        glUniformMatrix4fv(MVPMatrixHandle_, 1, false, (GLfloat *)&MVPMatrix_);
-        glDrawElements(GL_TRIANGLES, loadObj_->LoadedIndices.size(),GL_UNSIGNED_INT,loadObj_->LoadedIndices.data());
-//    }
+////    for(int i = 0; i < loadObj_->LoadedMeshes.size(); i ++)
+////    {
+//        glEnableVertexAttribArray(PositionHandle_);
+//        glEnableVertexAttribArray(TexcoordHandle_);
+//        glEnableVertexAttribArray(NormalHandle_);
+//
+////        Mesh mesh = loadObj_->LoadedMeshes[i];
+////        std::vector<Vertex> Vertices = mesh.Vertices;
+//
+//        glVertexAttribPointer(PositionHandle_, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), loadObj_->LoadedVertices.data());
+//        glVertexAttribPointer(TexcoordHandle_, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), loadObj_->LoadedVertices.data());
+//        glVertexAttribPointer(NormalHandle_, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), loadObj_->LoadedVertices.data());
+//
+////        std::vector<unsigned int> index = mesh.Indices;
+//        glUniformMatrix4fv(MVPMatrixHandle_, 1, false, (GLfloat *)&MVPMatrix_);
+//        glDrawElements(GL_TRIANGLES, loadObj_->LoadedIndices.size(),GL_UNSIGNED_INT,loadObj_->LoadedIndices.data());
+////    }
 
     glBindTexture(GL_TEXTURE_2D, 0);
     glUseProgram(0);

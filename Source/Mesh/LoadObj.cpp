@@ -36,6 +36,10 @@ bool LoadObj::LoadFile(std::string Path)
     std::vector<Vector2> TCoords;
     std::vector<Vector3> Normals;
 
+    std::vector<int>     PositionsIndex;
+    std::vector<int>     TCoordsIndex;
+    std::vector<int>     NormalsIndex;
+
     std::vector<Vertex> Vertices;
     std::vector<unsigned int> Indices;
 
@@ -66,15 +70,13 @@ bool LoadObj::LoadFile(std::string Path)
                 {
                     meshname = "unnamed";
                 }
-            }
-            else
+            }else
             {
                 // Generate the mesh to put into the array
 
                 if (!Indices.empty() && !Vertices.empty())
                 {
                     // Create Mesh
-                    tempMesh = Mesh(Vertices, Indices);
                     tempMesh.MeshName = meshname;
 
                     // Insert Mesh
@@ -86,8 +88,7 @@ bool LoadObj::LoadFile(std::string Path)
                     meshname.clear();
 
                     meshname = algorithm::tail(curline);
-                }
-                else
+                }else
                 {
                     if (algorithm::firstToken(curline) == "o" || algorithm::firstToken(curline) == "g")
                     {
@@ -141,412 +142,197 @@ bool LoadObj::LoadFile(std::string Path)
         // Generate a Face (vertices & indices)
         if (algorithm::firstToken(curline) == "f")
         {
-            // Generate the vertices
-            std::vector<Vertex> vVerts;
-            GenVerticesFromRawOBJ(vVerts, Positions, TCoords, Normals, curline);
-
-            // Add Vertices
-            for (int i = 0; i < int(vVerts.size()); i++)
+            //新版加载face的代码
+            std::vector<Vertex> vNewVerts;
+            std::vector<std::string> sface,svert;
+            algorithm::split(algorithm::tail(curline), sface, " ");
+            int isQuad;
+            std::vector<int> vQuadidx,vtQuadidx,vnQuadidx;
+            std::vector<int> vidx,vtidx,vnidx;
+            if((sface.size() == 5)||(sface.size() == 4 && sface[3] != "\r"))
             {
-                Vertices.push_back(vVerts[i]);
-
-                LoadedVertices.push_back(vVerts[i]);
-            }
-
-            std::vector<unsigned int> iIndices;
-
-            VertexTriangluation(iIndices, vVerts);
-
-            // Add Indices
-            for (int i = 0; i < int(iIndices.size()); i++)
-            {
-                unsigned int indnum = (unsigned int)((Vertices.size()) - vVerts.size()) + iIndices[i];
-                Indices.push_back(indnum);
-
-                indnum = (unsigned int)((LoadedVertices.size()) - vVerts.size()) + iIndices[i];
-                LoadedIndices.push_back(indnum);
-
-            }
-        }
-        // Get Mesh Material Name
-        if (algorithm::firstToken(curline) == "usemtl")
-        {
-            MeshMatNames.push_back(algorithm::tail(curline));
-
-            // Create new Mesh, if Material changes within a group
-            if (!Indices.empty() && !Vertices.empty())
-            {
-                // Create Mesh
-                tempMesh = Mesh(Vertices, Indices);
-                tempMesh.MeshName = meshname;
-                int i = 2;
-                while(1) {
-                    tempMesh.MeshName = meshname + "_" + std::to_string(i);
-
-                    for (auto &m : LoadedMeshes)
-                        if (m.MeshName == tempMesh.MeshName)
-                            continue;
-                    break;
-                }
-
-                // Insert Mesh
-                LoadedMeshes.push_back(tempMesh);
-
-                // Cleanup
-                Vertices.clear();
-                Indices.clear();
-            }
-        }
-        // Load Materials
-        if (algorithm::firstToken(curline) == "mtllib")
-        {
-            // Generate LoadedMaterial
-
-            // Generate a path to the material file
-            std::vector<std::string> temp;
-            algorithm::split(Path, temp, "/");
-
-            std::string pathtomat = "";
-
-            if (temp.size() != 1)
-            {
-                for (int i = 0; i < temp.size() - 1; i++)
+                isQuad = true;
+                for(int i = 0 ; i < 4; i ++)
                 {
-                    pathtomat += temp[i] + "/";
-                }
-            }
-
-
-            pathtomat += algorithm::tail(curline);
-
-            // Load Materials
-            LoadMaterials(pathtomat);
-        }
-    }
-
-    // Deal with last mesh
-
-    if (!Indices.empty() && !Vertices.empty())
-    {
-        // Create Mesh
-        tempMesh = Mesh(Vertices, Indices);
-        tempMesh.MeshName = meshname;
-
-        // Insert Mesh
-        LoadedMeshes.push_back(tempMesh);
-    }
-
-    file.close();
-
-    // Set Materials for each Mesh
-    for (int i = 0; i < MeshMatNames.size(); i++)
-    {
-        std::string matname = MeshMatNames[i];
-
-        // Find corresponding material name in loaded materials
-        // when found copy material variables into mesh material
-        for (int j = 0; j < LoadedMaterials.size(); j++)
-        {
-            if (LoadedMaterials[j].name == matname)
-            {
-                LoadedMeshes[i].MeshMaterial = LoadedMaterials[j];
-                break;
-            }
-        }
-    }
-
-    if (LoadedMeshes.empty() && LoadedVertices.empty() && LoadedIndices.empty())
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
-
-void LoadObj::GenVerticesFromRawOBJ(std::vector<Vertex> &oVerts,
-                                    const std::vector<Vector3> &iPositions,
-                                    const std::vector<Vector2> &iTCoords,
-                                    const std::vector<Vector3> &iNormals, std::string icurline)
-{
-    std::vector<std::string> sface, svert;
-    Vertex vVert;
-    algorithm::split(algorithm::tail(icurline), sface, " ");
-
-    vector<std::string>::iterator it;
-    for(it = sface.begin();it != sface.end();)
-    {
-        if(*it  == "\r"){
-            it = sface.erase(it);
-        }else {
-            ++it;
-        }
-    }
-    bool noNormal = false;
-
-    // For every given vertex do this
-    for (int i = 0; i < int(sface.size()); i++)
-    {
-        // See What type the vertex is.
-        int vtype;
-
-        algorithm::split(sface[i], svert, "/");
-
-        // Check for just position - v1
-        if (svert.size() == 1)
-        {
-            // Only position
-            vtype = 1;
-        }
-
-        // Check for position & texture - v1/vt1
-        if (svert.size() == 2)
-        {
-            // Position & Texture
-            vtype = 2;
-        }
-
-        // Check for Position, Texture and Normal - v1/vt1/vn1
-        // or if Position and Normal - v1//vn1
-        if (svert.size() == 3)
-        {
-            if (svert[1] != "")
-            {
-                // Position, Texture, and Normal
-                vtype = 4;
-            }
-            else
-            {
-                // Position & Normal
-                vtype = 3;
-            }
-        }
-
-        // Calculate and store the vertex
-        switch (vtype)
-        {
-            case 1: // P
-            {
-                vVert.Position = algorithm::getElement(iPositions, svert[0]);
-                vVert.TextureCoordinate = Vector2(0, 0);
-                noNormal = true;
-                oVerts.push_back(vVert);
-                break;
-            }
-            case 2: // P/T
-            {
-                vVert.Position = algorithm::getElement(iPositions, svert[0]);
-                vVert.TextureCoordinate = algorithm::getElement(iTCoords, svert[1]);
-                noNormal = true;
-                oVerts.push_back(vVert);
-                break;
-            }
-            case 3: // P//N
-            {
-                vVert.Position = algorithm::getElement(iPositions, svert[0]);
-                vVert.TextureCoordinate = Vector2(0, 0);
-                vVert.Normal = algorithm::getElement(iNormals, svert[2]);
-                oVerts.push_back(vVert);
-                break;
-            }
-            case 4: // P/T/N
-            {
-                vVert.Position = algorithm::getElement(iPositions, svert[0]);
-                vVert.TextureCoordinate = algorithm::getElement(iTCoords, svert[1]);
-                vVert.Normal = algorithm::getElement(iNormals, svert[2]);
-                oVerts.push_back(vVert);
-                break;
-            }
-            default:
-            {
-                break;
-            }
-        }
-    }
-
-    // take care of missing normals
-    // these may not be truly acurate but it is the
-    // best they get for not compiling a mesh with normals
-    if (noNormal)
-    {
-        Vector3 A = oVerts[0].Position - oVerts[1].Position;
-        Vector3 B = oVerts[2].Position - oVerts[1].Position;
-
-        Vector3 normal = mathSN::CrossV3(A, B);
-
-        for (int i = 0; i < int(oVerts.size()); i++)
-        {
-            oVerts[i].Normal = normal;
-        }
-    }
-}
-
-void LoadObj::VertexTriangluation(std::vector<unsigned int> &oIndices,
-                                  const std::vector<Vertex> &iVerts)
-{
-    // If there are 2 or less verts,
-    // no triangle can be created,
-    // so exit
-    if (iVerts.size() < 3)
-    {
-        return;
-    }
-    // If it is a triangle no need to calculate it
-    if (iVerts.size() == 3)
-    {
-        oIndices.push_back(0);
-        oIndices.push_back(1);
-        oIndices.push_back(2);
-        return;
-    }
-
-    // Create a list of vertices
-    std::vector<Vertex> tVerts = iVerts;
-
-    while (true)
-    {
-        // For every vertex
-        for (int i = 0; i < int(tVerts.size()); i++)
-        {
-            // pPrev = the previous vertex in the list
-            Vertex pPrev;
-            if (i == 0)
-            {
-                pPrev = tVerts[tVerts.size() - 1];
-            }
-            else
-            {
-                pPrev = tVerts[i - 1];
-            }
-
-            // pCur = the current vertex;
-            Vertex pCur = tVerts[i];
-
-            // pNext = the next vertex in the list
-            Vertex pNext;
-            if (i == tVerts.size() - 1)
-            {
-                pNext = tVerts[0];
-            }
-            else
-            {
-                pNext = tVerts[i + 1];
-            }
-
-            // Check to see if there are only 3 verts left
-            // if so this is the last triangle
-            if (tVerts.size() == 3)
-            {
-                // Create a triangle from pCur, pPrev, pNext
-                for (int j = 0; j < int(tVerts.size()); j++)
-                {
-                    if (iVerts[j].Position == pCur.Position)
-                        oIndices.push_back((unsigned)j);
-                    if (iVerts[j].Position == pPrev.Position)
-                        oIndices.push_back((unsigned)j);
-                    if (iVerts[j].Position == pNext.Position)
-                        oIndices.push_back((unsigned)j);
-                }
-
-                tVerts.clear();
-                break;
-            }
-            if (tVerts.size() == 4)
-            {
-                // Create a triangle from pCur, pPrev, pNext
-                for (int j = 0; j < int(iVerts.size()); j++)
-                {
-                    if (iVerts[j].Position == pCur.Position)
-                        oIndices.push_back((unsigned)j);
-                    if (iVerts[j].Position == pPrev.Position)
-                        oIndices.push_back((unsigned)j);
-                    if (iVerts[j].Position == pNext.Position)
-                        oIndices.push_back((unsigned)j);
-                }
-
-                Vector3 tempVec;
-                for (int j = 0; j < int(tVerts.size()); j++)
-                {
-                    if (tVerts[j].Position != pCur.Position
-                        && tVerts[j].Position != pPrev.Position
-                        && tVerts[j].Position != pNext.Position)
+                    algorithm::split(sface[i], svert, "/");
+                    if(svert.size() == 1)
                     {
-                        tempVec = tVerts[j].Position;
-                        break;
+                        vQuadidx.push_back(std::stoi(svert[0]));
+                    }else if(svert.size() == 2)
+                    {
+                        vQuadidx.push_back(std::stoi(svert[0]));
+                        vtQuadidx.push_back(std::stoi(svert[1]));
+                    }else if(svert.size() == 3)
+                    {
+                        if(svert[1] != "")
+                        {
+                            vQuadidx.push_back(std::stoi(svert[0]));
+                            vtQuadidx.push_back(std::stoi(svert[1]));
+                            vnQuadidx.push_back(std::stoi(svert[2]));
+                        }else{
+                            vQuadidx.push_back(std::stoi(svert[0]));
+                            vnQuadidx.push_back(std::stoi(svert[2]));
+                        }
                     }
                 }
-
-                // Create a triangle from pCur, pPrev, pNext
-                for (int j = 0; j < int(iVerts.size()); j++)
+            } else{
+                isQuad = false;
+                for(int i = 0 ; i < 3; i ++)
                 {
-                    if (iVerts[j].Position == pPrev.Position)
-                        oIndices.push_back((unsigned)j);
-                    if (iVerts[j].Position == pNext.Position)
-                        oIndices.push_back((unsigned)j);
-                    if (iVerts[j].Position == tempVec)
-                        oIndices.push_back((unsigned)j);
-                }
-
-                tVerts.clear();
-                break;
-            }
-
-            // If Vertex is not an interior vertex
-            float angle = mathSN::AngleBetweenV3(pPrev.Position - pCur.Position, pNext.Position - pCur.Position) * (180 / 3.14159265359);
-            if (angle <= 0 && angle >= 180)
-                continue;
-
-            // If any vertices are within this triangle
-            bool inTri = false;
-            for (int j = 0; j < int(iVerts.size()); j++)
-            {
-                if (algorithm::inTriangle(iVerts[j].Position, pPrev.Position, pCur.Position, pNext.Position)
-                    && iVerts[j].Position != pPrev.Position
-                    && iVerts[j].Position != pCur.Position
-                    && iVerts[j].Position != pNext.Position)
-                {
-                    inTri = true;
-                    break;
-                }
-            }
-            if (inTri)
-                continue;
-
-            // Create a triangle from pCur, pPrev, pNext
-            for (int j = 0; j < int(iVerts.size()); j++)
-            {
-                if (iVerts[j].Position == pCur.Position)
-                    oIndices.push_back((unsigned)j);
-                if (iVerts[j].Position == pPrev.Position)
-                    oIndices.push_back((unsigned)j);
-                if (iVerts[j].Position == pNext.Position)
-                    oIndices.push_back((unsigned)j);
-            }
-
-            // Delete pCur from the list
-            for (int j = 0; j < int(tVerts.size()); j++)
-            {
-                if (tVerts[j].Position == pCur.Position)
-                {
-                    tVerts.erase(tVerts.begin() + j);
-                    break;
+                    algorithm::split(sface[i], svert, "/");
+                    if(svert.size() == 1)
+                    {
+                        vidx.push_back(std::stoi(svert[0]));
+                    }else if(svert.size() == 2)
+                    {
+                        vidx.push_back(std::stoi(svert[0]));
+                        vtidx.push_back(std::stoi(svert[1]));
+                    }else if(svert.size() == 3)
+                    {
+                        if(svert[1] != "")
+                        {
+                            vidx.push_back(std::stoi(svert[0]));
+                            vtidx.push_back(std::stoi(svert[1]));
+                            vnidx.push_back(std::stoi(svert[2]));
+                        }else{
+                            vidx.push_back(std::stoi(svert[0]));
+                            vnidx.push_back(std::stoi(svert[2]));
+                        }
+                    }
                 }
             }
 
-            // reset i to the start
-            // -1 since loop will add 1 to it
-            i = -1;
+            if(isQuad)
+            {
+                std::vector<int> standIdx;
+                standIdx.clear();
+                standIdx.push_back(0);standIdx.push_back(1);standIdx.push_back(2);
+                standIdx.push_back(0);standIdx.push_back(2);standIdx.push_back(3);
+
+                for(int i = 0; i < 6; i++)
+                {
+                    int index = standIdx[i];
+                    if(vQuadidx.size() != 0)
+                        vidx.push_back(vQuadidx[index]);
+                    if(vtQuadidx.size() != 0)
+                        vtidx.push_back(vtQuadidx[index]);
+                    if(vnQuadidx.size() != 0)
+                        vnidx.push_back(vnQuadidx[index]);
+                }
+            }
+            //顶点索引
+            for(int i = 0;i < vidx.size();i ++)
+            {
+                PositionsIndex.push_back(vidx[i]);
+            }
+            //纹理坐标索引
+            for(int i = 0;i < vtidx.size();i ++)
+            {
+                TCoordsIndex.push_back(vtidx[i]);
+            }
+            //法线坐标索引
+            for(int i = 0;i < vnidx.size();i ++)
+            {
+                NormalsIndex.push_back(vnidx[i]);
+            }
         }
 
-        // if no triangles were created
-        if (oIndices.size() == 0)
-            break;
+//        // Get Mesh Material Name
+//        if (algorithm::firstToken(curline) == "usemtl")
+//        {
+//            MeshMatNames.push_back(algorithm::tail(curline));
+//
+//            // Create new Mesh, if Material changes within a group
+//            if (!Indices.empty() && !Vertices.empty())
+//            {
+//                // Create Mesh
+//                tempMesh = Mesh(Vertices, Indices);
+//                tempMesh.MeshName = meshname;
+//                int i = 2;
+//                while(1) {
+//                    tempMesh.MeshName = meshname + "_" + std::to_string(i);
+//
+//                    for (auto &m : LoadedMeshes)
+//                        if (m.MeshName == tempMesh.MeshName)
+//                            continue;
+//                    break;
+//                }
+//
+//                // Insert Mesh
+//                LoadedMeshes.push_back(tempMesh);
+//
+//                // Cleanup
+//                Vertices.clear();
+//                Indices.clear();
+//            }
+//        }
+//        // Load Materials
+//        if (algorithm::firstToken(curline) == "mtllib")
+//        {
+//            // Generate LoadedMaterial
+//
+//            // Generate a path to the material file
+//            std::vector<std::string> temp;
+//            algorithm::split(Path, temp, "/");
+//
+//            std::string pathtomat = "";
+//
+//            if (temp.size() != 1)
+//            {
+//                for (int i = 0; i < temp.size() - 1; i++)
+//                {
+//                    pathtomat += temp[i] + "/";
+//                }
+//            }
+//
+//
+//            pathtomat += algorithm::tail(curline);
+//
+//            // Load Materials
+//            LoadMaterials(pathtomat);
+//        }
+    }//循环读取obj文件结束
+    return true;
 
-        // if no more vertices
-        if (tVerts.size() == 0)
-            break;
-    }
+//    // Deal with last mesh
+//
+//    if (!Indices.empty() && !Vertices.empty())
+//    {
+//        // Create Mesh
+//        tempMesh = Mesh(Vertices, Indices);
+//        tempMesh.MeshName = meshname;
+//
+//        // Insert Mesh
+//        LoadedMeshes.push_back(tempMesh);
+//    }
+//
+//    file.close();
+//
+//    // Set Materials for each Mesh
+//    for (int i = 0; i < MeshMatNames.size(); i++)
+//    {
+//        std::string matname = MeshMatNames[i];
+//
+//        // Find corresponding material name in loaded materials
+//        // when found copy material variables into mesh material
+//        for (int j = 0; j < LoadedMaterials.size(); j++)
+//        {
+//            if (LoadedMaterials[j].name == matname)
+//            {
+//                LoadedMeshes[i].MeshMaterial = LoadedMaterials[j];
+//                break;
+//            }
+//        }
+//    }
+//
+//    if (LoadedMeshes.empty() && LoadedVertices.empty() && LoadedIndices.empty())
+//    {
+//        return false;
+//    }
+//    else
+//    {
+//        return true;
+//    }
 }
 
 bool LoadObj::LoadMaterials(std::string path)
@@ -709,4 +495,3 @@ bool LoadObj::LoadMaterials(std::string path)
     else
         return true;
 }
-
