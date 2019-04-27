@@ -20,6 +20,7 @@ file(GLOB srcSource "${Source_Common_Dir}/CoreObject/*.cpp"
                     "${Source_Common_Dir}/Graph/gles/*.cpp"
                     "${Source_Common_Dir}/Sample/*.cpp"
                     "${Source_Mac_Dir}/*.cpp"
+		    "${Source_Mac_Dir}/MacBridge/*.cpp"
     )
 
 #包含glfw的gl窗口环境
@@ -43,6 +44,7 @@ include_directories(${Source_Common_Dir}/glm/gtc/)
 include_directories(${Source_Common_Dir}/glm/gtx/)
 include_directories(${Source_Common_Dir}/glm/detail/)
 include_directories(${Source_Mac_Dir}/)
+include_directories(${Source_Mac_Dir}/MacBridge/)
 
 find_library(LIBCOCOA Cocoa)
 if (NOT LIBCOCOA)
