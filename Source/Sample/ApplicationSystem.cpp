@@ -29,6 +29,11 @@ void ApplicationSystem::RegisteredApplication(Application *application)
     CurrApplication_ = application;
 }
 
+Application* ApplicationSystem::GetCurrApplication()
+{
+    return CurrApplication_;
+}
+
 void ApplicationSystem::CreateScence(Context *context, int width, int height)
 {
     if(CurrApplication_ == NULL)

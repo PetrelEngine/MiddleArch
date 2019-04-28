@@ -42,7 +42,7 @@ void PBRSample::CreateScence(Context *context, int width, int height)
     LOGI("TextureHandle_:%d",TextureHandle_);
     loadObj_ = new LoadObj();
 
-    bool loadout = loadObj_->LoadFile("/sdcard/PBRObj/Test/Hyena_OBJ.obj");// Fish/fish.obj   Box/box_stack.obj  Persion/Model.obj
+    bool loadout = loadObj_->LoadFile("/sdcard/PBRObj/Fish/fish.obj");// Fish/fish.obj   Box/box_stack.obj  Persion/Model.obj  Test/Hyena_OBJ.obj
     if(loadout)
     {
         LOGI("obj加载成功！");
@@ -57,24 +57,37 @@ void PBRSample::CreateScence(Context *context, int width, int height)
 
     float pi = 3.1415926f;
 
-    ModelMatrix_ = glm::translate(glm::vec3(0,-1,-1))*glm::rotate(pi/4.f,glm::vec3(0,1,0))* glm::rotate(pi/1.f,glm::vec3(1,0,0))*glm::scale(glm::vec3(2.5,2.5,2.5));
+    ModelMatrix_ = glm::translate(glm::vec3(0,-1,-5))*glm::rotate(pi/2.f,glm::vec3(0,1,0))* glm::rotate(pi/1.f,glm::vec3(1,0,0))*glm::scale(glm::vec3(0.05,0.05,0.05));
     CameraMatrix_ = glm::lookAt(glm::vec3(5,1,-1),glm::vec3(0,-1,-1),glm::vec3(0,1,0));
     ProjectMatrix_ = glm::frustumRH(-1,1,-1,1,1,1000);
 
     MVPMatrix_ = ProjectMatrix_*CameraMatrix_* ModelMatrix_;
     textureId_ = context->getTextureId("fish");
-    LOGI("loadObj_->LoadedIndices.size():%d",loadObj_->LoadedIndices.size());
-    LOGI("textureId_:%d",textureId_);
+}
+
+void PBRSample::move()
+{
+    float pi = 3.1415926f;
+    ModelMatrix_ = glm::translate(glm::vec3(-2,-3,-5));
+    float angle = count * (pi/50);
+    ModelMatrix_ = ModelMatrix_ * glm::rotate(angle,glm::vec3(0,1,0));
+    ModelMatrix_ = ModelMatrix_ * glm::scale(glm::vec3(0.05,0.05,0.05));
+
+    MVPMatrix_ = ProjectMatrix_*CameraMatrix_* ModelMatrix_;
+    count ++;
 }
 
 void PBRSample::RenderOneFrame(Context *context)
 {
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST);
+
     glProgram->use();
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureId_);
     glUniform1i(TextureHandle_,0);
-    glCullFace(GL_CCW);
+
 
     glEnableVertexAttribArray(PositionHandle_);
     glEnableVertexAttribArray(TexcoordHandle_);
@@ -84,9 +97,11 @@ void PBRSample::RenderOneFrame(Context *context)
     glVertexAttribPointer(NormalHandle_, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), &loadObj_->LoadedVertices.data()->Normal);
     glVertexAttribPointer(TexcoordHandle_, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), &loadObj_->LoadedVertices.data()->TextureCoordinate);
 
+
     glUniformMatrix4fv(MVPMatrixHandle_, 1, false, (GLfloat *)&MVPMatrix_);
     glDrawElements(GL_TRIANGLES, loadObj_->LoadedIndices.size(),GL_UNSIGNED_INT,loadObj_->LoadedIndices.data());
 
     glBindTexture(GL_TEXTURE_2D, 0);
     glUseProgram(0);
+    glDisable(GL_DEPTH_TEST);
 }

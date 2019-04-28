@@ -6,6 +6,7 @@ import android.opengl.GLSurfaceView;
 import android.skysnow.com.ue4objectstudy.JNIAPI.CoreObjectJNI;
 import android.skysnow.com.ue4objectstudy.R;
 import android.util.Log;
+import android.view.MotionEvent;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -34,7 +35,7 @@ public class BaseRenderer implements GLSurfaceView.Renderer
     public void onSurfaceChanged(GL10 gl, int width, int height)
     {
         mRendererContextClassId = mCoreObjectJNI.setAssetsManager(mContext.getAssets());
-        int fishID = BitmapToTextureId.getInstence().getTextureId(R.drawable.hyena,mContext);
+        int fishID = BitmapToTextureId.getInstence().getTextureId(R.drawable.fish,mContext);
         Log.i("SkySnow:", "onSurfaceChanged: "+fishID);
         mCoreObjectJNI.setTextureId(mRendererContextClassId,"fish",fishID);
         mApplicationSystemClassId = mCoreObjectJNI.RendererCreate(mRendererContextClassId,width,height);
@@ -46,5 +47,24 @@ public class BaseRenderer implements GLSurfaceView.Renderer
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT|GLES20.GL_DEPTH_BUFFER_BIT);
         GLES20.glClearColor(0,0,0,0);
         mCoreObjectJNI.RendererFrame(mRendererContextClassId,mApplicationSystemClassId);
+    }
+
+    //触控回调方法
+    public boolean onTouchEvent(MotionEvent e)
+    {
+
+        switch (e.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if(mCoreObjectJNI != null)
+                    mCoreObjectJNI.moveObj(mApplicationSystemClassId);
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+        }
+        return true;
     }
 }

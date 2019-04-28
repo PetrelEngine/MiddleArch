@@ -3,6 +3,7 @@ package android.skysnow.com.ue4objectstudy.GLBase;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 /**
  * Created by liuqian8 on 2019/4/16.
@@ -24,4 +25,11 @@ public class GLView extends GLSurfaceView
         setRenderer(mBaseRenderer);
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent e)
+    {
+        return mBaseRenderer.onTouchEvent(e);
+    }
+
 }

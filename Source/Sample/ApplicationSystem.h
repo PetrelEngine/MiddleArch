@@ -14,6 +14,8 @@ public:
 
     void RegisteredApplication(Application* application);
 
+    Application* GetCurrApplication();
+
     void CreateScence(Context* context,int width,int height);
 
     void RenderOneFrame(Context* contex);

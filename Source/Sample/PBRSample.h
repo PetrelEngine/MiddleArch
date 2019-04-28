@@ -16,6 +16,8 @@ public:
     PBRSample();
     ~PBRSample();
 
+    void move();
+
     virtual void CreateScence(Context* context,int width,int height);
 
     virtual void RenderOneFrame(Context* context);
@@ -38,4 +40,5 @@ private:
     glm::mat4                   ProjectMatrix_;
     glm::mat4                   MVPMatrix_;
 
+    int count = 0;
 };

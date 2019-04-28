@@ -68,6 +68,13 @@ JNI_METHOD(void,RendererFrameJNI)(JNIEnv *env,jobject jobject1,jlong contextClas
     applicationSystem_->RenderOneFrame(context_);
 }
 
+JNI_METHOD(void ,move)(JNIEnv *env,jobject jobject1,jlong ApplicationSystemClassId)
+{
+    ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
+    PBRSample* pbrSample = (PBRSample*)applicationSystem_->GetCurrApplication();
+    pbrSample->move();
+}
+
 
 #ifdef __cplusplus
 }

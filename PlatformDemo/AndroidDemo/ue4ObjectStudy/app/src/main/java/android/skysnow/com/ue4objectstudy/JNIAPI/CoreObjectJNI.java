@@ -37,6 +37,11 @@ public class CoreObjectJNI
         setTexture2DId(RendererContextClassId,name,texture2DId);
     }
 
+    public void  moveObj(long ApplicationSystemClassId)
+    {
+        move(ApplicationSystemClassId);
+    }
+
     //=========================================================================================
 
     protected native void setTexture2DId(long RendererContextClassId,String name,int texture2DId);
@@ -48,4 +53,6 @@ public class CoreObjectJNI
     protected native long RendererCreateJNI(long RendererContextClassId,int width,int height);
 
     protected native void RendererFrameJNI(long RendererContextClassId,long ApplicationSystemClassId);
+
+    protected native void move(long ApplicationSystemClassId);
 }
