@@ -34,7 +34,7 @@ public class BaseRenderer implements GLSurfaceView.Renderer
     public void onSurfaceChanged(GL10 gl, int width, int height)
     {
         mRendererContextClassId = mCoreObjectJNI.setAssetsManager(mContext.getAssets());
-        int fishID = BitmapToTextureId.getInstence().getTextureId(R.drawable.fish,mContext);
+        int fishID = BitmapToTextureId.getInstence().getTextureId(R.drawable.hyena,mContext);
         Log.i("SkySnow:", "onSurfaceChanged: "+fishID);
         mCoreObjectJNI.setTextureId(mRendererContextClassId,"fish",fishID);
         mApplicationSystemClassId = mCoreObjectJNI.RendererCreate(mRendererContextClassId,width,height);
