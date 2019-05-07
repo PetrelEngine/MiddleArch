@@ -6,5 +6,6 @@
 class RenderResource
 {
 public:
-
+    RenderResource();
+    virtual ~RenderResource();
 };

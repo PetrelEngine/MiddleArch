@@ -8,6 +8,7 @@ SET(Source_Android_Dir "${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp")
 
 file(GLOB srcSource "${Source_Common_Dir}/CoreObject/*.cpp"
                     "${Source_Common_Dir}/RenderCore/*.cpp"
+                    "${Source_Common_Dir}/ShaderCore/*.cpp"
                     "${Source_Common_Dir}/*.cpp"
                     "${Source_Common_Dir}/PostProcess/*.cpp"
                     "${Source_Common_Dir}/SkeletalAnimation/*.cpp"
@@ -17,6 +18,8 @@ file(GLOB srcSource "${Source_Common_Dir}/CoreObject/*.cpp"
                     "${Source_Common_Dir}/Graph/*.cpp"
                     "${Source_Common_Dir}/Graph/gles/*.cpp"
                     "${Source_Common_Dir}/Sample/*.cpp"
+                    "${Source_Common_Dir}/Engine/*.cpp"
+                    "${Source_Common_Dir}/OpenGLESCase/*.cpp"
                     "${Source_Android_Dir}/Android/*.cpp"
     )
 
@@ -25,6 +28,8 @@ add_library(StudyCoreObjec SHARED ${srcSource})
 target_include_directories( StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/CoreObject/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/RenderCore/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/ShaderCore/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Engine/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Mesh/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/File/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Graph/>
@@ -32,6 +37,7 @@ target_include_directories( StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Co
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Sample/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/PostProcess/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/SkeletalAnimation/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/OpenGLESCase/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/glm/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/glm/gtc/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/glm/gtx/>
@@ -40,7 +46,7 @@ target_include_directories( StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Co
                           )
 
 target_link_libraries(StudyCoreObjec
-     GLESv2
      android
+     GLESv3
      log
      )

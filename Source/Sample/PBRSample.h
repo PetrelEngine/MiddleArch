@@ -5,7 +5,6 @@
 
 #include "WBGLProgram.hpp"
 #include "LoadObj.h"
-#include "ShaderProgram.h"
 #include "Application.h"
 #include "Common.h"
 #include "type_mat.hpp"

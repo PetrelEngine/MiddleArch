@@ -47,6 +47,57 @@ void RenderingCompositionGraph::RecursivelyGatherDependencies(RenderingComposite
     }
 }
 
+void RenderingCompositionGraph::RecursivelyProcess(const RenderingCompositeOutputRef &InOutputRef,RenderingCompositePassContext &Context) const
+{
+    RenderingCompositePass *Pass = InOutputRef.GetPass();
+    RenderingCompositeOutput *Output = InOutputRef.GetOutput();
+    if(Pass->bProcessWasCalled)
+    {
+        return;
+    }
+
+    Pass->bProcessWasCalled = true;
+
+    int Index = 0;
+    while(const RenderingCompositeOutputRef* OutputRefIt = Pass->GetDependency(Index++))
+    {
+        if(OutputRefIt->GetPass())
+        {
+            if(!OutputRefIt)
+            {
+                // Pass doesn't have more inputs
+                break;
+            }
+
+            RenderingCompositeOutput* Input = OutputRefIt->GetOutput();
+
+            Context.Pass = Pass;
+            RecursivelyProcess(*OutputRefIt, Context);
+        }
+    }
+
+    Context.Pass = Pass;
+
+    // then process the pass itself
+    Pass->Process(Context);
+
+    // iterate through all inputs of this pass and decrement the references for it's inputs
+    // this can release some intermediate RT so they can be reused
+
+    int InputId = 0;
+
+    while(const RenderingCompositeOutputRef* OutputRefIt = Pass->GetDependency(InputId++))
+    {
+        RenderingCompositeOutput* Input = OutputRefIt->GetOutput();
+
+        if(Input)
+        {
+            Input->ResolveDependencies();
+        }
+    }
+
+}
+
 RenderingCompositePassContext::RenderingCompositePassContext():
         bWasProcessed(false)
 {

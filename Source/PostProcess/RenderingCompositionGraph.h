@@ -15,6 +15,7 @@ using namespace std;
 struct RenderingCompositeOutput;
 struct RenderingCompositeOutputRef;
 struct RenderingCompositePass;
+struct RenderingCompositePassContext;
 
 class RenderingCompositionGraph
 {
@@ -35,7 +36,8 @@ private:
     std::vector<RenderingCompositePass*> Nodes;
 
     static void RecursivelyGatherDependencies(RenderingCompositePass* Pass);
-    
+    /** could be implemented without recursion */
+    void RecursivelyProcess(const RenderingCompositeOutputRef& InOutputRef, RenderingCompositePassContext& Context) const;
 };
 
 
@@ -54,6 +56,9 @@ struct RenderingCompositePassContext
         TargetedRoots.push_back(Root);
         Process(TargetedRoots);
     }
+
+    // is updated before each Pass->Process() call
+    RenderingCompositePass* Pass;
 
     RenderingCompositionGraph Graph;
 
@@ -104,6 +109,8 @@ struct RenderingCompositePass
 
     //return 0 if outside the range
     virtual RenderingCompositeOutput* GetOutput(EPassOutputId InPassOutputId) = 0;
+
+//    virtual FPooledRenderTargetDesc ComputeOutputDesc(EPassOutputId InPassOutputId) const = 0;
 
     /** Convenience method as this could have been done with GetInput() alone, performance: O(n) */
     unsigned ComputeInputCount();
