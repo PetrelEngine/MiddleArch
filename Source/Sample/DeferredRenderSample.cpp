@@ -13,12 +13,18 @@ DeferredRenderSample::~DeferredRenderSample()
 
 }
 
+void DeferredRenderSample::move()
+{
+    Deferred_->move();
+}
+
 void DeferredRenderSample::CreateScence(Context *context, int width, int height)
 {
-
+    Deferred_ = new Deferred();
+    Deferred_->createDeferred(context,width,height);
 }
 
 void DeferredRenderSample::RenderOneFrame(Context *context)
 {
-
+    Deferred_->deferredFirst();
 }

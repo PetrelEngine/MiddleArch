@@ -1,22 +1,20 @@
 uniform sampler2D DefaultTexture;
+
 varying vec2 vTexCoord;
 varying vec3 vNormal;
+varying vec3 vPosition;
 
-vec4 encode (vec3 normal)
-{
-    float p = sqrt(normal.z*8.0+8.0);
-    return vec4(normal.xy/p + 0.5,0,0);
-}
-
+//layout(location = 0) out vec4 outData0;//position
+//layout(location = 1) out vec4 outData1;//normal
+//layout(location = 2) out vec4 outData2;//color
+//layout(location = 3) out vec4 outData3;//texcoords
+//out vec4 fragColor;
 void main()
 {
-    vec3 albedo = texture2D(DefaultTexture,vTexCoord).rgb;
-
-    /** GBuffer format
-    *  [0] RGB: Albedo
-    *  [1] RGB: VS Normal
-    *  [2] R: Depth
-    */
-    gl_FragData[0] = vec4(albedo, 1.0);
-    gl_FragData[1] = encode(vNormal);
+    vec4 albedo = texture2D(DefaultTexture,vTexCoord);
+//    outData0 = vec4(vPosition.xyz,1.0);
+//    outData1 = vec4(normalize(vNormal),1.0);
+//    outData2 = vec4(albedo.xyz,1.0);
+//    outData3 = vec4(vTexCoord.xy,0.0,1.0);
+    gl_FragColor = albedo;
 }

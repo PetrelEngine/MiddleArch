@@ -5,6 +5,7 @@
 #include <iostream>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
+#include "DeferredRenderSample.h"
 #include "ApplicationSystem.h"
 #include "PBRSample.h"
 
@@ -53,9 +54,12 @@ JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextCl
 {
     Context* context_ = ((Context*)contextClassId);
     ApplicationSystem* applicationSystem_ = new (std::nothrow)ApplicationSystem();
-    PBRSample* pbrSample = new PBRSample();
 
-    applicationSystem_->RegisteredApplication(pbrSample);
+//    PBRSample* pbrSample = new PBRSample();
+//    applicationSystem_->RegisteredApplication(pbrSample);
+
+    DeferredRenderSample* deferredRenderSample = new DeferredRenderSample();
+    applicationSystem_->RegisteredApplication(deferredRenderSample);
 
     applicationSystem_->CreateScence(context_,width,height);
     return (uintptr_t)(applicationSystem_);
@@ -64,6 +68,7 @@ JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextCl
 JNI_METHOD(void,RendererFrameJNI)(JNIEnv *env,jobject jobject1,jlong contextClassId,jlong ApplicationSystemClassId)
 {
     Context* context_ = ((Context*)contextClassId);
+
     ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
     applicationSystem_->RenderOneFrame(context_);
 }
@@ -71,8 +76,12 @@ JNI_METHOD(void,RendererFrameJNI)(JNIEnv *env,jobject jobject1,jlong contextClas
 JNI_METHOD(void ,move)(JNIEnv *env,jobject jobject1,jlong ApplicationSystemClassId)
 {
     ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
-    PBRSample* pbrSample = (PBRSample*)applicationSystem_->GetCurrApplication();
-    pbrSample->move();
+
+//    PBRSample* pbrSample = (PBRSample*)applicationSystem_->GetCurrApplication();
+//    pbrSample->move();
+    DeferredRenderSample* deferredRenderSample = (DeferredRenderSample*)applicationSystem_->GetCurrApplication();
+    deferredRenderSample->move();
+
 }
 
 

@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "Deferred.h"
 #include "Application.h"
 
 class DeferredRenderSample: public Application
@@ -17,6 +18,9 @@ public:
 
     virtual void RenderOneFrame(Context* context);
 
+    void move();
+
 private:
     Context*                    Context_;
+    Deferred*                   Deferred_;
 };

@@ -1,8 +1,6 @@
 //
 // Created by liuqian8 on 2019/5/6.
 //
-#include "transform.hpp"
-#include <glm/ext.hpp>
 #include <File/File.h>
 #include "Deferred.h"
 
@@ -13,129 +11,134 @@ Deferred::Deferred()
 
 Deferred::~Deferred()
 {
+    if(objModel)
+    {
+        delete objModel;
+        objModel = NULL;
+    }
 
+    if(rect2D)
+    {
+        delete rect2D;
+        rect2D = NULL;
+    }
 }
 
 void Deferred::createDeferred(Context *context, int width, int height)
 {
-    Context_ = context;
-    /** Create Gbuffer*/
+    context_ = context;
 
-    /* Create framebuffer */
-    glGenFramebuffers(1, &gbuffer_framebuffer);
+//    //创建fbo
+//    glGenFramebuffers(1,&deferred_fbo_);
+//    //绑定fbo
+//    glBindFramebuffer(GL_FRAMEBUFFER,deferred_fbo_);
+//    //创建几何buffer的纹理
+//    glGenTextures(1, &g_position_texture_);//位置数据纹理
+//    glGenTextures(1, &g_normal_texture_);//法线数据纹理
+//    glGenTextures(1, &g_color_texture_);//颜色数据纹理
+//    glGenTextures(1, &g_texcoord_texture_);//纹理坐标数据纹理
+//    glGenTextures(1, &g_depth_texture_);//深度数据纹理
+//
+//    //position
+//    glBindTexture(GL_TEXTURE_2D, g_position_texture_);
+//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, nullptr);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//
+//    //Normal
+//    glBindTexture(GL_TEXTURE_2D, g_normal_texture_);
+//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, width, height, 0, GL_RGBA, GL_FLOAT, nullptr);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//
+//    //Color
+//    glBindTexture(GL_TEXTURE_2D, g_color_texture_);
+//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_FLOAT, nullptr);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//
+//    //texcoord
+//    glBindTexture(GL_TEXTURE_2D, g_texcoord_texture_);
+//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_FLOAT, nullptr);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//
+//    //Create depth texture
+//    glBindTexture(GL_TEXTURE_2D, g_depth_texture_);
+//    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE);
+//
+//    //Attach textures to FBO
+//    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, g_position_texture_, 0);
+//    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, g_normal_texture_, 0);
+//    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, g_color_texture_, 0);
+//    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, GL_TEXTURE_2D, g_texcoord_texture_, 0);
+//    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, g_depth_texture_, 0);
+//
+//    for (int i = 0; i < 4; i++) {
+//        drawBuffers[i] = GL_COLOR_ATTACHMENT0 + i;
+//    }
+//    glDrawBuffers(4, drawBuffers);
+//    //Unbind
+//    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+//
+//    g_texture_buffer_[0] = g_position_texture_;
+//    g_texture_buffer_[1] = g_normal_texture_;
+//    g_texture_buffer_[2] = g_color_texture_;
+//    g_texture_buffer_[3] = g_depth_texture_;
+//    g_texture_buffer_[4] = g_texcoord_texture_;
 
-    glGenTextures(2, gbuffer);
-    for(int i=0;i < 2; i++) {
-        glBindTexture(GL_TEXTURE_2D, gbuffer[i]);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    }
-    glGenTextures(1, &depth_buffer);
-    glBindTexture(GL_TEXTURE_2D, depth_buffer);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glBindTexture(GL_TEXTURE_2D, 0);
 
-    /** GBuffer format
-     *  [0] RGB: Albedo
-     *  [1] RG: VS Normal (encoded)
-     *  [2] R: Depth
-     */
-    glBindTexture(GL_TEXTURE_2D, gbuffer[0]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    objModel = new ObjModel();
+    objModel->CreateObj(context,width,height);
 
-    glBindTexture(GL_TEXTURE_2D, gbuffer[1]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RG16F, width, height, 0, GL_RG, GL_FLOAT, 0);
-    /* Depth texture */
-    glBindTexture(GL_TEXTURE_2D, depth_buffer);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-
-    glBindFramebuffer(GL_FRAMEBUFFER, gbuffer_framebuffer);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gbuffer[0], 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, gbuffer[1], 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depth_buffer, 0);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    //延迟渲染的物体的数据
-    File_ = new File(Context_);
-    std::string vertexShaderSource = File_->getStringFromFileAssets("deferredVertex.glsl");
-    std::string fragShaderSource = File_->getStringFromFileAssets("deferredFragment.glsl");
-    WBGLProgram_GBuffer_  = new WBGLProgram();
-    WBGLProgram_GBuffer_->initWithVertexShaderString(vertexShaderSource,fragShaderSource);
-    WBGLProgram_GBuffer_->addAttribute("position");
-    WBGLProgram_GBuffer_->addAttribute("texCoord");
-    WBGLProgram_GBuffer_->addAttribute("normal");
-    WBGLProgram_GBuffer_->link();
-
-
-    deferredGpuHandle.position = WBGLProgram_GBuffer_->getAttributeIndex("position");
-    deferredGpuHandle.texCoord = WBGLProgram_GBuffer_->getAttributeIndex("texCoord");
-    deferredGpuHandle.normal = WBGLProgram_GBuffer_->getAttributeIndex("normal");
-    deferredGpuHandle.uMVPMatix = WBGLProgram_GBuffer_->getUniformIndex("uMVPMatix");
-    deferredGpuHandle.DefaultTexture = WBGLProgram_GBuffer_->getUniformIndex("DefaultTexture");
-
-    loadObj_ = new LoadObj();
-
-    bool loadout = loadObj_->LoadFile("/sdcard/PBRObj/Fish/fish.obj");
-
-    deferredMatrix.MVPMatrix_ = glm::mat4(1.0);
-    deferredMatrix.ModelMatrix_ = glm::mat4(1.0);
-    deferredMatrix.CameraMatrix_ = glm::mat4(1.0);
-    deferredMatrix.ProjectMatrix_ = glm::mat4(1.0);
-
-    float pi = 3.1415926f;
-
-    deferredMatrix.ModelMatrix_ = glm::translate(glm::vec3(0,-1,-5))*glm::rotate(pi/2.f,glm::vec3(0,1,0))* glm::rotate(pi/1.f,glm::vec3(1,0,0))*glm::scale(glm::vec3(0.05,0.05,0.05));
-    deferredMatrix.CameraMatrix_ = glm::lookAt(glm::vec3(5,1,-1),glm::vec3(0,-1,-1),glm::vec3(0,1,0));
-    deferredMatrix.ProjectMatrix_ = glm::frustumRH(-1,1,-1,1,1,1000);
-
-    deferredMatrix.MVPMatrix_ = deferredMatrix.ProjectMatrix_*deferredMatrix.CameraMatrix_* deferredMatrix.ModelMatrix_;
-    textureId_ = context->getTextureId("fish");
+//    rect2D = new Rect2D();
+//    rect2D->CreateRect2D(context,width,height);
 }
 
+void Deferred::move()
+{
+    objModel->move();
+}
 
+int isp = false;
 void Deferred::deferredFirst()
 {
-    GLenum buffers[] = {
-            GL_COLOR_ATTACHMENT0,
-            GL_COLOR_ATTACHMENT1,
-            GL_COLOR_ATTACHMENT2,
-    };
 
-    glBindFramebuffer(GL_FRAMEBUFFER, gbuffer_framebuffer);
-    glDrawBuffers(2, buffers);
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+//    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, deferred_fbo_);
+//    glDrawBuffers ( 4, drawBuffers );
+//    glDepthMask(GL_TRUE);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glDepthMask(GL_TRUE);
-    glDepthFunc(GL_LESS);
-    glCullFace(GL_BACK);
-    glUseProgram(WBGLProgram_GBuffer_->getProgramId());
-
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureId_);
-    glUniform1i(deferredGpuHandle.DefaultTexture,0);
-
-    glEnableVertexAttribArray(deferredGpuHandle.position);
-    glEnableVertexAttribArray(deferredGpuHandle.normal);
-    glEnableVertexAttribArray(deferredGpuHandle.texCoord);
-
-    glVertexAttribPointer(deferredGpuHandle.position, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), loadObj_->LoadedVertices.data());
-    glVertexAttribPointer(deferredGpuHandle.normal, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (reinterpret_cast<char*>(loadObj_->LoadedVertices.data()) + 3 * sizeof(GL_FLOAT)));
-    glVertexAttribPointer(deferredGpuHandle.texCoord, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (reinterpret_cast<char*>(loadObj_->LoadedVertices.data()) + 6 * sizeof(GL_FLOAT)));
-
-    glUniformMatrix4fv(deferredGpuHandle.uMVPMatix, 1, false, (GLfloat *)&deferredMatrix.MVPMatrix_);
-    glDrawElements(GL_TRIANGLES, loadObj_->LoadedIndices.size(),GL_UNSIGNED_INT,loadObj_->LoadedIndices.data());
-
-    glBindTexture(GL_TEXTURE_2D, 0);
+    glEnable(GL_DEPTH_TEST);
     glDisable(GL_BLEND);
-    glDepthMask(GL_TRUE);
-    glDepthFunc(GL_LESS);
-    glCullFace(GL_BACK);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+//
+    objModel->drawObj(context_);
+//
+//    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+//    glDepthMask(GL_FALSE);
+    glDisable(GL_DEPTH_TEST);
+//    if(!isp)
+//    {
+//        LOGI("gbuffer[0]:%d",g_texture_buffer_[0]);
+//        LOGI("gbuffer[1]:%d",g_texture_buffer_[1]);
+//        LOGI("gbuffer[2]:%d",g_texture_buffer_[2]);
+//        LOGI("gbuffer[3]:%d",g_texture_buffer_[3]);
+//        isp = true;
+//    }
+
+
+//    rect2D->DrawRect2D(context_,g_texture_buffer_);
 }
 

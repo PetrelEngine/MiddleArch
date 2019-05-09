@@ -3,30 +3,10 @@
 //
 #pragma once
 
-#include <Graph/WBGLProgram.hpp>
-#include <Mesh/LoadObj.h>
-#include "File.h"
-#include "type_mat.hpp"
-#include "type_mat4x4.hpp"
 #include "Context.h"
 #include "Common.h"
-
-struct DeferredGpuHandle
-{
-    GLuint position;
-    GLuint texCoord;
-    GLuint normal;
-    GLuint uMVPMatix;
-    GLuint DefaultTexture;
-};
-
-struct DeferredMatrix
-{
-    glm::mat4 ModelMatrix_;
-    glm::mat4 CameraMatrix_;
-    glm::mat4 ProjectMatrix_;
-    glm::mat4 MVPMatrix_;
-};
+#include "ObjModel.h"
+#include "Rect2D.h"
 
 class Deferred
 {
@@ -38,18 +18,23 @@ public:
 
     void deferredFirst();
 
+    void move();
+
 protected:
-    Context*                    Context_;
-    File*                       File_;
 
-    WBGLProgram*                WBGLProgram_GBuffer_;
-    LoadObj*                    loadObj_;
-    int                         textureId_;
+    GLuint                      deferred_fbo_;
+    GLuint                      g_position_texture_;
+    GLuint                      g_normal_texture_;
+    GLuint                      g_color_texture_;
+    GLuint                      g_texcoord_texture_;
+    GLuint                      g_depth_texture_;
 
-    GLuint                      gbuffer_framebuffer;
-    GLuint                      gbuffer[2];
-    GLuint                      depth_buffer;
 
-    DeferredMatrix      deferredMatrix;
-    DeferredGpuHandle   deferredGpuHandle;
+    GLenum                      drawBuffers[3];
+
+    ObjModel*                   objModel;
+    Rect2D*                     rect2D;
+    Context*                    context_;
+
+    int                         g_texture_buffer_[5];
 };
