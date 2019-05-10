@@ -36,12 +36,12 @@ void Rect2D::CreateRect2D(Context *context,int width,int height)
     Context_ = context;
     //显示GBuffer数据的矩形数据。
     RectHandle = new Rect();
-    File_ = new File(Context_);
-    string vertexShaderSource = File_->getStringFromFileAssets("uiVertex.glsl");
-    string fragShaderSource = File_->getStringFromFileAssets("uiFragment.glsl");
+//    File_ = new File(Context_);
+//    string vertexShaderSource = File_->getStringFromFileAssets("uiVertex.glsl");
+//    string fragShaderSource = File_->getStringFromFileAssets("uiFragment.glsl");
 
     GLProgram__ = new WBGLProgram();
-    GLProgram__->initWithVertexShaderString(vertexShaderSource,fragShaderSource);//ShaderStr::uiVertex,ShaderStr::uifragment
+    GLProgram__->initWithVertexShaderString(ShaderStr::uiVertex,ShaderStr::uifragment);//ShaderStr::uiVertex,ShaderStr::uifragment  vertexShaderSource,fragShaderSource
     GLProgram__->addAttribute("position");
     GLProgram__->addAttribute("texCoord");
     GLProgram__->link();

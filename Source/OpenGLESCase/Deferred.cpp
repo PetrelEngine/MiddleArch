@@ -27,8 +27,6 @@ Deferred::~Deferred()
 void Deferred::createDeferred(Context *context, int width, int height)
 {
     context_ = context;
-    width_ = width;
-    height_ = height;
     //创建fbo
     glGenFramebuffers(1,&deferred_fbo_);
     //绑定fbo
