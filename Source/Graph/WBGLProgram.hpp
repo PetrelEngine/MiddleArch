@@ -21,7 +21,7 @@ public:
     ~WBGLProgram();
     
     bool initWithVertexShaderString(const std::string& vertexShaderString, const std::string& fragmentShaderString);
-    bool compileShader(GLuint& shader, GLenum type,const std::string& defineString, const std::string& shaderString);
+    bool compileShader(GLuint& shader, GLenum type, const std::string& shaderString);
     void addAttribute(const std::string& attributeName);
     GLuint getAttributeIndex(const std::string& attributeName);
     GLuint getUniformIndex(const std::string& uniformName);

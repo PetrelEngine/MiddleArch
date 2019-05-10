@@ -3,6 +3,7 @@
 //
 
 #include "Rect2D.h"
+#include "ShaderStr.h"
 
 Rect2D::Rect2D()
 {
@@ -40,7 +41,7 @@ void Rect2D::CreateRect2D(Context *context,int width,int height)
     string fragShaderSource = File_->getStringFromFileAssets("uiFragment.glsl");
 
     GLProgram__ = new WBGLProgram();
-    GLProgram__->initWithVertexShaderString(vertexShaderSource,fragShaderSource);
+    GLProgram__->initWithVertexShaderString(vertexShaderSource,fragShaderSource);//ShaderStr::uiVertex,ShaderStr::uifragment
     GLProgram__->addAttribute("position");
     GLProgram__->addAttribute("texCoord");
     GLProgram__->link();
@@ -55,6 +56,8 @@ void Rect2D::CreateRect2D(Context *context,int width,int height)
     RectHandle->gNormal = GLProgram__->getUniformIndex("gnormal");
     RectHandle->gColor = GLProgram__->getUniformIndex("gcolor");
     RectHandle->gDepth = GLProgram__->getUniformIndex("gdepth");
+    RectHandle->u_lightPosition = GLProgram__->getUniformIndex("lightPosition");
+    RectHandle->u_eyePosition = GLProgram__->getUniformIndex("u_eyePosition");
 
 }
 
@@ -87,6 +90,8 @@ void Rect2D::DrawRect2D(Context *context,int* gbuffer)
     glUniform1i(RectHandle->gDepth,3);
 
     glUniform2fv(RectHandle->u_ViewportHandle, 1, RectHandle->viewport);
+    glUniform3fv(RectHandle->u_lightPosition,1,RectHandle->lightPos);
+    glUniform3fv(RectHandle->u_eyePosition,1,RectHandle->eyePosition);
     glEnableVertexAttribArray(RectHandle->positionHandle);
     glEnableVertexAttribArray(RectHandle->texcoordsHandle);
     glVertexAttribPointer(RectHandle->positionHandle, 2, GL_FLOAT, GL_FALSE, 0, RectHandle->positions);

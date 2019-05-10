@@ -31,23 +31,12 @@ bool WBGLProgram::initWithVertexShaderString(const std::string& vertexShaderStri
     _uniforms.clear();
     _program = glCreateProgram();
     
-    std::string platformDefineShader = "";
-#if PLATFORM == PLATFORM_ANDROID
-    platformDefineShader += "#define OPENGL_ES\n";
-//    platformDefineShader += "#define __ANDROID__\n";
-#elif PLATFORM == PLATFORM_IOS
-    platformDefineShader += "#define OPENGL_ES \n";
-    platformDefineShader += "#define __APPLE__ \n";
-#elif PLATFORM == PLATFORM_LINUX
-    platformDefineShader += "#define __LINUX__ \n";
-#endif
-    
-    if (!compileShader(_vertexShader, GL_VERTEX_SHADER,platformDefineShader ,vertexShaderString)) {
+    if (!compileShader(_vertexShader, GL_VERTEX_SHADER ,vertexShaderString)) {
         return false;
     }
     
     // Create and compile fragment shader
-    if (!compileShader(_fragmentShader, GL_FRAGMENT_SHADER,platformDefineShader,fragmentShaderString)) {
+    if (!compileShader(_fragmentShader, GL_FRAGMENT_SHADER,fragmentShaderString)) {
         return false;
     }
     
@@ -57,7 +46,7 @@ bool WBGLProgram::initWithVertexShaderString(const std::string& vertexShaderStri
     return true;
 }
 
-bool WBGLProgram::compileShader(GLuint& shader, GLenum type,const std::string& defineString, const std::string& shaderString) {
+bool WBGLProgram::compileShader(GLuint& shader, GLenum type, const std::string& shaderString) {
     
     GLint status;
     
@@ -68,15 +57,8 @@ bool WBGLProgram::compileShader(GLuint& shader, GLenum type,const std::string& d
     }
     
     shader = glCreateShader(type);
-    
-    if(&defineString){
-        const GLchar* define = defineString.c_str();
-        const GLchar* glSource[2]= { define ,source };
-        const GLint glSourceSize[2] = {static_cast<const GLint> (defineString.size()),static_cast<const GLint> (shaderString.size()) };
-        glShaderSource(shader, 2, glSource, glSourceSize);
-    }else{
-        glShaderSource(shader, 1, &source, NULL);
-    }
+
+    glShaderSource(shader, 1, &source, NULL);
     
     glCompileShader(shader);
     
@@ -91,8 +73,10 @@ bool WBGLProgram::compileShader(GLuint& shader, GLenum type,const std::string& d
             glGetShaderInfoLog(shader, logLength, &logLength, log);
             if(type == GL_VERTEX_SHADER){
                 _vertexShaderErrorLog = std::string(log);
+                LOGE("vertex error:%s",_vertexShaderErrorLog.c_str());
             }else if(type == GL_FRAGMENT_SHADER){
                 _fragmentShaderErrorLog = std::string(log);
+                LOGE("fragment error:%s",_fragmentShaderErrorLog.c_str());
             }
             //TODO: NSLog(@"Shader compile log:\n%s", log);
             delete [] log;

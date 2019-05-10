@@ -18,6 +18,10 @@ struct Rect
     GLuint  gNormal;
     GLuint  gColor;
     GLuint  gDepth;
+    GLuint u_lightPosition;
+    GLuint u_eyePosition;
+    float lightPos[3] = {-8.0f,6.0f,-5.0f};
+    float eyePosition[3] = {5.0f,1.0f,-1.0f};
     float positions[8]=
             {
                     1,1,

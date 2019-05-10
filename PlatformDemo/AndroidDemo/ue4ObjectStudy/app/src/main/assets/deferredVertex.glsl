@@ -1,13 +1,14 @@
-attribute vec4 position;
-attribute vec4 texCoord;
-attribute vec4 normal;
+#version 300 es
+in vec4 position;
+in vec4 texCoord;
+in vec4 normal;
 
 uniform mat4 uMVPMatix;
 uniform mat4 uModelMatix;
 
-varying vec2 vTexCoord;
-varying vec3 vNormal;
-varying vec3 vPosition;
+out vec2 vTexCoord;
+out vec3 vNormal;
+out vec3 vPosition;
 void main()
 {
     gl_Position = uMVPMatix * vec4(position.xyz,1.0);

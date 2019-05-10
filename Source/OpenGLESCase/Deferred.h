@@ -18,6 +18,8 @@ public:
 
     void deferredFirst();
 
+//    void debugDeferred();
+
     void move();
 
 protected:
@@ -37,4 +39,7 @@ protected:
     Context*                    context_;
 
     int                         g_texture_buffer_[5];
+
+    int width_;
+    int height_;
 };

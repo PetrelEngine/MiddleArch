@@ -3,6 +3,7 @@
 //
 
 #include "ObjModel.h"
+#include "ShaderStr.h"
 
 ObjModel::ObjModel()
 {
@@ -31,7 +32,7 @@ void ObjModel::CreateObj(Context *context, int width, int height)
     std::string vertexShaderSource = File_->getStringFromFileAssets("deferredVertex.glsl");
     std::string fragShaderSource = File_->getStringFromFileAssets("deferredFragment.glsl");
     GLProgram__  = new WBGLProgram();
-    GLProgram__->initWithVertexShaderString(vertexShaderSource,fragShaderSource);
+    GLProgram__->initWithVertexShaderString(vertexShaderSource,fragShaderSource);//ShaderStr::deferrVertex ShaderStr::deferrfragment
     GLProgram__->addAttribute("position");
     GLProgram__->addAttribute("texCoord");
     GLProgram__->addAttribute("normal");
@@ -62,8 +63,8 @@ void ObjModel::CreateObj(Context *context, int width, int height)
 
     float pi = 3.1415926f;
 
-    ObjGraph_.ModelMatrix_ = glm::translate(glm::vec3(0,-1,-5))*glm::rotate(0.0f,glm::vec3(0,1,0))* glm::rotate(0.0f,glm::vec3(1,0,0))*glm::scale(glm::vec3(0.05,0.05,0.05));
-    ObjGraph_.CameraMatrix_ = glm::lookAt(glm::vec3(5,1,-1),glm::vec3(0,-1,-1),glm::vec3(0,1,0));
+    ObjGraph_.ModelMatrix_ = glm::translate(glm::vec3(0,0,0))*glm::rotate(0.0f,glm::vec3(0,1,0))* glm::rotate(0.0f,glm::vec3(1,0,0))*glm::scale(glm::vec3(0.05,0.05,0.05));
+    ObjGraph_.CameraMatrix_ = glm::lookAt(glm::vec3(0,1,5),glm::vec3(0,-1,-1),glm::vec3(0,1,0));
     ObjGraph_.ProjectMatrix_ = glm::frustumRH(-1,1,-1,1,1,1000);
 
     ObjGraph_.MVPMatrix_ = ObjGraph_.ProjectMatrix_*ObjGraph_.CameraMatrix_* ObjGraph_.ModelMatrix_;
@@ -76,7 +77,7 @@ void ObjModel::CreateObj(Context *context, int width, int height)
 void ObjModel::move()
 {
     float pi = 3.1415926f;
-    ObjGraph_.ModelMatrix_ = glm::translate(glm::vec3(-2,-3,-5));
+    ObjGraph_.ModelMatrix_ = glm::translate(glm::vec3(0,0,0));
     float angle = count * (pi/50);
     ObjGraph_.ModelMatrix_ = ObjGraph_.ModelMatrix_ * glm::rotate(angle,glm::vec3(0,1,0));
     ObjGraph_.ModelMatrix_ = ObjGraph_.ModelMatrix_ * glm::scale(glm::vec3(0.05,0.05,0.05));
