@@ -106,6 +106,42 @@ void Deferred::createDeferred(Context *context, int width, int height)
 
     rect2D = new Rect2D();
     rect2D->CreateRect2D(context,width,height);
+
+    testzsx();
+}
+
+void Deferred::testzsx()
+{
+    float fScreenW = 3.0f,fScreenH = 4.0f;
+    float fImageW = 3.0f,fImageH = 4.0f;
+    float tScreenW = 10.0f,tScreenH = 10.0f;
+    float tImageW,tImageH;
+
+
+    float FSdiaDisT = sqrtf(fScreenW * fScreenW + fScreenH* fScreenH);
+    float FIdiaDisT = sqrtf(fImageW * fImageW + fImageH* fImageH);
+    float radio = FIdiaDisT/FSdiaDisT;
+    float imageSeflRadioW = fImageW/FIdiaDisT;
+    float imageSeflRadioH = fImageH/FIdiaDisT;
+
+    float tScDiaDis = sqrtf(tScreenW* tScreenW + tScreenH * tScreenW);
+    float tImageDiaDis = tScDiaDis * radio;
+
+    tImageW = tImageDiaDis * imageSeflRadioW;
+    tImageH = tImageDiaDis * imageSeflRadioH;
+
+    float tImageRadioW = tImageW/tImageDiaDis;
+    float tImageRadioH = tImageH/tImageDiaDis;
+
+    LOGE("1000* 1000的像素的大小：%f: ,%f:",tImageW,tImageH);
+
+    fImageW = radio * FSdiaDisT *tImageRadioW;
+    fImageH = radio * FSdiaDisT *tImageRadioH;
+
+    float recordW = tImageW;//回滚数据，或者是进行下一次变换使用，一旦使用使用该次编辑数据，那么数据清零。以本次显示数据为第一次数据
+    float recordH = tImageH;
+
+    LOGE("720* 1280：%f: ,%f:",fImageW,fImageH);
 }
 
 void Deferred::move()

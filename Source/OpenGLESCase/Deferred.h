@@ -20,6 +20,8 @@ public:
 
     void move();
 
+    void testzsx();
+
 protected:
 
     GLuint                      deferred_fbo_;
