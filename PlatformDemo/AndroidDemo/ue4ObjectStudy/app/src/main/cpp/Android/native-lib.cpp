@@ -8,7 +8,7 @@
 #include "DeferredRenderSample.h"
 #include "ApplicationSystem.h"
 #include "PBRSample.h"
-
+#include "ProductNormalMapSample.h"
 using namespace std;
 
 #define JNI_METHOD(return_type, method_name) \
@@ -58,8 +58,11 @@ JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextCl
 //    PBRSample* pbrSample = new PBRSample();
 //    applicationSystem_->RegisteredApplication(pbrSample);
 
-    DeferredRenderSample* deferredRenderSample = new DeferredRenderSample();
-    applicationSystem_->RegisteredApplication(deferredRenderSample);
+//    DeferredRenderSample* deferredRenderSample = new DeferredRenderSample();
+//    applicationSystem_->RegisteredApplication(deferredRenderSample);
+
+    ProductNormalMapSample* productNormalMapSample = new ProductNormalMapSample();
+    applicationSystem_->RegisteredApplication(productNormalMapSample);
 
     applicationSystem_->CreateScence(context_,width,height);
     return (uintptr_t)(applicationSystem_);
@@ -79,8 +82,11 @@ JNI_METHOD(void ,move)(JNIEnv *env,jobject jobject1,jlong ApplicationSystemClass
 
 //    PBRSample* pbrSample = (PBRSample*)applicationSystem_->GetCurrApplication();
 //    pbrSample->move();
-    DeferredRenderSample* deferredRenderSample = (DeferredRenderSample*)applicationSystem_->GetCurrApplication();
-    deferredRenderSample->move();
+//    DeferredRenderSample* deferredRenderSample = (DeferredRenderSample*)applicationSystem_->GetCurrApplication();
+//    deferredRenderSample->move();
+
+    ProductNormalMapSample* productNormalMapSample = (ProductNormalMapSample*)applicationSystem_->GetCurrApplication();
+    productNormalMapSample->move();
 
 }
 
