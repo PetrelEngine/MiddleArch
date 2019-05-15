@@ -54,3 +54,13 @@ void ApplicationSystem::RenderOneFrame(Context *contex)
     CurrApplication_->RenderOneFrame(contex);
 }
 
+void ApplicationSystem::Move()
+{
+    if(CurrApplication_ == NULL)
+    {
+        LOGE("ApplicationSystem.cpp Application is NULL pointer!");
+        return ;
+    }
+    CurrApplication_->Move();
+}
+

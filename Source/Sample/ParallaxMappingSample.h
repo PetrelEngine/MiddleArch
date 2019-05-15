@@ -1,18 +1,17 @@
 //
-// Created by liuqian8 on 2019/5/6.
+// Created by liuqian8 on 2019/5/15.
 //
-
 #pragma once
 
-#include "Deferred.h"
+#include "ParallaxMapping.h"
+#include "Context.h"
 #include "Application.h"
 
-class DeferredRenderSample: public Application
+class ParallaxMappingSample: public Application
 {
 public:
-    DeferredRenderSample();
-
-    ~DeferredRenderSample();
+    ParallaxMappingSample();
+    ~ParallaxMappingSample();
 
     virtual void CreateScence(Context* context,int width,int height);
 
@@ -22,5 +21,5 @@ public:
 
 private:
     Context*                    Context_;
-    Deferred*                   Deferred_;
+    ParallaxMapping*            ParallaxMapping_;
 };

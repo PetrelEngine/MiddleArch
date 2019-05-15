@@ -26,3 +26,36 @@ struct RectScreen
                     0,2,3
             };
 };
+
+struct Rect3D
+{
+    float positions[12]=
+            {
+                    1,  1,  0,
+                    1,  -1, 0,
+                    -1, -1, 0,
+                    -1, 1,  0
+            };
+    float texcoords[8] =
+            {
+                    1,1,
+                    1,0,
+                    0,0,
+                    0,1
+            };
+
+    float* normal;
+
+    float* tangent;
+
+    float* bitgent;
+
+    int index[6] =
+            {
+                    0,1,2,
+                    0,2,3
+            };
+
+    float* posArray;
+    float* texCoordsArray;
+};

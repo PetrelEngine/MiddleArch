@@ -15,4 +15,6 @@ public:
     virtual void CreateScence(Context* context,int width,int height) = 0;
 
     virtual void RenderOneFrame(Context* contex) = 0;
+
+    virtual void Move() = 0;
 };

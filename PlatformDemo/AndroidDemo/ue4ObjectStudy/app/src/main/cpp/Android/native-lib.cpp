@@ -5,6 +5,7 @@
 #include <iostream>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
+#include "ParallaxMappingSample.h"
 #include "DeferredRenderSample.h"
 #include "ApplicationSystem.h"
 #include "PBRSample.h"
@@ -45,8 +46,11 @@ JNI_METHOD(jlong ,setAssetsManagerJNI)(JNIEnv *env,jobject jobject1,jobject asse
 
 JNI_METHOD(void,setTexture2DId)(JNIEnv *env,jobject jobject1,jlong contextClassId,jstring name,jint textureId)
 {
+    const char* nameStr = env->GetStringUTFChars(name,0);
+    string nameT = const_cast<char*>(nameStr);
     Context* context_ = ((Context*)contextClassId);
-    context_->setTextureId("fish",textureId);
+    context_->setTextureId(nameT,textureId);
+    env->ReleaseStringUTFChars(name,nameStr);
 }
 
 
@@ -61,8 +65,11 @@ JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextCl
 //    DeferredRenderSample* deferredRenderSample = new DeferredRenderSample();
 //    applicationSystem_->RegisteredApplication(deferredRenderSample);
 
-    ProductNormalMapSample* productNormalMapSample = new ProductNormalMapSample();
-    applicationSystem_->RegisteredApplication(productNormalMapSample);
+//    ProductNormalMapSample* productNormalMapSample = new ProductNormalMapSample();
+//    applicationSystem_->RegisteredApplication(productNormalMapSample);
+
+    ParallaxMappingSample* parallaxMappingSample = new ParallaxMappingSample();
+    applicationSystem_->RegisteredApplication(parallaxMappingSample);
 
     applicationSystem_->CreateScence(context_,width,height);
     return (uintptr_t)(applicationSystem_);
@@ -79,14 +86,7 @@ JNI_METHOD(void,RendererFrameJNI)(JNIEnv *env,jobject jobject1,jlong contextClas
 JNI_METHOD(void ,move)(JNIEnv *env,jobject jobject1,jlong ApplicationSystemClassId)
 {
     ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
-
-//    PBRSample* pbrSample = (PBRSample*)applicationSystem_->GetCurrApplication();
-//    pbrSample->move();
-//    DeferredRenderSample* deferredRenderSample = (DeferredRenderSample*)applicationSystem_->GetCurrApplication();
-//    deferredRenderSample->move();
-
-    ProductNormalMapSample* productNormalMapSample = (ProductNormalMapSample*)applicationSystem_->GetCurrApplication();
-    productNormalMapSample->move();
+    applicationSystem_->Move();
 
 }
 

@@ -20,6 +20,8 @@ public:
 
     void RenderOneFrame(Context* contex);
 
+    void Move();
+
 protected:
     Application* CurrApplication_;
 };

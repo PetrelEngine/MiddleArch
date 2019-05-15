@@ -13,7 +13,7 @@ DeferredRenderSample::~DeferredRenderSample()
 
 }
 
-void DeferredRenderSample::move()
+void DeferredRenderSample::Move()
 {
     Deferred_->move();
 }

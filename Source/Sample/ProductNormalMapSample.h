@@ -13,7 +13,7 @@ public:
 
     ~ProductNormalMapSample();
 
-    void move();
+    virtual void Move();
 
     virtual void CreateScence(Context* context,int width,int height);
 

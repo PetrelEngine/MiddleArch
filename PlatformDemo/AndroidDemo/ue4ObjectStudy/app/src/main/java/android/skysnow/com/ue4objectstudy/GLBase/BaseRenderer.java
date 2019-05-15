@@ -38,6 +38,22 @@ public class BaseRenderer implements GLSurfaceView.Renderer
         int fishID = BitmapToTextureId.getInstence().getTextureId(R.drawable.fish,mContext);
         Log.i("SkySnow:", "onSurfaceChanged: "+fishID);
         mCoreObjectJNI.setTextureId(mRendererContextClassId,"fish",fishID);
+
+        int box_diffuse = BitmapToTextureId.getInstence().getTextureId(R.drawable.toyboxdiffuse,mContext);
+        int box_disp = BitmapToTextureId.getInstence().getTextureId(R.drawable.toyboxdisp,mContext);
+        int box_normal = BitmapToTextureId.getInstence().getTextureId(R.drawable.toyboxnormal,mContext);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"box_diffuse",box_diffuse);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"box_disp",box_disp);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"box_normal",box_normal);
+
+        int bri_diffuse = BitmapToTextureId.getInstence().getTextureId(R.drawable.bricks2,mContext);
+        int bri_disp = BitmapToTextureId.getInstence().getTextureId(R.drawable.bricks2_disp,mContext);
+        int bri_normal = BitmapToTextureId.getInstence().getTextureId(R.drawable.bricks2_normal,mContext);
+
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"bri_diffuse",bri_diffuse);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"bri_disp",bri_disp);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"bri_normal",bri_normal);
+
         mApplicationSystemClassId = mCoreObjectJNI.RendererCreate(mRendererContextClassId,width,height);
     }
 

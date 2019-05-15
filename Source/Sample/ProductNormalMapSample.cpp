@@ -13,7 +13,7 @@ ProductNormalMapSample::~ProductNormalMapSample()
 
 }
 
-void ProductNormalMapSample::move()
+void ProductNormalMapSample::Move()
 {
 
 }

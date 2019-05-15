@@ -65,7 +65,7 @@ void PBRSample::CreateScence(Context *context, int width, int height)
     textureId_ = context->getTextureId("fish");
 }
 
-void PBRSample::move()
+void PBRSample::Move()
 {
     float pi = 3.1415926f;
     ModelMatrix_ = glm::translate(glm::vec3(-2,-3,-5));
