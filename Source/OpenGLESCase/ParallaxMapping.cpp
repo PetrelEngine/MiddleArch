@@ -54,7 +54,7 @@ void ParallaxMapping::CreateScence(Context *context, int width, int height)
 
     float pi = 3.1415926f;
     glm::vec3 eyePos = glm::vec3(0,0,8);
-    glm::vec3 lightPos = glm::vec3(0,2,4);
+    glm::vec3 lightPos = glm::vec3(3,3,4);
 
     GraphParallax_.modelMatrix_ = glm::translate(glm::vec3(0,0,3))*glm::rotate(0.0f,glm::vec3(0,1,0))* glm::rotate(0.0f,glm::vec3(1,0,0))*glm::scale(glm::vec3(2.0f,2.0f,2.0f));
     GraphParallax_.CameraMatrix_ = glm::lookAt(eyePos,glm::vec3(0,0,-1),glm::vec3(0,1,0));

@@ -36,6 +36,13 @@ struct Rect3D
                     -1, -1, 0,
                     -1, 1,  0
             };
+    float normals[12] =
+            {
+                   0,0,1,
+                   0,0,1,
+                   0,0,1,
+                   0,0,1
+            };
     float texcoords[8] =
             {
                     1,1,

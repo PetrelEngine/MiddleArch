@@ -59,7 +59,7 @@ void main()
     vec3 normal = texture(normalMap, texCoords).rgb;
     normal = normalize(normal * 2.0 - 1.0);
     // get diffuse color
-    vec3 color = texture(diffuseMap, texCoords).rgb;
+    vec3 color = pow(texture(diffuseMap, texCoords).rgb,vec3(2.2));
     // ambient
     vec3 ambient = 0.1 * color;
     // diffuse
@@ -72,5 +72,6 @@ void main()
     float spec = pow(max(dot(normal, halfwayDir), 0.0), 32.0);
 
     vec3 specular = color * spec;
-    fragColor = vec4(ambient + diffuse + specular,1.0);
+    vec3 gammaColor = pow((ambient + diffuse + specular),vec3(1.0/2.2));
+    fragColor = vec4(gammaColor,1.0);
 }//
