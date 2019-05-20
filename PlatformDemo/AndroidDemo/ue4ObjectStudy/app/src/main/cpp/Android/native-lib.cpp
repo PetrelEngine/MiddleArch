@@ -5,6 +5,7 @@
 #include <iostream>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
+#include "GammaCorrectionSample.h"
 #include "ParallaxMappingSample.h"
 #include "DeferredRenderSample.h"
 #include "ApplicationSystem.h"
@@ -68,8 +69,11 @@ JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextCl
 //    ProductNormalMapSample* productNormalMapSample = new ProductNormalMapSample();
 //    applicationSystem_->RegisteredApplication(productNormalMapSample);
 
-    ParallaxMappingSample* parallaxMappingSample = new ParallaxMappingSample();
-    applicationSystem_->RegisteredApplication(parallaxMappingSample);
+//    ParallaxMappingSample* parallaxMappingSample = new ParallaxMappingSample();
+//    applicationSystem_->RegisteredApplication(parallaxMappingSample);
+
+    GammaCorrectionSample* gammaCorrectionSample = new GammaCorrectionSample();
+    applicationSystem_->RegisteredApplication(gammaCorrectionSample);
 
     applicationSystem_->CreateScence(context_,width,height);
     return (uintptr_t)(applicationSystem_);

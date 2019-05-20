@@ -54,6 +54,9 @@ public class BaseRenderer implements GLSurfaceView.Renderer
         mCoreObjectJNI.setTextureId(mRendererContextClassId,"bri_disp",bri_disp);
         mCoreObjectJNI.setTextureId(mRendererContextClassId,"bri_normal",bri_normal);
 
+        int GammaTextureId = BitmapToTextureId.getInstence().getTextureId(R.drawable.wood,mContext);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"gamma",GammaTextureId);
+
         mApplicationSystemClassId = mCoreObjectJNI.RendererCreate(mRendererContextClassId,width,height);
     }
 
