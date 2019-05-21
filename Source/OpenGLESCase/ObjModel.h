@@ -6,7 +6,7 @@
 
 #include <glm/ext.hpp>
 #include "LoadObj.h"
-#include "WBGLProgram.hpp"
+#include "GLProgram.hpp"
 #include "File.h"
 #include "Context.h"
 #include "type_mat.hpp"
@@ -41,7 +41,7 @@ public:
 protected:
     Context*                    Context_;
     File*                       File_;
-    WBGLProgram*                GLProgram__;
+    GLProgram*                GLProgram__;
     LoadObj*                    loadObj_;
     int                         textureId_;
     ObjGraph                    ObjGraph_;

@@ -3,7 +3,7 @@
 //
 #pragma once
 
-#include "WBGLProgram.hpp"
+#include "GLProgram.hpp"
 #include "File.h"
 #include "Context.h"
 #include "RectData.h"
@@ -28,7 +28,7 @@ protected:
     GLuint                      u_ImageHandle;
     GLuint                      u_PositionHandle;
     GLuint                      u_TexCoordsHandle;
-    WBGLProgram*                GLProgram__;
+    GLProgram*                GLProgram__;
     GLuint                      textureId_ ;
     RectScreen*                 RectScreen_;
     float*                      imageSize_;

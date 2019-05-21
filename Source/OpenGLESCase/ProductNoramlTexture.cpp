@@ -19,7 +19,7 @@ void ProductNoramlTexture::CreateScence(Context *context, int width, int height)
     File_ = new File(Context_);
     std::string vertexShaderSource = File_->getStringFromFileAssets("ProductNormalMapVertex.glsl");
     std::string fragShaderSource = File_->getStringFromFileAssets("ProductNormalMapFragment.glsl");
-    GLProgram__  = new WBGLProgram();
+    GLProgram__  = new GLProgram();
     GLProgram__->initWithVertexShaderString(vertexShaderSource,fragShaderSource);
     GLProgram__->addAttribute("position");
     GLProgram__->addAttribute("texCoord");

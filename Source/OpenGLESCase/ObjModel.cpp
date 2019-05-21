@@ -31,7 +31,7 @@ void ObjModel::CreateObj(Context *context, int width, int height)
 //    File_ = new File(Context_);
 //    std::string vertexShaderSource = File_->getStringFromFileAssets("deferredVertex.glsl");
 //    std::string fragShaderSource = File_->getStringFromFileAssets("deferredFragment.glsl");
-    GLProgram__  = new WBGLProgram();
+    GLProgram__  = new GLProgram();
     GLProgram__->initWithVertexShaderString(ShaderStr::deferrVertex,ShaderStr::deferrfragment);//ShaderStr::deferrVertex,ShaderStr::deferrfragment   vertexShaderSource,fragShaderSource
     GLProgram__->addAttribute("position");
     GLProgram__->addAttribute("texCoord");

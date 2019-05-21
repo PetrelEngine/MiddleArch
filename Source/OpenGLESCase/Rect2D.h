@@ -6,7 +6,7 @@
 
 #include <File/File.h>
 #include "Context.h"
-#include "WBGLProgram.hpp"
+#include "GLProgram.hpp"
 
 struct Rect
 {
@@ -59,5 +59,5 @@ protected:
     Rect*                       RectHandle;
     Context*                    Context_;
     File*                       File_;
-    WBGLProgram*                GLProgram__;
+    GLProgram*                GLProgram__;
 };

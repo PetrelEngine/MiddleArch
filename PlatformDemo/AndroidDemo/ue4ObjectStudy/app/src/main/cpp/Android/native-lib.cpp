@@ -9,7 +9,7 @@
 #include "ParallaxMappingSample.h"
 #include "DeferredRenderSample.h"
 #include "ApplicationSystem.h"
-#include "PBRSample.h"
+#include "ObjSample.h"
 #include "ProductNormalMapSample.h"
 using namespace std;
 
@@ -60,7 +60,7 @@ JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextCl
     Context* context_ = ((Context*)contextClassId);
     ApplicationSystem* applicationSystem_ = new (std::nothrow)ApplicationSystem();
 
-//    PBRSample* pbrSample = new PBRSample();
+//    ObjSample* pbrSample = new ObjSample();
 //    applicationSystem_->RegisteredApplication(pbrSample);
 
 //    DeferredRenderSample* deferredRenderSample = new DeferredRenderSample();

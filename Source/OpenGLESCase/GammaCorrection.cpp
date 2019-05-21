@@ -2,6 +2,7 @@
 // Created by liuqian8 on 2019/5/17.
 //
 #include <glm/ext.hpp>
+#include <Graph/GLProgram.hpp>
 #include "GammaCorrection.h"
 
 GammaCorrection::GammaCorrection()
@@ -37,7 +38,7 @@ void GammaCorrection::CreateScence(Context *context, int width, int height)
     File_ = new File(Context_);
     std::string vertexShaderSource = File_->getStringFromFileAssets("GammaCorrectionVertex.glsl");
     std::string fragShaderSource = File_->getStringFromFileAssets("GammaCorrectionFragment.glsl");
-    GLProgram__  = new WBGLProgram();
+    GLProgram__  = new GLProgram();
 
     GLProgram__->initWithVertexShaderString(vertexShaderSource,fragShaderSource);
     GLProgram__->addAttribute("positions");

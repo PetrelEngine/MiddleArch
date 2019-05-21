@@ -35,10 +35,10 @@ const std::string ShaderStr::deferrfragment=
                 in vec3 vPosition;\
                 void main()\
                 {\
-                    vec4 albedo = texture(DefaultTexture,vTexCoord);\
+                    vec4 wall_albedo = texture(DefaultTexture,vTexCoord);\
                     fragData0 = vec4(vPosition.xyz,1.0);\
                     fragData1 = vec4(vNormal.xyz,1.0);\
-                    fragData2 = vec4(albedo.xyz,1.0);\
+                    fragData2 = vec4(wall_albedo.xyz,1.0);\
                     fragData3 = vec4(vTexCoord.xy,0.0,1.0);\
                 }");
 

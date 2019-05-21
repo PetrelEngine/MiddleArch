@@ -57,6 +57,17 @@ public class BaseRenderer implements GLSurfaceView.Renderer
         int GammaTextureId = BitmapToTextureId.getInstence().getTextureId(R.drawable.wood,mContext);
         mCoreObjectJNI.setTextureId(mRendererContextClassId,"gamma",GammaTextureId);
 
+        int iron_albedo = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_albedo,mContext);
+        int iron_ao = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_ao,mContext);
+        int iron_metallic = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_metallic,mContext);
+        int iron_normal = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_normal,mContext);
+        int iron_roughness = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_roughness,mContext);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"iron_albedo",iron_albedo);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"iron_ao",iron_ao);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"iron_metallic",iron_metallic);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"iron_normal",iron_normal);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"iron_roughness",iron_roughness);
+
         mApplicationSystemClassId = mCoreObjectJNI.RendererCreate(mRendererContextClassId,width,height);
     }
 

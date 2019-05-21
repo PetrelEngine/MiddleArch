@@ -15,5 +15,5 @@ void main()
     outData1 = vec4(vNormal.xyz,1.0);
     outData2 = vec4(albedo.xyz,1.0);
     outData3 = vec4(vTexCoord.xy,0.0,1.0);
-//    fragColor = albedo;
+//    fragColor = wall_albedo;
 }

@@ -40,7 +40,7 @@ void Rect2D::CreateRect2D(Context *context,int width,int height)
 //    string vertexShaderSource = File_->getStringFromFileAssets("uiVertex.glsl");
 //    string fragShaderSource = File_->getStringFromFileAssets("uiFragment.glsl");
 
-    GLProgram__ = new WBGLProgram();
+    GLProgram__ = new GLProgram();
     GLProgram__->initWithVertexShaderString(ShaderStr::uiVertex,ShaderStr::uifragment);//ShaderStr::uiVertex,ShaderStr::uifragment  vertexShaderSource,fragShaderSource
     GLProgram__->addAttribute("position");
     GLProgram__->addAttribute("texCoord");

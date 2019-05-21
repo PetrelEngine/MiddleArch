@@ -3,7 +3,7 @@
 //
 #pragma once
 
-#include "WBGLProgram.hpp"
+#include "GLProgram.hpp"
 #include "type_mat4x4.hpp"
 #include "type_mat.hpp"
 #include "File.h"
@@ -54,6 +54,6 @@ protected:
     Context*                    Context_;
     File*                       File_;
     Rect3D*                     Rect3D_;
-    WBGLProgram*                GLProgram__;
+    GLProgram*                GLProgram__;
     GraphParallax               GraphParallax_;
 };
