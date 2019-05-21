@@ -93,10 +93,6 @@ void ObjSample::RenderOneFrame(Context *context)
     glEnableVertexAttribArray(TexcoordHandle_);
     glEnableVertexAttribArray(NormalHandle_);
 
-//    glVertexAttribPointer(PositionHandle_, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), &loadObj_->LoadedVertices.data()->Position);
-//    glVertexAttribPointer(NormalHandle_, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), &loadObj_->LoadedVertices.data()->Normal);
-//    glVertexAttribPointer(TexcoordHandle_, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), &loadObj_->LoadedVertices.data()->TextureCoordinate);
-
     glVertexAttribPointer(PositionHandle_, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), loadObj_->LoadedVertices.data());
     glVertexAttribPointer(NormalHandle_, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (reinterpret_cast<char*>(loadObj_->LoadedVertices.data()) + 3 * sizeof(GL_FLOAT)));
     glVertexAttribPointer(TexcoordHandle_, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (reinterpret_cast<char*>(loadObj_->LoadedVertices.data()) + 6 * sizeof(GL_FLOAT)));

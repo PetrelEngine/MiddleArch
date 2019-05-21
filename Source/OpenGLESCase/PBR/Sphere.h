@@ -33,7 +33,7 @@ private:
     void ProductSphere();
 
 protected:
-    unsigned int                indexCount;
+    int                         indexCount;
     std::vector<float>          Data_;
     std::vector<glm::vec3>      Positions_;
     std::vector<glm::vec2>      Uv_;

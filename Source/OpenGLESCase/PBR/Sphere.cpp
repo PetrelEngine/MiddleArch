@@ -3,7 +3,7 @@
 //
 #include <cmath>
 #include "Sphere.h"
-
+#include "Common.h"
 Sphere::Sphere()
 {
     Data_.clear();
@@ -50,19 +50,18 @@ void Sphere::ProductSphere() {
     }
     indexCount = Indices_.size();
 
-    std::vector<float> data;
     for (int i = 0; i < Positions_.size(); ++i) {
-        data.push_back(Positions_[i].x);
-        data.push_back(Positions_[i].y);
-        data.push_back(Positions_[i].z);
+        Data_.push_back(Positions_[i].x);
+        Data_.push_back(Positions_[i].y);
+        Data_.push_back(Positions_[i].z);
         if (Uv_.size() > 0) {
-            data.push_back(Uv_[i].x);
-            data.push_back(Uv_[i].y);
+            Data_.push_back(Uv_[i].x);
+            Data_.push_back(Uv_[i].y);
         }
         if (Normals_.size() > 0) {
-            data.push_back(Normals_[i].x);
-            data.push_back(Normals_[i].y);
-            data.push_back(Normals_[i].z);
+            Data_.push_back(Normals_[i].x);
+            Data_.push_back(Normals_[i].y);
+            Data_.push_back(Normals_[i].z);
         }
     }
 }

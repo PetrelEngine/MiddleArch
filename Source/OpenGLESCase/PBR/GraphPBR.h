@@ -23,6 +23,8 @@ struct PRBGraph
     GLuint      lightColorHandle;
     GLuint      eyePositionHandle;
 
+    GLuint      vaoId;
+
     glm::mat4    modelMatrix;
     glm::mat4    cameraMatrix;
     glm::mat4    projectMatrix;

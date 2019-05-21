@@ -3,6 +3,7 @@
 //
 #pragma once
 
+#include "RectData.h"
 #include "GLProgram.hpp"
 #include "File.h"
 #include "Context.h"
