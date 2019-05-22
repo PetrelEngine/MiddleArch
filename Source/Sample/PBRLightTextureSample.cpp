@@ -30,5 +30,5 @@ void PBRLightTextureSample::RenderOneFrame(Context *context)
 
 void PBRLightTextureSample::Move()
 {
-
+    PBR_LightingTexture_->move();
 }

@@ -75,21 +75,27 @@ void PBR_LightingTexture::CreateScence(Context *context, int width, int height)
     PRBGraph_.projectMatrix = glm::perspective(glm::radians(120.0f), (float)width / (float)height, 0.1f, 100.0f);
     PRBGraph_.mvpMatrix = PRBGraph_.projectMatrix*PRBGraph_.cameraMatrix* PRBGraph_.modelMatrix;
     //光照位置
-    PRBGraph_.lightPos[0] = glm::vec3(1.0f, 0.0f, 3.0f);
-    PRBGraph_.lightPos[1] = glm::vec3(-1.0f, 0.0f, 3.0f);
-    PRBGraph_.lightPos[2] = glm::vec3 (1.0f, 0.0f, -3.0f);
-    PRBGraph_.lightPos[3] = glm::vec3 (-1.0f, 0.0f, -3.0f);
+    PRBGraph_.lightPos[0] = glm::vec3(3.0f, 0.0f, 3.0f);
+    PRBGraph_.lightPos[1] = glm::vec3(-3.0f, 0.0f, 3.0f);
+    PRBGraph_.lightPos[2] = glm::vec3 (3.0f, 0.0f, -3.0f);
+    PRBGraph_.lightPos[3] = glm::vec3 (-3.0f, 0.0f, -3.0f);
     //光照颜色
-    PRBGraph_.lightColor[0] = glm::vec3(10.0f);
-    PRBGraph_.lightColor[1] = glm::vec3(10.0f);
-    PRBGraph_.lightColor[2] = glm::vec3(10.0f);
-    PRBGraph_.lightColor[3] = glm::vec3(10.0f);
-
-    PRBGraph_.albedoMapId = Context_->getTextureId("iron_albedo");
-    PRBGraph_.aoMapId = Context_->getTextureId("iron_ao");
-    PRBGraph_.metallicMapId = Context_->getTextureId("iron_metallic");
-    PRBGraph_.normalMapId = Context_->getTextureId("iron_normal");
-    PRBGraph_.roughnessMapId = Context_->getTextureId("iron_roughness");
+    PRBGraph_.lightColor[0] = glm::vec3(100.0f);
+    PRBGraph_.lightColor[1] = glm::vec3(100.0f);
+    PRBGraph_.lightColor[2] = glm::vec3(100.0f);
+    PRBGraph_.lightColor[3] = glm::vec3(100.0f);
+    //生锈的铁球
+//    PRBGraph_.albedoMapId = Context_->getTextureId("iron_albedo");
+//    PRBGraph_.aoMapId = Context_->getTextureId("iron_ao");
+//    PRBGraph_.metallicMapId = Context_->getTextureId("iron_metallic");
+//    PRBGraph_.normalMapId = Context_->getTextureId("iron_normal");
+//    PRBGraph_.roughnessMapId = Context_->getTextureId("iron_roughness");
+    //墙体
+    PRBGraph_.albedoMapId = Context_->getTextureId("wall_albedo");
+    PRBGraph_.aoMapId = Context_->getTextureId("wall_ao");
+    PRBGraph_.metallicMapId = Context_->getTextureId("wall_metallic");
+    PRBGraph_.normalMapId = Context_->getTextureId("wall_normal");
+    PRBGraph_.roughnessMapId = Context_->getTextureId("wall_roughness");
 
     //创建VAO
     glGenVertexArrays(1, &PRBGraph_.vaoId);
@@ -110,6 +116,17 @@ void PBR_LightingTexture::CreateScence(Context *context, int width, int height)
     glVertexAttribPointer(PRBGraph_.texCoordsHandle, 2, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(PRBGraph_.normalHandle);
     glVertexAttribPointer(PRBGraph_.normalHandle, 3, GL_FLOAT, GL_FALSE, stride, (void*)(5 * sizeof(float)));
+}
+
+void PBR_LightingTexture::move()
+{
+    //计算相机的z轴的位置
+    float pi = 3.1415926f;
+    PRBGraph_.eyePos = glm::vec3(3 * cosf(count * (pi/50)),0,3 * sinf(count * (pi/50)));
+    PRBGraph_.cameraMatrix = glm::lookAt(PRBGraph_.eyePos,glm::vec3(0,0,0),glm::vec3(0,1,0));
+    PRBGraph_.mvpMatrix = PRBGraph_.projectMatrix*PRBGraph_.cameraMatrix* PRBGraph_.modelMatrix;
+    count ++;
+    count = count % 360;
 }
 
 void PBR_LightingTexture::RenderScence()

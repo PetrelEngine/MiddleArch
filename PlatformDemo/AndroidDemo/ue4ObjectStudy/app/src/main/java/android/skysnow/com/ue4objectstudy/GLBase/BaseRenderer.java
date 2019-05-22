@@ -68,6 +68,17 @@ public class BaseRenderer implements GLSurfaceView.Renderer
         mCoreObjectJNI.setTextureId(mRendererContextClassId,"iron_normal",iron_normal);
         mCoreObjectJNI.setTextureId(mRendererContextClassId,"iron_roughness",iron_roughness);
 
+        int wall_albedo = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_albedo,mContext);
+        int wall_ao = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_ao,mContext);
+        int wall_metallic = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_metallic,mContext);
+        int wall_normal = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_normal,mContext);
+        int wall_roughness = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_roughness,mContext);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"wall_albedo",wall_albedo);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"wall_ao",wall_ao);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"wall_metallic",wall_metallic);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"wall_normal",wall_normal);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"wall_roughness",wall_roughness);
+
         mApplicationSystemClassId = mCoreObjectJNI.RendererCreate(mRendererContextClassId,width,height);
     }
 

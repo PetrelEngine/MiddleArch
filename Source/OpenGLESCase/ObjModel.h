@@ -41,7 +41,7 @@ public:
 protected:
     Context*                    Context_;
     File*                       File_;
-    GLProgram*                GLProgram__;
+    GLProgram*                  GLProgram__;
     LoadObj*                    loadObj_;
     int                         textureId_;
     ObjGraph                    ObjGraph_;

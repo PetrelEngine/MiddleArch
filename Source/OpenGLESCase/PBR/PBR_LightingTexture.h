@@ -21,10 +21,13 @@ public:
 
     void RenderScence();
 
+    void move();
+
 protected:
     Sphere*                     Sphere_;
     Context*                    Context_;
     File*                       File_;
     GLProgram*                  GLProgram_;
     PRBGraph                    PRBGraph_;
+    int                         count = 0;
 };
