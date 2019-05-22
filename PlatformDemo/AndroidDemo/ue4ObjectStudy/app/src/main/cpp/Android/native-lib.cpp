@@ -5,7 +5,8 @@
 #include <iostream>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
-#include <Sample/PBRLightTextureSample.h>
+#include "PBRLightTextureSample.h"
+#include "NormalMapSample.h"
 #include "GammaCorrectionSample.h"
 #include "ParallaxMappingSample.h"
 #include "DeferredRenderSample.h"
@@ -76,8 +77,11 @@ JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextCl
 //    GammaCorrectionSample* gammaCorrectionSample = new GammaCorrectionSample();
 //    applicationSystem_->RegisteredApplication(gammaCorrectionSample);
 
-    PBRLightTextureSample* pbrLightTextureSample = new PBRLightTextureSample();
-    applicationSystem_->RegisteredApplication(pbrLightTextureSample);
+//    PBRLightTextureSample* pbrLightTextureSample = new PBRLightTextureSample();
+//    applicationSystem_->RegisteredApplication(pbrLightTextureSample);
+
+    NormalMapSample* normalMapSample = new NormalMapSample();
+    applicationSystem_->RegisteredApplication(normalMapSample);
 
     applicationSystem_->CreateScence(context_,width,height);
     return (uintptr_t)(applicationSystem_);

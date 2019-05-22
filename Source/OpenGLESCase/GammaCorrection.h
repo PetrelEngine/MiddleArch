@@ -53,6 +53,6 @@ protected:
     Context*                    Context_;
     File*                       File_;
     Rect3D*                     Rect3D_;
-    GLProgram*                GLProgram__;
+    GLProgram*                  GLProgram__;
     GraphGamma                  GraphGamma_;
 };
