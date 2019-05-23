@@ -21,6 +21,7 @@ file(GLOB srcSource "${Source_Common_Dir}/CoreObject/*.cpp"
                     "${Source_Common_Dir}/Engine/*.cpp"
                     "${Source_Common_Dir}/OpenGLESCase/*.cpp"
                     "${Source_Common_Dir}/OpenGLESCase/PBR/*.cpp"
+                    "${Source_Common_Dir}/OpenGLESCase/ShadowMap/*.cpp"
                     "${Source_Android_Dir}/Android/*.cpp"
     )
 
@@ -40,6 +41,7 @@ target_include_directories( StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Co
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/SkeletalAnimation/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/OpenGLESCase/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/OpenGLESCase/PBR/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/OpenGLESCase/ShadowMap/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/glm/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/glm/gtc/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/glm/gtx/>
