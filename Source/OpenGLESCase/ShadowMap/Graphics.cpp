@@ -19,13 +19,13 @@ void Graphics::SetVBO(unsigned object)
     if(object)
         glBindBuffer(GL_ARRAY_BUFFER,object);
 }
-
-void Graphics::DrawElements()
+//三角形卷绕绘制
+void Graphics::Draw(PrimitiveType type, unsigned vertexStart, unsigned vertexCount)
 {
 
 }
-
-void Graphics::DrawArrays()
+//索引法绘制
+void Graphics::Draw(PrimitiveType type, unsigned indexStart, unsigned indexCount,unsigned minVertex, unsigned vertexCount)
 {
 
 }

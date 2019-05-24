@@ -3,6 +3,16 @@
 //
 #pragma once
 
+/// Primitive type.
+enum PrimitiveType
+{
+    TRIANGLE_LIST = 0,
+    LINE_LIST,
+    POINT_LIST,
+    TRIANGLE_STRIP,
+    LINE_STRIP,
+    TRIANGLE_FAN
+};
 
 enum VertexElementType
 {
@@ -51,3 +61,5 @@ struct VertexElement
     VertexElementSemantic   semantic_;
     unsigned                offset_;
 };
+
+extern const unsigned ELEMENT_TYPESIZE[];

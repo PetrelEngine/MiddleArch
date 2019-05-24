@@ -5,7 +5,8 @@
 #include "GPUObject.h"
 
 GPUObject::GPUObject(Graphics *graphics):
-        graphics_(graphics)
+        graphics_(graphics),
+        dataLost_(false)
 {
     object_.name_ = 0;
 }

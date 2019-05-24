@@ -12,3 +12,8 @@ Geometry::~Geometry()
 {
 
 }
+
+void Geometry::SetVertexBuffer(VertexBuffer *vertexBuffer)
+{
+
+}

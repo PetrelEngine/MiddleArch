@@ -3,24 +3,36 @@
 //
 #pragma once
 
+#include <vector>
 #include "Object.h"
 #include "GPUObject.h"
+#include "DataStruct.h"
 
 class VertexBuffer: public Object,public GPUObject
 {
     ENGINE_OBJECT(VertexBuffer,Object);
 public:
     VertexBuffer(Context* context);
+
     ~VertexBuffer();
 
-    void setData(const void* data);
+    bool SetSize(unsigned vertexCount, const std::vector<VertexElement>& elements,bool dynamic = false);
+
+    bool setData(const void* data);
 
 protected:
 
 
 private:
+    void UpdateOffsets();
+
     bool Create();
 
     unsigned vertexCount_;
+
     unsigned vertexSize_;
+
+    std::vector<VertexElement> elements_;
+
+    bool dynamic_;
 };

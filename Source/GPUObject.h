@@ -20,4 +20,5 @@ public:
 protected:
     GPUObjectHandle object_;
     Graphics* graphics_;
+    bool dataLost_;
 };
