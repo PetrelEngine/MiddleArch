@@ -2,7 +2,7 @@
 // Created by liuqian8 on 2019/5/23.
 //
 #pragma once
-
+#define MAX_VERTEX_STREAMS 4
 /// Primitive type.
 enum PrimitiveType
 {

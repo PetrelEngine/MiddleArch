@@ -1,11 +1,10 @@
 //
 // Created by liuqian8 on 2019/5/23.
 //
-
 #pragma once
-
 #include "Object.h"
 #include "DataStruct.h"
+#include <vector>
 class IndexBuffer;
 class GPUObject;
 class VertexBuffer;
@@ -21,13 +20,23 @@ public:
     void SetVBO(unsigned object);
 
     void SetIndexBuffer(IndexBuffer* buffer);
+
+    void SetVertexBuffer(VertexBuffer* vertexBuffer);
+
+    bool SetVertexBuffers(const std::vector<VertexBuffer*> buffers, unsigned instanceOffset = 0);
     //三角形卷绕绘制
     void Draw(PrimitiveType type, unsigned vertexStart, unsigned vertexCount);
     //索引法绘制
     void Draw(PrimitiveType type, unsigned indexStart, unsigned indexCount, unsigned minVertex, unsigned vertexCount);
 
 private:
+    /// Process dirtied state before draw.
+    void PrepareDraw();
+
+    void GetGLPrimitiveType(unsigned elementCount, PrimitiveType type, unsigned& primitiveCount, GLenum& glPrimitiveType);
     IndexBuffer* indexBuffer_;
+    VertexBuffer* vertexBuffers_[MAX_VERTEX_STREAMS];
+
 protected:
 
 };

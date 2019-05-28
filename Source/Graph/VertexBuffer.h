@@ -20,6 +20,12 @@ public:
 
     bool setData(const void* data);
 
+    unsigned GetVertexCount() const {return vertexCount_;}
+
+    unsigned GetVertexSize()const {return vertexSize_;}
+
+    std::vector<VertexElement> GetElements() const {return elements_;}
+
 protected:
 
 

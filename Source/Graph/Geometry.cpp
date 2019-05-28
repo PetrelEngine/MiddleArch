@@ -2,8 +2,16 @@
 // Created by liuqian8 on 2019/5/23.
 //
 #include "Geometry.h"
-
-Geometry::Geometry()
+#include "IndexBuffer.h"
+#include "VertexBuffer.h"
+#include "Graphics.h"
+Geometry::Geometry(Context* context):
+    Object(context),
+    primitiveType_(TRIANGLE_LIST),
+    indexStart_(0),
+    indexCount_(0),
+    vertexStart_(0),
+    vertexCount_(0)
 {
 
 }
@@ -31,11 +39,14 @@ void Geometry::SetIndexBuffer(IndexBuffer *buffer)
 
 void Geometry::Draw(Graphics *graphics)
 {
-//    if(indexBuffer_)
-//    {
-//
-//    }else if()
-//    {
-//
-//    }
+    if(indexBuffer_ && indexCount_ > 0)//索引法绘制
+    {
+        graphics->SetIndexBuffer(indexBuffer_);
+        graphics->SetVertexBuffers(vertexBuffers_);
+        graphics->Draw(primitiveType_,indexStart_,indexCount_,vertexStart_,vertexCount_);
+    }else if(vertexCount_ > 0)//三角形卷绕法
+    {
+        graphics->SetVertexBuffers(vertexBuffers_);
+        graphics->Draw(primitiveType_, vertexStart_,vertexCount_);
+    }
 }

@@ -18,6 +18,10 @@ public:
 
     bool SetData(const void* data);
 
+    unsigned GetIndexCount() const {return indexCount_;}
+
+    unsigned GetIndexSize() const {return indexSize_;}
+
 private:
     bool Create();
 
