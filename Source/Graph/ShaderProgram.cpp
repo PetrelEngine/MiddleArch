@@ -76,7 +76,7 @@ bool ShaderProgram::Link()
 
         int location = glGetAttribLocation(object_.name_, name.c_str());
 
-        vertexAttributes_[make_pair(semantic,name)] = location;
+//        vertexAttributes_[make_pair(semantic,name)] = location;
         LOGI("location:%d",location);
     }
 

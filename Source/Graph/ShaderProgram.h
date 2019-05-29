@@ -4,6 +4,7 @@
 #pragma once
 #include "GPUObject.h"
 #include "Graphics.h"
+
 class ShaderProgram:public GPUObject
 {
 public:
@@ -20,5 +21,5 @@ protected:
     ShaderVariation* vertexShader_;
     ShaderVariation* pixeShader_;
     SN_HashMap<string,ShaderParameter> shaderParameters_;
-    SN_HashMap<pair<char ,string>,unsigned > vertexAttributes_;
+    SN_HashMap<pair<char,string>,unsigned > vertexAttributes_;
 };

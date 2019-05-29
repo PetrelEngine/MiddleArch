@@ -12,6 +12,8 @@ android {
         externalNativeBuild {
             cmake {
                 arguments '-DANDROID_STL=c++_static'
+                arguments "-DANDROID_STL=c++_shared"
+                cppFlags "-std=c++11 -frtti -fexceptions"
                 abiFilters 'armeabi-v7a'
             }
         }

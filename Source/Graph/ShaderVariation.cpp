@@ -3,6 +3,7 @@
 //
 #include "ShaderVariation.h"
 #include "Shader.h"
+#include "Graphics.h"
 const char* ShaderVariation::elementSemanticNames[] =
 {
         "POS",
