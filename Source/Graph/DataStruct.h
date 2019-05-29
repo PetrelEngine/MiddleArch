@@ -3,6 +3,13 @@
 //
 #pragma once
 #define MAX_VERTEX_STREAMS 4
+
+enum ShaderType
+{
+    VS = 0,
+    PS,
+};
+
 /// Primitive type.
 enum PrimitiveType
 {

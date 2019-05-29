@@ -3,7 +3,8 @@
 //
 #include "Shader.h"
 
-Shader::Shader(Context *context)
+Shader::Shader(Context *context):
+    Object(context)
 {
 
 }

@@ -4,6 +4,7 @@
 #include "Graphics.h"
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
+#include "GraphicsImpl.h"
 static const unsigned glElementComponents[] =
 {
         1,
@@ -25,7 +26,8 @@ static const unsigned glElementTypes[] =
         GL_UNSIGNED_BYTE
 };
 Graphics::Graphics(Context* context):
-Object(context)
+Object(context),
+impl_(new GraphicsImpl())
 {
 
 }
@@ -53,12 +55,12 @@ void Graphics::SetVertexBuffer(VertexBuffer* vertexBuffer)
 
 bool Graphics::SetVertexBuffers(const std::vector<VertexBuffer *> buffers,unsigned int instanceOffset)
 {
-    if(buffers.size() > 4)
+    if(buffers.size() > MAX_VERTEX_STREAMS)
     {
         LOGE("Too many vertex buffers.");
         return false;
     }
-    for(unsigned i = 0; i < 4 ; i ++)
+    for(unsigned i = 0; i < MAX_VERTEX_STREAMS ; i ++)
     {
         VertexBuffer* buffer = NULL;
         if(i < buffers.size())
@@ -66,6 +68,7 @@ bool Graphics::SetVertexBuffers(const std::vector<VertexBuffer *> buffers,unsign
         if(buffer != vertexBuffers_[i])
         {
             vertexBuffers_[i] = buffer;
+            impl_->vertexBuffersDirty_ = true;
         }
     }
     return true;
@@ -99,30 +102,33 @@ void Graphics::Draw(PrimitiveType type, unsigned indexStart, unsigned indexCount
 
 void Graphics::PrepareDraw()
 {
-    //设置一个标识位，该操作只需要执行一次就可以了
-    unsigned assignedLocations = 0;
-
-    for(unsigned i = MAX_VERTEX_STREAMS - 1;i < MAX_VERTEX_STREAMS; i --)
+    if(impl_->vertexBuffersDirty_)//设置一个标识位，该操作只需要执行一次就可以了
     {
-        VertexBuffer* buffer = vertexBuffers_[i];
-        if(!buffer || !buffer->getGPUObjectName())
-            continue;
-        const std::vector<VertexElement> elements = buffer->GetElements();
-        for(int j = 0 ; j < elements.size(); j ++)
+        unsigned assignedLocations = 0;
+        for(unsigned i = MAX_VERTEX_STREAMS - 1;i < MAX_VERTEX_STREAMS; i --)
         {
-            VertexElement element = elements[j];
-            GLuint location;
-            glEnableVertexAttribArray(location);
+            VertexBuffer* buffer = vertexBuffers_[i];
+            if(!buffer || !buffer->getGPUObjectName())
+                continue;
+            const std::vector<VertexElement> elements = buffer->GetElements();
+            for(int j = 0 ; j < elements.size(); j ++)
+            {
+                VertexElement element = elements[j];
+                GLuint location;
+                glEnableVertexAttribArray(location);
 
-            // Enable/disable instancing divisor as necessary
-            unsigned dataStart = element.offset_;
+                // Enable/disable instancing divisor as necessary
+                unsigned dataStart = element.offset_;
 
-            SetVBO(buffer->getGPUObjectName());
-            glVertexAttribPointer(location,glElementComponents[element.type_],glElementTypes[element.type_],
-                                  element.type_ == TYPE_UBYTE4_NORM ? GL_TRUE : GL_FALSE, (unsigned)buffer->GetVertexSize(),
-                                  (const void *)(size_t)dataStart);
+                SetVBO(buffer->getGPUObjectName());
+                glVertexAttribPointer(location,glElementComponents[element.type_],glElementTypes[element.type_],
+                                      element.type_ == TYPE_UBYTE4_NORM ? GL_TRUE : GL_FALSE, (unsigned)buffer->GetVertexSize(),
+                                      (const void *)(size_t)dataStart);
+            }
         }
+        impl_->vertexBuffersDirty_ = false;
     }
+
 }
 
 void Graphics::GetGLPrimitiveType(unsigned elementCount, PrimitiveType type,unsigned &primitiveCount, GLenum &glPrimitiveType)

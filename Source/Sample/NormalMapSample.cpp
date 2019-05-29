@@ -21,6 +21,9 @@ void NormalMapSample::CreateScence(Context *context, int width, int height)
 {
     normalMap_ = new NormalMap();
     normalMap_->CreateScence(context,width,height);
+
+    testRenderCore_ = new TestRenderCore();
+    testRenderCore_->testShader(context);
 }
 
 void NormalMapSample::RenderOneFrame(Context *context)

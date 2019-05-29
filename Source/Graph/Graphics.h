@@ -4,10 +4,12 @@
 #pragma once
 #include "Object.h"
 #include "DataStruct.h"
+#include "ShaderVariation.h"
 #include <vector>
 class IndexBuffer;
 class GPUObject;
 class VertexBuffer;
+class GraphicsImpl;
 class Graphics: public Object
 {
     ENGINE_OBJECT(Graphics,Object);
@@ -36,7 +38,7 @@ private:
     void GetGLPrimitiveType(unsigned elementCount, PrimitiveType type, unsigned& primitiveCount, GLenum& glPrimitiveType);
     IndexBuffer* indexBuffer_;
     VertexBuffer* vertexBuffers_[MAX_VERTEX_STREAMS];
-
+    GraphicsImpl* impl_;
 protected:
 
 };

@@ -5,14 +5,19 @@
 #pragma once
 
 #include "Context.h"
+#include "DataStruct.h"
 
-class Shader
+class ShaderVariation;
+class Shader:public Object
 {
+    ENGINE_OBJECT(Shader,Object);
 public:
     Shader(Context* context);
 
     ~Shader();
 
+    const string& GetSourceCode(ShaderType type) const { return type == VS ? vsSourceCode_ : psSourceCode_; }
 private:
     std::string vsSourceCode_;
+    std::string psSourceCode_;
 };
