@@ -40,6 +40,7 @@ using namespace std;
 #include <iostream>
 #include <string>
 #include <ext/hash_map>
+#include <unordered_map>
 #include <ext/hash_set>
 #include <map>
 #include <list>
@@ -63,7 +64,7 @@ namespace __gnu_cxx
 }
 #       define SN_Map      map
 #       define SN_List      list
-#       define SN_HashMap ::__gnu_cxx::hash_map
+#       define SN_HashMap std::unordered_map
 #       define SN_HashMultiMap ::__gnu_cxx::hash_multimap
 #       define SN_HashSet ::__gnu_cxx::hash_set
 #       define SN_HashMultiSet ::__gnu_cxx::hash_multiset

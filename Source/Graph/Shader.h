@@ -16,6 +16,8 @@ public:
 
     ~Shader();
 
+    void SetShaderSourceCode(ShaderType type,std::string shaderCode);
+
     const string& GetSourceCode(ShaderType type) const { return type == VS ? vsSourceCode_ : psSourceCode_; }
 private:
     std::string vsSourceCode_;

@@ -2,7 +2,7 @@
 // Created by liuqian8 on 2019/5/29.
 //
 #include "ShaderProgram.h"
-
+#include "Common.h"
 ShaderProgram::ShaderProgram(Graphics *graphics, ShaderVariation *vertexShader,ShaderVariation *pixelShader):
     GPUObject(graphics),
     vertexShader_(vertexShader),
@@ -76,7 +76,7 @@ bool ShaderProgram::Link()
 
         int location = glGetAttribLocation(object_.name_, name.c_str());
 
-//        vertexAttributes_[make_pair(semantic,name)] = location;
+        vertexAttributes_[make_pair(semantic,name)] = (unsigned)location;
         LOGI("location:%d",location);
     }
 

@@ -4,6 +4,9 @@
 
 #pragma once
 
+#include "ShaderProgram.h"
+#include "ShaderVariation.h"
+#include "Shader.h"
 #include "File.h"
 #include "Context.h"
 
@@ -18,4 +21,9 @@ public:
 private:
     Context*                    Context_;
     File*                       File_;
+    Shader*                     shader_;
+    ShaderVariation*            vertexShader_;
+    ShaderVariation*            fragmentShader_;
+    ShaderProgram*              shaderProgram_;
+
 };

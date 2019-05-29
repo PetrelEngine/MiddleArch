@@ -23,5 +23,14 @@ void TestRenderCore::testShader(Context *context)
     std::string vertexShaderSource = File_->getStringFromFileAssets("NormalMapingVertex.glsl");
     std::string fragShaderSource = File_->getStringFromFileAssets("NormalMappingFragment.glsl");
 
+    shader_ = new Shader(context);
+    shader_->SetShaderSourceCode(VS,vertexShaderSource);
+    shader_->SetShaderSourceCode(PS,fragShaderSource);
+    vertexShader_ = new ShaderVariation(shader_,VS);
+    vertexShader_->Create();
+    fragmentShader_ = new ShaderVariation(shader_,PS);
+    fragmentShader_->Create();
+    shaderProgram_ = new ShaderProgram(context->getSubsystem<Graphics>(),vertexShader_,fragmentShader_);
 
+    shaderProgram_->Link();
 }
