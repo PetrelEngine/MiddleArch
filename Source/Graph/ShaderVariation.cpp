@@ -6,15 +6,15 @@
 #include "Graphics.h"
 const char* ShaderVariation::elementSemanticNames[] =
 {
-        "POS",
-        "NORMAL",
-        "BINORMAL",
-        "TANGENT",
-        "TEXCOORD",
-        "COLOR",
-        "BLENDWEIGHT",
-        "BLENDINDICES",
-        "OBJECTINDEX"
+        "Pos",
+        "Normal",
+        "BinNormal",
+        "Tangetnt",//TANGENT
+        "TexCoord",//TEXCOORD
+        "Color",//COLOR
+        "BlendWeight",//BLENDWEIGHT
+        "BlendIndices",//BLENDINDICES
+        "ObjectIndex"//OBJECTINDEX
 };
 ShaderVariation::ShaderVariation(Shader *shader, ShaderType type):
         GPUObject(shader->getSubsystem<Graphics>()),

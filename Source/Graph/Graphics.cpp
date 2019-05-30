@@ -5,6 +5,7 @@
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
 #include "GraphicsImpl.h"
+#include "ShaderProgram.h"
 static const unsigned glElementComponents[] =
 {
         1,
@@ -72,6 +73,78 @@ bool Graphics::SetVertexBuffers(const std::vector<VertexBuffer *> buffers,unsign
         }
     }
     return true;
+}
+
+void Graphics::SetShaders(ShaderVariation *vs, ShaderVariation *ps)
+{
+    if(vs == vertexShader_ && ps == pixelShader_)
+        return;
+    if(vs && !vs->getGPUObjectName())
+    {
+       bool success = vs->Create();
+        if(success){
+            LOGI("Compiled vertex shader:%d",vs->getGPUObjectName());
+        }else
+        {
+            LOGE("Failed to compile vertex shader:%s",vs->GetName().c_str());
+            vs = nullptr;
+        }
+    }
+
+    if(ps && !ps->getGPUObjectName())
+    {
+        bool success = ps->Create();
+        if(success){
+            LOGI("Compiled pixel shader:%d",ps->getGPUObjectName());
+        }else
+        {
+            LOGE("Failed to compile pixel shader:%s",ps->GetName().c_str());
+        }
+    }
+
+    if(!vs || !ps)
+    {
+        glUseProgram(0);
+        vertexShader_ = nullptr;
+        pixelShader_ = nullptr;
+        impl_->shaderProgram_ = nullptr;
+    } else{
+        vertexShader_ = vs;
+        pixelShader_ = ps;
+        pair<ShaderVariation*,ShaderVariation*> combinantion(vs,ps);
+        SN_Map<pair<ShaderVariation*,ShaderVariation*>,ShaderProgram*>::iterator i = impl_->shaderPrograms_.find(combinantion);
+        if(i != impl_->shaderPrograms_.end())
+        {
+            if(i->second->getGPUObjectName())
+            {
+                glUseProgram(i->second->getGPUObjectName());
+                impl_->shaderProgram_ = i->second;
+            }else{
+                glUseProgram(0);
+                impl_->shaderProgram_ = nullptr;
+            }
+        }else{
+            ShaderProgram* newProgram = new ShaderProgram(this,vs,ps);
+            if(newProgram->Link())
+            {
+                LOGI("Linked vertex shader:%s,and pixel shader:%s",vs->GetName().c_str(),ps->GetName().c_str());
+                impl_->shaderProgram_ = newProgram;
+            }else{
+                LOGE("Failed to link vertex shader:%s, and pixel shader:%s" ,vs->GetName().c_str(), ps->GetName().c_str());
+                glUseProgram(0);
+                impl_->shaderProgram_ = nullptr;
+            }
+            impl_->shaderPrograms_[combinantion] = newProgram;
+        }
+    }
+
+    if(impl_->shaderProgram_)
+    {
+        impl_->vertexAttributes_ = impl_->shaderProgram_->GetVertexAttributes();
+    }else{
+        impl_->vertexAttributes_.clear();
+    }
+    impl_->vertexBuffersDirty_ = true;
 }
 
 void Graphics::SetVBO(unsigned object)

@@ -53,55 +53,48 @@ bool ShaderProgram::Link()
     glUseProgram(object_.name_);
     //查询获取统一变量
     glGetProgramiv(object_.name_,GL_ACTIVE_ATTRIBUTES,&attributeCount);
-    LOGI("attributeCount： %d",attributeCount);
     for(int i = 0; i < attributeCount; i ++)
     {
         glGetActiveAttrib(object_.name_,i,(GLsizei)MAX_NAME_LENGTH,&nameLength, &elementCount, &type, nameBuffer);
         string name = string(nameBuffer,nameLength);
-        LOGI("attribute name:%s",name.c_str());
         VertexElementSemantic semantic = MAX_VERTEX_ELEMENT_SEMANTICS;
         unsigned char semanticIndex = 0;
         for(unsigned j = MAX_VERTEX_ELEMENT_SEMANTICS - 1;j < MAX_VERTEX_ELEMENT_SEMANTICS;j--)
         {
-            int flag = name.find(ShaderVariation::elementSemanticNames[j]);
-            if(flag >= 0)//name.find("p")
+            string elementSemanticName = ShaderVariation::elementSemanticNames[j];
+            string::size_type flag = name.find(elementSemanticName);
+            if(flag != name.npos)
             {
                 semantic = (VertexElementSemantic)j;
-                LOGE("semantic:%d",semantic);
-                LOGE("semanticIndex:%s",name.c_str());
-                LOGE("j:%d",j);
                 break;
             }
         }
-
         int location = glGetAttribLocation(object_.name_, name.c_str());
-
         vertexAttributes_[make_pair(semantic,name)] = (unsigned)location;
-        LOGI("location:%d",location);
     }
 
     //获取uniforms 变量
-
     glGetProgramiv(object_.name_, GL_ACTIVE_UNIFORMS, &uniformCount);
-    LOGE("uniformCount:%d",uniformCount);
     for(int i = 0; i < uniformCount; ++i)
     {
         glGetActiveUniform(object_.name_,(GLuint)i,MAX_NAME_LENGTH,nullptr, &elementCount, &type, nameBuffer);
         int location = glGetUniformLocation(object_.name_, nameBuffer);
         string name(nameBuffer);
-        if(name[0] == 'c')
+        if(name[0] == 'c')//处理uniform变量
         {
-            //将c打头的字符截掉
-            string paramName = name.substr(1);
             ShaderParameter parameter;
-            parameter.name_ = paramName;
+            parameter.name_ = name;
             parameter.glType_ = type;
             parameter.location_ = location;
-
             if(location >= 0)
-                shaderParameters_[paramName] = parameter;
+                shaderParameters_[name] = parameter;
         }else if(location >= 0 && name[0] == 's'){//处理Sample2D类型的统一变量
-            LOGE("Sample2D name:%s",name.c_str());
+            ShaderParameter parameter;
+            parameter.name_ = name;
+            parameter.glType_ = type;
+            parameter.location_ = location;
+            if(location >= 0)
+                shaderParameters_[name] = parameter;
         }
     }
     return true;
@@ -116,4 +109,13 @@ ShaderVariation* ShaderProgram::GetPixelShader() const
 ShaderVariation* ShaderProgram::GetVertexShader() const
 {
     return vertexShader_;
+}
+
+const ShaderParameter* ShaderProgram::GetParameter(string param) const
+{
+    SN_Map<string,ShaderParameter>::const_iterator i = shaderParameters_.find(param);
+    if (i != shaderParameters_.end())
+        return &i->second;
+    else
+        return nullptr;
 }

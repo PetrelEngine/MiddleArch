@@ -3,6 +3,8 @@
 //
 #pragma once
 
+#include "ShaderProgram.h"
+
 class GraphicsImpl
 {
     friend class Graphics;
@@ -12,4 +14,7 @@ public:
 
 private:
     bool vertexBuffersDirty_;
+    ShaderProgram* shaderProgram_;
+    SN_Map<pair<ShaderVariation*,ShaderVariation*>,ShaderProgram*> shaderPrograms_;
+    SN_Map<pair<char,string>,unsigned> vertexAttributes_;
 };

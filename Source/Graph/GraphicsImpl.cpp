@@ -4,7 +4,8 @@
 #include "GraphicsImpl.h"
 
 GraphicsImpl::GraphicsImpl():
-        vertexBuffersDirty_(false)
+        vertexBuffersDirty_(false),
+        shaderProgram_(nullptr)
 {
 
 }

@@ -24,6 +24,5 @@ private:
     Shader*                     shader_;
     ShaderVariation*            vertexShader_;
     ShaderVariation*            fragmentShader_;
-    ShaderProgram*              shaderProgram_;
 
 };

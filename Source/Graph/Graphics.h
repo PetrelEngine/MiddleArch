@@ -26,6 +26,8 @@ public:
     void SetVertexBuffer(VertexBuffer* vertexBuffer);
 
     bool SetVertexBuffers(const std::vector<VertexBuffer*> buffers, unsigned instanceOffset = 0);
+
+    void SetShaders(ShaderVariation* vs, ShaderVariation* ps);
     //三角形卷绕绘制
     void Draw(PrimitiveType type, unsigned vertexStart, unsigned vertexCount);
     //索引法绘制
@@ -39,6 +41,10 @@ private:
     IndexBuffer* indexBuffer_;
     VertexBuffer* vertexBuffers_[MAX_VERTEX_STREAMS];
     GraphicsImpl* impl_;
+    /// Vertex shader in use.
+    ShaderVariation* vertexShader_;
+    /// Pixel shader in use.
+    ShaderVariation* pixelShader_;
 protected:
 
 };

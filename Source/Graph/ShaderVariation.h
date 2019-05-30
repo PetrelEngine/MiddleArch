@@ -31,6 +31,8 @@ public:
 
     Shader* GetShader() const;
 
+    const string& GetName() const { return name_; }
+
     static const char* elementSemanticNames[];
 private:
     ShaderType type_;

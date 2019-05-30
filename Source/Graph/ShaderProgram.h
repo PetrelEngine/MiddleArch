@@ -17,6 +17,10 @@ public:
     ShaderVariation* GetVertexShader() const;
 
     ShaderVariation* GetPixelShader() const;
+
+    const ShaderParameter* GetParameter(string param) const;
+
+    const SN_Map<pair<char,string>, unsigned>& GetVertexAttributes() const { return vertexAttributes_; }
 protected:
     ShaderVariation* vertexShader_;
     ShaderVariation* pixeShader_;
