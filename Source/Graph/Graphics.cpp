@@ -112,8 +112,8 @@ void Graphics::SetShaders(ShaderVariation *vs, ShaderVariation *ps)
         vertexShader_ = vs;
         pixelShader_ = ps;
         pair<ShaderVariation*,ShaderVariation*> combinantion(vs,ps);
-        SN_Map<pair<ShaderVariation*,ShaderVariation*>,ShaderProgram*>::iterator i = impl_->shaderPrograms_.find(combinantion);
-        if(i != impl_->shaderPrograms_.end())
+        SN_Map<pair<ShaderVariation*,ShaderVariation*>,ShaderProgram*>::iterator i = impl_->shaderPrograms_->find(combinantion);
+        if(i != impl_->shaderPrograms_->end())å
         {
             if(i->second->getGPUObjectName())
             {
@@ -187,16 +187,22 @@ void Graphics::PrepareDraw()
             for(int j = 0 ; j < elements.size(); j ++)
             {
                 VertexElement element = elements[j];
-                GLuint location;
-                glEnableVertexAttribArray(location);
+                SN_Map<pair<char,string>,unsigned>::const_iterator k = impl_->vertexAttributes_->find(
+                        make_pair((unsigned char)element.semantic_, element.index_));
+                if(k != impl_->vertexAttributes_->end())
+                {
+                    unsigned location = k->second;
+                    glEnableVertexAttribArray(location);
 
-                // Enable/disable instancing divisor as necessary
-                unsigned dataStart = element.offset_;
+                    // Enable/disable instancing divisor as necessary
+                    unsigned dataStart = element.offset_;
 
-                SetVBO(buffer->getGPUObjectName());
-                glVertexAttribPointer(location,glElementComponents[element.type_],glElementTypes[element.type_],
-                                      element.type_ == TYPE_UBYTE4_NORM ? GL_TRUE : GL_FALSE, (unsigned)buffer->GetVertexSize(),
-                                      (const void *)(size_t)dataStart);
+                    SetVBO(buffer->getGPUObjectName());
+                    glVertexAttribPointer(location,glElementComponents[element.type_],glElementTypes[element.type_],
+                                          element.type_ == TYPE_UBYTE4_NORM ? GL_TRUE : GL_FALSE, (unsigned)buffer->GetVertexSize(),
+                                          (const void *)(size_t)dataStart);
+                }
+
             }
         }
         impl_->vertexBuffersDirty_ = false;
