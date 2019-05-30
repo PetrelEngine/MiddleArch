@@ -2,8 +2,9 @@
 // Created by liuqian8 on 2019/5/23.
 //
 #pragma once
-#define MAX_VERTEX_STREAMS 4
 
+#include "Common.h"
+#define MAX_VERTEX_STREAMS 4
 enum ShaderType
 {
     VS = 0,
@@ -54,10 +55,10 @@ struct VertexElement
             type_(TYPE_VECTOR3),
             semantic_(SEM_POSITION),
             offset_(0),
-            index_(0)
+            index_("")
     {
     }
-    VertexElement(VertexElementType type,VertexElementSemantic semantic,string index = 0, unsigned offset):
+    VertexElement(VertexElementType type,VertexElementSemantic semantic,string index = "0", unsigned offset):
             type_(type),
             semantic_(semantic),
             offset_(offset),
@@ -69,7 +70,7 @@ struct VertexElement
     VertexElementType       type_;
     VertexElementSemantic   semantic_;
     unsigned                offset_;
-    string                  index_;
+    std::string             index_;
 };
 
 extern const unsigned ELEMENT_TYPESIZE[];

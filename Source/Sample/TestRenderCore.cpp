@@ -30,7 +30,5 @@ void TestRenderCore::testShader(Context *context)
     vertexShader_ = new ShaderVariation(shader_,VS);
     fragmentShader_ = new ShaderVariation(shader_,PS);
 
-    GL_FLOAT
-
     context->getSubsystem<Graphics>()->SetShaders(vertexShader_,fragmentShader_);
 }
