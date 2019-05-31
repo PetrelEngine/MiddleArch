@@ -9,11 +9,11 @@
 #include "Context.h"
 #include "Application.h"
 #include "Geometry.h"
-class TestRenderCoreSample: public Application
+class HelloTriangleSample: public Application
 {
 public:
-    TestRenderCoreSample();
-    ~TestRenderCoreSample();
+    HelloTriangleSample();
+    ~HelloTriangleSample();
 
     virtual void CreateScence(Context* context,int width,int height);
 

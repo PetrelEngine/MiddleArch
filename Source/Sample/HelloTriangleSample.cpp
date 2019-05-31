@@ -1,17 +1,17 @@
 //
 // Created by liuqian8 on 2019/5/29.
 //
-#include "TestRenderCoreSample.h"
+#include "HelloTriangleSample.h"
 #include "Graphics.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "DataStruct.h"
-TestRenderCoreSample::TestRenderCoreSample()
+HelloTriangleSample::HelloTriangleSample()
 {
 
 }
 
-TestRenderCoreSample::~TestRenderCoreSample()
+HelloTriangleSample::~HelloTriangleSample()
 {
     if(File_)
     {
@@ -20,7 +20,7 @@ TestRenderCoreSample::~TestRenderCoreSample()
     }
 }
 
-void TestRenderCoreSample::CreateScence(Context *context, int width, int height)
+void HelloTriangleSample::CreateScence(Context *context, int width, int height)
 {
     Context_ = context;
     File_ = new File(Context_);
@@ -40,15 +40,16 @@ void TestRenderCoreSample::CreateScence(Context *context, int width, int height)
     geometry_ = new Geometry(context);
     float vertex[] =
     {
-            0.0f, 1.0f,  0.0f,  0.0f, 1.0f, 0.0f,   0.5f,  1.0f,
-            -1.0f,-1.0f, 0.0f,  0.0f, 1.0f, 0.0f,   0.0f,  0.0f,
-            1.0f, 1.0f,  0.0f,  0.0f, 1.0f, 0.0f,   1.0f,  0.0f,
+            0.0f, 1.0f,  0.0f,  0.5f,  1.0f,   0.0f, 1.0f, 0.0f,
+            -1.0f,-1.0f, 0.0f,  0.0f,  0.0f,   0.0f, 1.0f, 0.0f,
+            1.0f, 1.0f,  0.0f,  1.0f,  0.0f,   0.0f, 1.0f, 0.0f,
     };
     std::vector<VertexElement> elements;
 
     elements.push_back(VertexElement(TYPE_VECTOR3,SEM_POSITION,"iPos",0));
-    elements.push_back(VertexElement(TYPE_VECTOR3,SEM_NORMAL,"iNormal",0));
     elements.push_back(VertexElement(TYPE_VECTOR2,SEM_TEXCOORD,"iTexCoord",0));
+    elements.push_back(VertexElement(TYPE_VECTOR3,SEM_NORMAL,"iNormal",0));
+
     vertexBuffer_->SetSize(3,elements);
 
     vertexBuffer_->setData(vertex);
@@ -56,12 +57,13 @@ void TestRenderCoreSample::CreateScence(Context *context, int width, int height)
     geometry_->SetVertexBuffer(0,vertexBuffer_);
 }
 
-void TestRenderCoreSample::RenderOneFrame(Context *context)
+void HelloTriangleSample::RenderOneFrame(Context *context)
 {
+    LOGI("HelloTriangleSample pre");
     geometry_->Draw(graphics_);
 }
 
-void TestRenderCoreSample::Move()
+void HelloTriangleSample::Move()
 {
 
 }

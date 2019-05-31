@@ -29,6 +29,7 @@ bool Geometry::SetVertexBuffer(unsigned index, VertexBuffer *buffer)
         return false;
     }
     vertexBuffers_[index] = buffer;
+    vertexCount_ = buffer->GetVertexCount();
     return true;
 }
 
