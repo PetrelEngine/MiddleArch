@@ -172,6 +172,14 @@ void Graphics::Draw(PrimitiveType type, unsigned indexStart, unsigned indexCount
     if(!indexCount||indexBuffer_ || !indexBuffer_->getGPUObjectName())
         return;
     PrepareDraw();
+
+    unsigned indexSize = indexBuffer_->GetIndexSize();
+    unsigned primitiveCount;
+    GLenum glPrimitiveType;
+
+    GetGLPrimitiveType(indexCount, type, primitiveCount, glPrimitiveType);
+    GLenum indexType = indexSize == sizeof(unsigned short) ? GL_UNSIGNED_SHORT : GL_UNSIGNED_INT;
+    glDrawElements(glPrimitiveType, indexCount, indexType, reinterpret_cast<const GLvoid*>(indexStart * indexSize));
 }
 
 void Graphics::PrepareDraw()
