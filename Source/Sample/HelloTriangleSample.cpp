@@ -40,16 +40,16 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
     geometry_ = new Geometry(context);
     float vertex[] =
     {
-            0.0f, 1.0f,  0.0f,  0.5f,  1.0f,   0.0f, 1.0f, 0.0f,
-            -1.0f,-1.0f, 0.0f,  0.0f,  0.0f,   0.0f, 1.0f, 0.0f,
-            1.0f, 1.0f,  0.0f,  1.0f,  0.0f,   0.0f, 1.0f, 0.0f,
+            0.0f,  1.0f,  0.0f,  0.5f,  1.0f,   0.0f, 1.0f, 0.0f,
+            -1.0f,-1.0f,  0.0f,  0.0f,  0.0f,   0.0f, 1.0f, 0.0f,
+            1.0f, -1.0f,  0.0f,  1.0f,  0.0f,   0.0f, 1.0f, 0.0f,
     };
     std::vector<VertexElement> elements;
 
-    elements.push_back(VertexElement(TYPE_VECTOR3,SEM_POSITION,"iPos",0));
-    elements.push_back(VertexElement(TYPE_VECTOR2,SEM_TEXCOORD,"iTexCoord",0));
-    elements.push_back(VertexElement(TYPE_VECTOR3,SEM_NORMAL,"iNormal",0));
-
+    elements.push_back(VertexElement(TYPE_VECTOR3,SEM_POSITION,"iPos"));
+    elements.push_back(VertexElement(TYPE_VECTOR2,SEM_TEXCOORD,"iTexCoord"));
+    elements.push_back(VertexElement(TYPE_VECTOR3,SEM_NORMAL,"iNormal"));
+    
     vertexBuffer_->SetSize(3,elements);
 
     vertexBuffer_->setData(vertex);
@@ -59,7 +59,6 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
 
 void HelloTriangleSample::RenderOneFrame(Context *context)
 {
-    LOGI("HelloTriangleSample pre");
     geometry_->Draw(graphics_);
 }
 

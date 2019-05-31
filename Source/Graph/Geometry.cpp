@@ -36,6 +36,8 @@ bool Geometry::SetVertexBuffer(unsigned index, VertexBuffer *buffer)
 void Geometry::SetIndexBuffer(IndexBuffer *buffer)
 {
     indexBuffer_ = buffer;
+    indexCount_ = indexBuffer_->GetIndexCount();
+
 }
 
 bool Geometry::SetDrawRange(PrimitiveType type, unsigned indexStart, unsigned indexCount,bool getUsedVertexRange)

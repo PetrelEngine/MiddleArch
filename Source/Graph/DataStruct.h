@@ -57,7 +57,7 @@ struct VertexElement
             index_("")
     {
     }
-    VertexElement(VertexElementType type,VertexElementSemantic semantic,std::string index, unsigned offset):
+    VertexElement(VertexElementType type,VertexElementSemantic semantic,std::string index, unsigned offset = 0):
             type_(type),
             semantic_(semantic),
             offset_(offset),
