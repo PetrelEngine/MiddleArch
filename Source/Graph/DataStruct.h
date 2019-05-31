@@ -2,7 +2,6 @@
 // Created by liuqian8 on 2019/5/23.
 //
 #pragma once
-
 #include "Common.h"
 #define MAX_VERTEX_STREAMS 4
 enum ShaderType
@@ -55,18 +54,18 @@ struct VertexElement
             type_(TYPE_VECTOR3),
             semantic_(SEM_POSITION),
             offset_(0),
-            index_(0)
+            index_("")
     {
     }
-    VertexElement(VertexElementType type,VertexElementSemantic semantic,string index , unsigned offset):
+    VertexElement(VertexElementType type,VertexElementSemantic semantic,std::string index, unsigned offset):
             type_(type),
             semantic_(semantic),
             offset_(offset),
-            index_(0)
+            index_(index)
     {
 
     }
-    string                  index_;
+    std::string             index_;
     VertexElementType       type_;
     VertexElementSemantic   semantic_;
     unsigned                offset_;
