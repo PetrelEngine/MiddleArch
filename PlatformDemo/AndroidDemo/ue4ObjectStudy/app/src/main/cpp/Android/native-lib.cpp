@@ -5,6 +5,7 @@
 #include <iostream>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
+#include <Sample/TestRenderCoreSample.h>
 #include "Graphics.h"
 #include "PBRLightTextureSample.h"
 #include "NormalMapSample.h"
@@ -85,8 +86,11 @@ JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextCl
 //    PBRLightTextureSample* pbrLightTextureSample = new PBRLightTextureSample();
 //    applicationSystem_->RegisteredApplication(pbrLightTextureSample);
 
-    NormalMapSample* normalMapSample = new NormalMapSample();
-    applicationSystem_->RegisteredApplication(normalMapSample);
+//    NormalMapSample* normalMapSample = new NormalMapSample();
+//    applicationSystem_->RegisteredApplication(normalMapSample);
+
+    TestRenderCoreSample* testRenderCoreSample = new TestRenderCoreSample();
+    applicationSystem_->RegisteredApplication(testRenderCoreSample);
 
     applicationSystem_->CreateScence(context_,width,height);
     return (uintptr_t)(applicationSystem_);

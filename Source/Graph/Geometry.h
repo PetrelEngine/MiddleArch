@@ -20,6 +20,10 @@ public:
     bool SetVertexBuffer(unsigned index, VertexBuffer* buffer);
 
     void SetIndexBuffer(IndexBuffer* buffer);
+    /// Set the draw range.
+    bool SetDrawRange(PrimitiveType type, unsigned indexStart, unsigned indexCount, bool getUsedVertexRange = true);
+    /// Set the draw range.
+    bool SetDrawRange(PrimitiveType type, unsigned indexStart, unsigned indexCount, unsigned vertexStart, unsigned vertexCount, bool checkIllegal = true);
 
     void Draw(Graphics* graphics);
 

@@ -5,7 +5,6 @@
 
 #include "NormalMap.h"
 #include "Application.h"
-#include "TestRenderCore.h"
 
 class NormalMapSample: public Application
 {
@@ -22,5 +21,4 @@ public:
 
 protected:
     NormalMap*          normalMap_;
-    TestRenderCore*     testRenderCore_;
 };

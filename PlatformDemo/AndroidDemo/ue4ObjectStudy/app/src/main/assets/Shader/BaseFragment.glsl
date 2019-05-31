@@ -7,5 +7,6 @@ out vec4 fragColor;
 void main()
 {
     vec3 color = cColor.rgb;
-    fragColor = texture(sDiffuseMap,vTexCoord);
+    vec4 cloor = texture(sDiffuseMap,vTexCoord);
+    fragColor = vec4(1.0,0.0,1.0,1.0);
 }//

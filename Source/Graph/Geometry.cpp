@@ -13,7 +13,7 @@ Geometry::Geometry(Context* context):
     vertexStart_(0),
     vertexCount_(0)
 {
-
+    vertexBuffers_.resize(1);
 }
 
 Geometry::~Geometry()
@@ -35,6 +35,18 @@ bool Geometry::SetVertexBuffer(unsigned index, VertexBuffer *buffer)
 void Geometry::SetIndexBuffer(IndexBuffer *buffer)
 {
     indexBuffer_ = buffer;
+}
+
+bool Geometry::SetDrawRange(PrimitiveType type, unsigned indexStart, unsigned indexCount,bool getUsedVertexRange)
+{
+
+    return true;
+}
+
+bool Geometry::SetDrawRange(PrimitiveType type, unsigned indexStart, unsigned indexCount,unsigned vertexStart, unsigned vertexCount, bool checkIllegal)
+{
+
+    return true;
 }
 
 void Geometry::Draw(Graphics *graphics)
