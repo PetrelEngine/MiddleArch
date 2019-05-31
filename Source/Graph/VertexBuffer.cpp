@@ -60,7 +60,6 @@ void VertexBuffer::UpdateOffsets()
     {
         VertexElement vertexElement = elements_[i];
         vertexElement.offset_ = elementOffset;
-        LOGI("vertexElement.offset_:%d",vertexElement.offset_);
         elementOffset += ELEMENT_TYPESIZE[vertexElement.type_];
     }
     vertexSize_ = elementOffset;

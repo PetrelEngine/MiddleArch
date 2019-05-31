@@ -13,3 +13,16 @@ extern const unsigned ELEMENT_TYPESIZE[] =
         sizeof(unsigned),
         sizeof(unsigned)
 };
+
+extern const string   ELEMENT_INDEX[] =
+{
+     "iPos",
+     "iNormal",
+     "iBinNormal",
+     "iTangetnt",
+     "iTexCoord",
+     "iColor",
+     "iBlendWeight",
+     "iBlendIndices",
+     "iObjectIndex"
+};

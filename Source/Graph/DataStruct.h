@@ -4,6 +4,8 @@
 #pragma once
 #include "Common.h"
 #define MAX_VERTEX_STREAMS 4
+
+extern const string   ELEMENT_INDEX[];
 enum ShaderType
 {
     VS = 0,
@@ -53,17 +55,17 @@ struct VertexElement
     VertexElement():
             type_(TYPE_VECTOR3),
             semantic_(SEM_POSITION),
-            offset_(0),
-            index_("")
+            offset_(0)
     {
+        index_ = ELEMENT_INDEX[semantic_];
     }
-    VertexElement(VertexElementType type,VertexElementSemantic semantic,std::string index, unsigned offset = 0):
+    VertexElement(VertexElementType type,VertexElementSemantic semantic,unsigned offset = 0):
             type_(type),
             semantic_(semantic),
-            offset_(offset),
-            index_(index)
+            offset_(offset)
     {
-
+        index_ = ELEMENT_INDEX[semantic];
+        LOGI("typename:%s",ELEMENT_INDEX[semantic].c_str());
     }
     std::string             index_;
     VertexElementType       type_;
@@ -72,3 +74,4 @@ struct VertexElement
 };
 
 extern const unsigned ELEMENT_TYPESIZE[];
+

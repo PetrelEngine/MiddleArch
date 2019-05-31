@@ -46,10 +46,10 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
     };
     std::vector<VertexElement> elements;
 
-    elements.push_back(VertexElement(TYPE_VECTOR3,SEM_POSITION,"iPos"));
-    elements.push_back(VertexElement(TYPE_VECTOR2,SEM_TEXCOORD,"iTexCoord"));
-    elements.push_back(VertexElement(TYPE_VECTOR3,SEM_NORMAL,"iNormal"));
-    
+    elements.push_back(VertexElement(TYPE_VECTOR3,SEM_POSITION));
+    elements.push_back(VertexElement(TYPE_VECTOR2,SEM_TEXCOORD));
+    elements.push_back(VertexElement(TYPE_VECTOR3,SEM_NORMAL));
+
     vertexBuffer_->SetSize(3,elements);
 
     vertexBuffer_->setData(vertex);
