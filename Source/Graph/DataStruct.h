@@ -54,17 +54,19 @@ struct VertexElement
     VertexElement():
             type_(TYPE_VECTOR3),
             semantic_(SEM_POSITION),
-            offset_(0)
+            offset_(0),
+            index_(0)
     {
     }
-    VertexElement(VertexElementType type,VertexElementSemantic semantic, unsigned offset):
+    VertexElement(VertexElementType type,VertexElementSemantic semantic,string index , unsigned offset):
             type_(type),
             semantic_(semantic),
-            offset_(offset)
+            offset_(offset),
+            index_(0)
     {
 
     }
-
+    string                  index_;
     VertexElementType       type_;
     VertexElementSemantic   semantic_;
     unsigned                offset_;
