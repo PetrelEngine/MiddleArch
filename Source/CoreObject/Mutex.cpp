@@ -70,10 +70,12 @@ void Mutex::Release()
 MutexLock::MutexLock(Mutex& mutex) :
         mutex_(mutex)
 {
+    //互斥锁加锁，也就是获取互斥锁
     mutex_.Acquire();
 }
 
 MutexLock::~MutexLock()
 {
+    //互斥锁解锁，也就是释放互斥锁
     mutex_.Release();
 }
