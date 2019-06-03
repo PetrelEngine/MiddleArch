@@ -65,7 +65,6 @@ struct VertexElement
             offset_(offset)
     {
         index_ = ELEMENT_INDEX[semantic];
-        LOGI("typename:%s",ELEMENT_INDEX[semantic].c_str());
     }
     std::string             index_;
     VertexElementType       type_;

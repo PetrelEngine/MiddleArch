@@ -17,6 +17,10 @@ public class CoreObjectJNI
     {
 
     }
+    //==================多线程学习接口
+
+
+    //=================
 
     public long setAssetsManager(AssetManager ass)
     {

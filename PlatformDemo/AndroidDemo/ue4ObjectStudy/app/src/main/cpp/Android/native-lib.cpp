@@ -6,6 +6,7 @@
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
 #include <Sample/HelloTriangleSample.h>
+#include <Sample/MTTestSample.h>
 #include "Graphics.h"
 #include "PBRLightTextureSample.h"
 #include "NormalMapSample.h"
@@ -89,8 +90,11 @@ JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextCl
 //    NormalMapSample* normalMapSample = new NormalMapSample();
 //    applicationSystem_->RegisteredApplication(normalMapSample);
 
-    HelloTriangleSample* helloTriangleSample = new HelloTriangleSample();
-    applicationSystem_->RegisteredApplication(helloTriangleSample);
+//    HelloTriangleSample* helloTriangleSample = new HelloTriangleSample();
+//    applicationSystem_->RegisteredApplication(helloTriangleSample);
+
+    MTTestSample* mtTestSample = new MTTestSample();
+    applicationSystem_->RegisteredApplication(mtTestSample);
 
     applicationSystem_->CreateScence(context_,width,height);
     return (uintptr_t)(applicationSystem_);

@@ -8,5 +8,5 @@ void main()
 {
     vec3 color = cColor.rgb;
     vec4 cloor = texture(sDiffuseMap,vTexCoord);
-    fragColor = vec4(1.0,0.0,0.0,1.0);
+    fragColor = vec4(1.0,cloor.x,cColor.z,1.0);
 }//

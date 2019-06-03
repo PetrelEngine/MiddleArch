@@ -86,9 +86,11 @@ bool ShaderProgram::Link()
             parameter.name_ = name;
             parameter.glType_ = type;
             parameter.location_ = location;
+            LOGE("c 打头的uniform变量：%s",name.c_str());
             if(location >= 0)
                 shaderParameters_[name] = parameter;
         }else if(location >= 0 && name[0] == 's'){//处理Sample2D类型的统一变量
+            LOGE("s 打头的uniform变量：%s",name.c_str());
             ShaderParameter parameter;
             parameter.name_ = name;
             parameter.glType_ = type;
