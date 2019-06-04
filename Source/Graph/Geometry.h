@@ -27,6 +27,7 @@ public:
 
     void Draw(Graphics* graphics);
 
+    bool IsEmpty() const { return indexCount_ == 0 && vertexCount_ == 0; }
 protected:
 
 private:

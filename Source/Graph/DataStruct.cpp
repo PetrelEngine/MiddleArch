@@ -26,3 +26,9 @@ extern const string   ELEMENT_INDEX[] =
      "iBlendIndices",
      "iObjectIndex"
 };
+
+extern const string VSP_MODEL("cMadel");
+extern const string VSP_VIEW("cView");
+extern const string VSP_VIEWPROJ("cViewProj");
+extern const string PSP_DIFFUSEMAP("sDiffuseMap");
+extern const string PSP_COLOR("cColor");

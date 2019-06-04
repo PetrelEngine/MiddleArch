@@ -74,3 +74,9 @@ struct VertexElement
 
 extern const unsigned ELEMENT_TYPESIZE[];
 
+//初始化着色器的统一属性变量的名字
+extern const string VSP_MODEL;//顶点着色器中的模型矩阵
+extern const string VSP_VIEW;//顶点着色器中的camera矩阵
+extern const string VSP_VIEWPROJ;//顶点着色器中的透视矩阵
+extern const string PSP_DIFFUSEMAP;//片元着色器中的默认的贴图
+extern const string PSP_COLOR;//片元着色器中的测试颜色数据
