@@ -90,11 +90,11 @@ JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextCl
 //    NormalMapSample* normalMapSample = new NormalMapSample();
 //    applicationSystem_->RegisteredApplication(normalMapSample);
 
-//    HelloTriangleSample* helloTriangleSample = new HelloTriangleSample();
-//    applicationSystem_->RegisteredApplication(helloTriangleSample);
+    HelloTriangleSample* helloTriangleSample = new HelloTriangleSample();
+    applicationSystem_->RegisteredApplication(helloTriangleSample);
 
-    MTTestSample* mtTestSample = new MTTestSample();
-    applicationSystem_->RegisteredApplication(mtTestSample);
+//    MTTestSample* mtTestSample = new MTTestSample();
+//    applicationSystem_->RegisteredApplication(mtTestSample);
 
     applicationSystem_->CreateScence(context_,width,height);
     return (uintptr_t)(applicationSystem_);

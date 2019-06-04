@@ -33,6 +33,7 @@ public:
     //获取当前时间
     long long getCurrentTime();
 protected:
+    //线程指针的句柄id
     void* handle_;
     //线程运行的标志位
     volatile bool shouldRun_;

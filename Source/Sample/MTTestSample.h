@@ -9,6 +9,7 @@
 #include <mutex>
 #include <unistd.h>
 #include <condition_variable>
+#include "WorkerThread.h"
 
 class MTTestSample: public Application
 {
@@ -23,5 +24,7 @@ public:
 
     virtual void Move();
 private:
-
+    WorkerThread* producer;
+    WorkerThread* consumer;
+    Mutex*        mutex_;
 };

@@ -26,7 +26,7 @@ private:
 class MutexLock
 {
 public:
-    ///构造并获取呼哧锁
+    ///构造并获取互斥锁
     MutexLock(Mutex& mutex);
     /// 析构并释放互斥锁
     ~MutexLock();
