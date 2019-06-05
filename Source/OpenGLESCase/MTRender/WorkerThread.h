@@ -8,18 +8,19 @@
 #include <iostream>
 #include <queue>
 
+class WorkerThread;
+enum ThreadType
+{
+    Producer,
+    Consumer
+};
+
 struct WorkItem
 {
     queue<int>      buffer;
     Mutex*          wimutex;
     WorkerThread*   wiproducer;
     WorkerThread*   wiconsumer;
-};
-
-enum ThreadType
-{
-    Producer,
-    Consumer
 };
 
 class WorkerThread:public Thread

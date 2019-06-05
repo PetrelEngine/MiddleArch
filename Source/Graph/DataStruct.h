@@ -12,6 +12,41 @@ enum ShaderType
     PS,
 };
 
+//混合模型
+enum BlendMode
+{
+    BLEND_REPLACE = 0,
+    BLEND_ADD,
+    BLEDN_MULTIPY,
+    BLEND_ALPHA,
+    BLEND_ADDALPHA,
+    BLEND_PREMULALPHA,
+    BLEND_INVDESTALPHA,
+    BLEND_SUBTRACT,
+    BLEND_SUBTRACTALPHA,
+    MAX_BLENDMODES
+};
+
+enum CompareMode
+{
+    CMP_ALWAYS = 0,
+    CMP_EQUAL,
+    CMP_NOTEQUAL,
+    CMP_LESS,
+    CMP_LESSEQUAL,
+    CMP_GREATER,
+    CMP_GREATEREQUAL,
+    CMP_COMPAREMODES
+};
+
+enum CullMode
+{
+    CULL_NONE = 0,
+    CULL_CCW,//逆时针为正面
+    CULL_CW,//顺时针为正面
+    MAX_CULLMODES
+};
+
 /// Primitive type.
 enum PrimitiveType
 {

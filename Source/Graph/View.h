@@ -9,7 +9,12 @@ class View: public Object
     ENGINE_OBJECT(View,Object);
 public:
     View(Context* context);
+
     virtual ~View();
+
+    void Update();
+
+    void Render();
 
     Graphics* GetGraphics() const;
 private:

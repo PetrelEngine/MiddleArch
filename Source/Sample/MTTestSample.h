@@ -3,12 +3,6 @@
 //
 #pragma once
 #include "Application.h"
-#include <iostream>
-#include <queue>
-#include <pthread.h>
-#include <mutex>
-#include <unistd.h>
-#include <condition_variable>
 #include "WorkerThread.h"
 
 class MTTestSample: public Application

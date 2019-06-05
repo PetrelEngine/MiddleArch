@@ -16,5 +16,15 @@ View::~View()
 }
 Graphics* View::GetGraphics() const
 {
+    return graphics_;
+}
+
+void View::Update()
+{
+
+}
+
+void View::Render()
+{
 
 }
