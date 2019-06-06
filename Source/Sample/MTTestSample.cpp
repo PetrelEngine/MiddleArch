@@ -15,8 +15,8 @@ MTTestSample::~MTTestSample()
 void MTTestSample::CreateScence(Context *context, int width, int height)
 {
     queue<int> buffer;
-    producer = new WorkerThread(Producer);
-    consumer = new WorkerThread(Consumer);
+    producer = new TestWorkerThread(Producer);
+    consumer = new TestWorkerThread(Consumer);
     mutex_ = new Mutex();
 
     WorkItem workItem;

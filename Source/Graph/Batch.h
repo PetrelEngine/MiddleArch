@@ -3,6 +3,7 @@
 //
 #pragma once
 
+#include "DataStruct.h"
 #include "type_mat.hpp"
 #include "type_mat4x4.hpp"
 class View;
@@ -27,4 +28,26 @@ struct Batch
     ShaderVariation* vertexShader_;
 
     ShaderVariation* pixelShader_;
+};
+
+struct BatchGroup:public Batch
+{
+    BatchGroup():
+            startIndex_(M_MAX_UNSIGNED)
+    {
+    }
+
+    BatchGroup(const Batch& batch):
+            Batch(batch),
+            startIndex_(M_MAX_UNSIGNED)
+    {
+    }
+
+    ~BatchGroup()
+    {
+
+    }
+
+    void Draw(View* view, bool allowDepthWrite) const;
+    unsigned startIndex_;
 };

@@ -21,3 +21,9 @@ void Batch::Draw(View* view)
         geometry_->Draw(view->GetGraphics());
     }
 }
+
+
+void BatchGroup::Draw(View *view, bool allowDepthWrite) const
+{
+
+}

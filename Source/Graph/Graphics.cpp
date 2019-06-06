@@ -148,6 +148,117 @@ void Graphics::SetShaders(ShaderVariation *vs, ShaderVariation *ps)
     impl_->vertexBuffersDirty_ = true;
 }
 
+void Graphics::setShaderParameter(std::string param, const float *data, unsigned count)
+{
+    if(impl_->shaderProgram_)
+    {
+        const ShaderParameter* info = impl_->shaderProgram_->GetParameter(param);
+        if(info)
+        {
+            switch (info->glType_)
+            {
+                case GL_FLOAT:
+                    glUniform1fv(info->location_,count,data);
+                    break;
+                case GL_FLOAT_VEC2:
+                    glUniform2fv(info->location_,count/2,data);
+                    break;
+                case GL_FLOAT_VEC3:
+                    glUniform3fv(info->location_,count/3,data);
+                    break;
+                case GL_FLOAT_VEC4:
+                    glUniform4fv(info->location_,count/4,data);
+                    break;
+                case GL_FLOAT_MAT3:
+                    glUniformMatrix3fv(info->location_, count / 9, GL_FALSE, data);
+                    break;
+                case GL_FLOAT_MAT4:
+                    glUniformMatrix4fv(info->location_, count / 16, GL_FALSE, data);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+void Graphics::setShaderParameter(std::string param, const glm::mat4 matrix)
+{
+    if(impl_->shaderProgram_)
+    {
+        const ShaderParameter* info = impl_->shaderProgram_->GetParameter(param);
+        if(info)
+        {
+            //设置矩阵统一变量
+            glUniformMatrix4fv(info->location_,1,GL_FALSE,(GLfloat *)&matrix);
+        }
+    }
+}
+
+void Graphics::setShaderParameter(std::string param, const glm::vec4 vectorData)
+{
+    if(impl_->shaderProgram_)
+    {
+        const ShaderParameter* info = impl_->shaderProgram_->GetParameter(param);
+        if(info)
+        {
+            switch (info->glType_)
+            {
+                case GL_FLOAT:
+                    glUniform1fv(info->location_,1,(GLfloat *)&vectorData);
+                    break;
+                case GL_FLOAT_VEC2:
+                    glUniform2fv(info->location_,1,(GLfloat *)&vectorData);
+                    break;
+                case GL_FLOAT_VEC3:
+                    glUniform3fv(info->location_,1,(GLfloat *)&vectorData);
+                    break;
+                case GL_FLOAT_VEC4:
+                    glUniform4fv(info->location_,1,(GLfloat *)&vectorData);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+void Graphics::setShaderParameter(std::string param, float value)
+{
+    if(impl_->shaderProgram_)
+    {
+        const ShaderParameter* info = impl_->shaderProgram_->GetParameter(param);
+        if(info)
+        {
+            glUniform1fv(info->location_,1,&value);
+        }
+    }
+}
+
+void Graphics::setShaderParameter(std::string param, int value)
+{
+    if(impl_->shaderProgram_)
+    {
+        const ShaderParameter* info = impl_->shaderProgram_->GetParameter(param);
+        if(info)
+        {
+            glUniform1i(info->location_,value);
+        }
+    }
+}
+
+void Graphics::setShaderParameter(std::string param, bool value)
+{
+    if(impl_->shaderProgram_)
+    {
+        const ShaderParameter* info = impl_->shaderProgram_->GetParameter(param);
+        if(info)
+        {
+            glUniform1i(info->location_,(int)value);
+        }
+    }
+}
+
 void Graphics::SetVBO(unsigned object)
 {
     if(object)

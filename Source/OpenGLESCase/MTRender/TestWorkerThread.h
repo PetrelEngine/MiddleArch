@@ -8,7 +8,7 @@
 #include <iostream>
 #include <queue>
 
-class WorkerThread;
+class TestWorkerThread;
 enum ThreadType
 {
     Producer,
@@ -19,16 +19,16 @@ struct WorkItem
 {
     queue<int>      buffer;
     Mutex*          wimutex;
-    WorkerThread*   wiproducer;
-    WorkerThread*   wiconsumer;
+    TestWorkerThread*   wiproducer;
+    TestWorkerThread*   wiconsumer;
 };
 
-class WorkerThread:public Thread
+class TestWorkerThread:public Thread
 {
 public:
-    WorkerThread(ThreadType type);
+    TestWorkerThread(ThreadType type);
 
-    virtual ~WorkerThread();
+    virtual ~TestWorkerThread();
 
     virtual void threadFunction() override;
 

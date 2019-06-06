@@ -4,7 +4,7 @@
 #pragma once
 #include "Common.h"
 #define MAX_VERTEX_STREAMS 4
-
+#define M_MAX_UNSIGNED  0xffffffff
 extern const string   ELEMENT_INDEX[];
 enum ShaderType
 {

@@ -1,18 +1,18 @@
 //
 // Created by liuqian8 on 2019/6/4.
 //
-#include "WorkerThread.h"
-WorkerThread::WorkerThread(ThreadType type)
+#include "TestWorkerThread.h"
+TestWorkerThread::TestWorkerThread(ThreadType type)
 {
     threadType_ = type;
 }
 
-WorkerThread::~WorkerThread()
+TestWorkerThread::~TestWorkerThread()
 {
 
 }
 
-void WorkerThread::threadFunction()
+void TestWorkerThread::threadFunction()
 {
     if(threadType_ == Producer)
         producer();
@@ -20,12 +20,12 @@ void WorkerThread::threadFunction()
         consumer();
 }
 
-void WorkerThread::setWorkItem(WorkItem workItem)
+void TestWorkerThread::setWorkItem(WorkItem workItem)
 {
     workItem_ = workItem;
 }
 
-void WorkerThread::consumer()
+void TestWorkerThread::consumer()
 {
     while(true)
     {
@@ -40,7 +40,7 @@ void WorkerThread::consumer()
     }
 }
 
-void WorkerThread::producer()
+void TestWorkerThread::producer()
 {
     while(true)
     {

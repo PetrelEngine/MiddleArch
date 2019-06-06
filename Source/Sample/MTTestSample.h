@@ -3,7 +3,7 @@
 //
 #pragma once
 #include "Application.h"
-#include "WorkerThread.h"
+#include "TestWorkerThread.h"
 
 class MTTestSample: public Application
 {
@@ -18,7 +18,7 @@ public:
 
     virtual void Move();
 private:
-    WorkerThread* producer;
-    WorkerThread* consumer;
+    TestWorkerThread* producer;
+    TestWorkerThread* consumer;
     Mutex*        mutex_;
 };

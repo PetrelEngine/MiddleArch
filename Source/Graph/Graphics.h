@@ -6,6 +6,9 @@
 #include "DataStruct.h"
 #include "ShaderVariation.h"
 #include <vector>
+#include "type_mat4x4.hpp"
+#include "type_mat.hpp"
+
 class IndexBuffer;
 class GPUObject;
 class VertexBuffer;
@@ -28,6 +31,18 @@ public:
     bool SetVertexBuffers(const std::vector<VertexBuffer*> buffers, unsigned instanceOffset = 0);
 
     void SetShaders(ShaderVariation* vs, ShaderVariation* ps);
+    //设置数组类型的统一变量进GPU中
+    void setShaderParameter(std::string param,const float* data, unsigned count);
+    //设置4*4矩阵
+    void setShaderParameter(std::string param,const glm::mat4 matrix);
+    //设置最大4最小为1的向量数据
+    void setShaderParameter(std::string param,const glm::vec4 vectorData);
+    //设置int类型
+    void setShaderParameter(std::string param,int value);
+    //设置float类型
+    void setShaderParameter(std::string param,float value);
+    //设置布尔类型
+    void setShaderParameter(std::string param,bool value);
     //三角形卷绕绘制
     void Draw(PrimitiveType type, unsigned vertexStart, unsigned vertexCount);
     //索引法绘制
