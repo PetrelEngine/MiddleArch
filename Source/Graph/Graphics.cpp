@@ -259,6 +259,20 @@ void Graphics::setShaderParameter(std::string param, bool value)
     }
 }
 
+void Graphics::setTexture(std::string param,unsigned index, int textureID)
+{
+    if(impl_->shaderProgram_)
+    {
+        const ShaderParameter* info = impl_->shaderProgram_->GetParameter(param);
+        if(info)
+        {
+            glActiveTexture(GL_TEXTURE + index);
+            glBindTexture(info->glType_, textureID);
+            glUniform1i(info->location_,index);
+        }
+    }
+}
+
 void Graphics::SetVBO(unsigned object)
 {
     if(object)

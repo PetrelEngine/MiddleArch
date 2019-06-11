@@ -6,6 +6,11 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "DataStruct.h"
+#include "View.h"
+#include "ShaderProgram.h"
+#include "ShaderVariation.h"
+#include "Shader.h"
+#include "Geometry.h"
 HelloTriangleSample::HelloTriangleSample()
 {
 
@@ -27,17 +32,16 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
     std::string vertexShaderSource = File_->getStringFromFileAssets("Shader/BaseVertex.glsl");
     std::string fragShaderSource = File_->getStringFromFileAssets("Shader/BaseFragment.glsl");
 
-    shader_ = new Shader(context);
+    Shader* shader_ = new Shader(context);
     shader_->SetShaderSourceCode(VS,vertexShaderSource);
     shader_->SetShaderSourceCode(PS,fragShaderSource);
-    vertexShader_ = new ShaderVariation(shader_,VS);
-    fragmentShader_ = new ShaderVariation(shader_,PS);
-    context->getSubsystem<Graphics>()->SetShaders(vertexShader_,fragmentShader_);
-    graphics_ = context->getSubsystem<Graphics>();
+    ShaderVariation* vertexShader_ = new ShaderVariation(shader_,VS);
+    ShaderVariation* fragmentShader_ = new ShaderVariation(shader_,PS);
+
     //组建顶点几何数据
-    vertexBuffer_ = new VertexBuffer(context);
+    VertexBuffer* vertexBuffer_ = new VertexBuffer(context);
 //    indexBuffer_ = new IndexBuffer(context);
-    geometry_ = new Geometry(context);
+    Geometry* geometry_ = new Geometry(context);
     float vertex[] =
     {
             0.0f,  1.0f,  0.0f,  0.5f,  1.0f,   0.0f, 1.0f, 0.0f,
@@ -55,11 +59,17 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
     vertexBuffer_->setData(vertex);
 //    geometry_->SetIndexBuffer(indexBuffer_);
     geometry_->SetVertexBuffer(0,vertexBuffer_);
+
+    view_ = new View(context);
+
+    batch_.geometry_ = geometry_;
+    batch_.vertexShader_ = vertexShader_;
+    batch_.pixelShader_ = fragmentShader_;
 }
 
 void HelloTriangleSample::RenderOneFrame(Context *context)
 {
-    geometry_->Draw(graphics_);
+    batch_.Draw(view_);
 }
 
 void HelloTriangleSample::Move()

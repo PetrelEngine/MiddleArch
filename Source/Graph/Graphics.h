@@ -43,6 +43,8 @@ public:
     void setShaderParameter(std::string param,float value);
     //设置布尔类型
     void setShaderParameter(std::string param,bool value);
+    //设置纹理
+    void setTexture(std::string param,unsigned index,int textureID);
     //三角形卷绕绘制
     void Draw(PrimitiveType type, unsigned vertexStart, unsigned vertexCount);
     //索引法绘制

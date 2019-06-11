@@ -12,6 +12,8 @@ public:
 
     virtual ~View();
 
+    void setCameraShaderParameters();
+
     void Update();
 
     void Render();
