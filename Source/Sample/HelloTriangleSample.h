@@ -2,6 +2,8 @@
 // Created by liuqian8 on 2019/5/29.
 //
 #pragma once
+
+#include "Camera.h"
 #include "File.h"
 #include "Context.h"
 #include "Application.h"
@@ -24,4 +26,5 @@ private:
 
     Batch                       batch_;
     View*                       view_;
+    Camera*                     camera_;
 };

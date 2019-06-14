@@ -6,25 +6,25 @@
 #include "Geometry.h"
 #include "Graphics.h"
 #include "View.h"
-void Batch::Prepare(View* view)
+#include "Camera.h"
+void Batch::Prepare(View* view,Camera* camera)
 {
     if(!vertexShader_ || !pixelShader_)
         return;
-    LOGE("Batch ");
     Graphics* graphics = view->GetGraphics();
     //设置着色器
     graphics->SetShaders(vertexShader_,pixelShader_);
     //设置模型矩阵
     graphics->setShaderParameter(VSP_MODEL,modelmatrix_);
     //设置相机相关的参数
-    view->setCameraShaderParameters();
+    view->setCameraShaderParameters(camera);
 }
 
-void Batch::Draw(View* view)
+void Batch::Draw(View* view,Camera* camera)
 {
     if(!geometry_->IsEmpty())
     {
-        Prepare(view);
+        Prepare(view,camera);
         geometry_->Draw(view->GetGraphics());
     }
 }

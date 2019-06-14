@@ -5,6 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "View.h"
 #include "Graphics.h"
+#include "Camera.h"
 View::View(Context *context):
     Object(context),
     graphics_(getSubsystem<Graphics>())
@@ -21,10 +22,10 @@ Graphics* View::GetGraphics() const
     return graphics_;
 }
 
-void View::setCameraShaderParameters()
+void View::setCameraShaderParameters(Camera* camera)
 {
-    graphics_->setShaderParameter(VSP_VIEWPROJ,glm::perspective(glm::radians(120.0f), (float)1080 / (float)1920, 0.1f, 100.0f));
-    graphics_->setShaderParameter(VSP_VIEW,glm::lookAt(glm::vec3(0,1,1),glm::vec3(0,0,0),glm::vec3(0,1,0)));
+    graphics_->setShaderParameter(VSP_VIEWPROJ,camera->getCamera());
+    graphics_->setShaderParameter(VSP_VIEW,camera->getFrustum());
 }
 
 void View::Update()

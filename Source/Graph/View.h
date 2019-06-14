@@ -4,6 +4,7 @@
 #pragma once
 #include "Object.h"
 class Graphics;
+class Camera;
 class View: public Object
 {
     ENGINE_OBJECT(View,Object);
@@ -12,7 +13,7 @@ public:
 
     virtual ~View();
 
-    void setCameraShaderParameters();
+    void setCameraShaderParameters(Camera* camera);
 
     void Update();
 

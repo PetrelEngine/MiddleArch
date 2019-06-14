@@ -12,6 +12,7 @@
 #include "ShaderVariation.h"
 #include "Shader.h"
 #include "Geometry.h"
+
 HelloTriangleSample::HelloTriangleSample()
 {
 
@@ -61,6 +62,9 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
 //    geometry_->SetIndexBuffer(indexBuffer_);
     geometry_->SetVertexBuffer(0,vertexBuffer_);
 
+    camera_ = new Camera(context);
+    camera_->setAspectRadio((float)width/(float)height);
+
     view_ = new View(context);
 
     batch_.geometry_ = geometry_;
@@ -71,7 +75,7 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
 
 void HelloTriangleSample::RenderOneFrame(Context *context)
 {
-    batch_.Draw(view_);
+    batch_.Draw(view_,camera_);
 }
 
 void HelloTriangleSample::Move()

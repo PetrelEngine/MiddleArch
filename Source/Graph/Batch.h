@@ -11,6 +11,7 @@ class View;
 class Geometry;
 class ShaderVariation;
 class Drawable;
+class Camera;
 //Queued 3D geometry draw call.
 struct Batch
 {
@@ -24,9 +25,9 @@ struct Batch
     {
     }
 
-    void Prepare(View* view);
+    void Prepare(View* view,Camera* camera);
 
-    void Draw(View* view);
+    void Draw(View* view,Camera* camera);
 
     glm::mat4        modelmatrix_;
 
