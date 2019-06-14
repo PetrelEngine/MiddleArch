@@ -1,8 +1,6 @@
 //
 // Created by liuqian8 on 2019/6/4.
 //
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include "View.h"
 #include "Graphics.h"
 #include "Camera.h"
