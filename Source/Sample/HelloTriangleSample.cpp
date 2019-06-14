@@ -1,6 +1,7 @@
 //
 // Created by liuqian8 on 2019/5/29.
 //
+#include <glm/ext.hpp>
 #include "HelloTriangleSample.h"
 #include "Graphics.h"
 #include "VertexBuffer.h"
@@ -65,6 +66,7 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
     batch_.geometry_ = geometry_;
     batch_.vertexShader_ = vertexShader_;
     batch_.pixelShader_ = fragmentShader_;
+    batch_.modelmatrix_ = glm::translate(glm::vec3(0,-1,-3))*glm::rotate(0.0f,glm::vec3(0,1,0))* glm::rotate(0.0f,glm::vec3(1,0,0))*glm::scale(glm::vec3(2.0f,2.0f,2.0f));
 }
 
 void HelloTriangleSample::RenderOneFrame(Context *context)
