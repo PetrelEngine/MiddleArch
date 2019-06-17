@@ -37,8 +37,8 @@ void PBR_LightingTexture::CreateScence(Context *context, int width, int height)
     Sphere_ = new Sphere();
 
     File_ = Context_->getSubsystem<File>();
-    std::string vertexShaderSource = File_->getStringFromFileAssets("PBRTextureVertex.glsl");
-    std::string fragShaderSource = File_->getStringFromFileAssets("PBRTextureFragment.glsl");
+    std::string vertexShaderSource = File_->getStringFromFileAssets("SkySnowResources/CoreData/Shaders/PBRTextureVertex.glsl");
+    std::string fragShaderSource = File_->getStringFromFileAssets("SkySnowResources/CoreData/Shaders/PBRTextureFragment.glsl");
     GLProgram_  = new GLProgram();
     GLProgram_->initWithVertexShaderString(vertexShaderSource,fragShaderSource);
     GLProgram_->addAttribute("positions");

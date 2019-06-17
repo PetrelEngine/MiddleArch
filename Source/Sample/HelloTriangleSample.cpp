@@ -31,8 +31,8 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
 {
     Context_ = context;
     File_ = Context_->getSubsystem<File>();
-    std::string vertexShaderSource = File_->getStringFromFileAssets("Shader/BaseVertex.glsl");
-    std::string fragShaderSource = File_->getStringFromFileAssets("Shader/BaseFragment.glsl");
+    std::string vertexShaderSource = File_->getStringFromFileAssets("SkySnowResources/CoreData/Shaders/BaseVertex.glsl");
+    std::string fragShaderSource = File_->getStringFromFileAssets("SkySnowResources/CoreData/Shaders/BaseFragment.glsl");
 
     Shader* shader_ = new Shader(context);
     shader_->SetShaderSourceCode(VS,vertexShaderSource);

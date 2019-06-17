@@ -28,8 +28,8 @@ void NormalMap::CreateScence(Context * context, int width, int height)
 {
     Context_ = context;
     File_ = Context_->getSubsystem<File>();
-    std::string vertexShaderSource = File_->getStringFromFileAssets("NormalMapingVertex.glsl");
-    std::string fragShaderSource = File_->getStringFromFileAssets("NormalMappingFragment.glsl");
+    std::string vertexShaderSource = File_->getStringFromFileAssets("SkySnowResources/CoreData/Shaders/NormalMapingVertex.glsl");
+    std::string fragShaderSource = File_->getStringFromFileAssets("SkySnowResources/CoreData/Shaders/NormalMappingFragment.glsl");
     GLProgram__  = new GLProgram();
 
     GLProgram__->initWithVertexShaderString(vertexShaderSource,fragShaderSource);

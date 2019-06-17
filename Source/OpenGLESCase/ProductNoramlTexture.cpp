@@ -17,8 +17,8 @@ void ProductNoramlTexture::CreateScence(Context *context, int width, int height)
 {
     Context_ = context;
     File_ = Context_->getSubsystem<File>();
-    std::string vertexShaderSource = File_->getStringFromFileAssets("ProductNormalMapVertex.glsl");
-    std::string fragShaderSource = File_->getStringFromFileAssets("ProductNormalMapFragment.glsl");
+    std::string vertexShaderSource = File_->getStringFromFileAssets("SkySnowResources/CoreData/Shaders/ProductNormalMapVertex.glsl");
+    std::string fragShaderSource = File_->getStringFromFileAssets("SkySnowResources/CoreData/Shaders/ProductNormalMapFragment.glsl");
     GLProgram__  = new GLProgram();
     GLProgram__->initWithVertexShaderString(vertexShaderSource,fragShaderSource);
     GLProgram__->addAttribute("position");

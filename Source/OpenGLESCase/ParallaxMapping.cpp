@@ -18,9 +18,9 @@ void ParallaxMapping::CreateScence(Context *context, int width, int height)
 {
     Context_ = context;
     File_ = Context_->getSubsystem<File>();
-    std::string vertexShaderSource = File_->getStringFromFileAssets("ParallaxMappingVertex.glsl");
+    std::string vertexShaderSource = File_->getStringFromFileAssets("SkySnowResources/CoreData/Shaders/ParallaxMappingVertex.glsl");
     //ParallaxMappingFragment 是基础的视察贴图    ParallaxMapSteepFragment是陡峭的视察贴图  ParallaxOcclusionMappingFragment是视察遮蔽贴图
-    std::string fragShaderSource = File_->getStringFromFileAssets("ParallaxOcclusionMappingFragment.glsl");
+    std::string fragShaderSource = File_->getStringFromFileAssets("SkySnowResources/CoreData/Shaders/ParallaxOcclusionMappingFragment.glsl");
     GLProgram__  = new GLProgram();
 
     GLProgram__->initWithVertexShaderString(vertexShaderSource,fragShaderSource);
