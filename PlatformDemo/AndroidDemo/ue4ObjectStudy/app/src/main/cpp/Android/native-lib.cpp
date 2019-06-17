@@ -50,7 +50,8 @@ JNI_METHOD(jlong ,setAssetsManagerJNI)(JNIEnv *env,jobject jobject1,jobject asse
     //引擎启动，我们注册相关的渲染core对象
     Graphics* graphics = new Graphics(context_);
     context_->registerSubsystem(graphics);
-
+    File* file = new File(context_);
+    context_->registerSubsystem(file);
     return (uintptr_t)(context_);
 }
 

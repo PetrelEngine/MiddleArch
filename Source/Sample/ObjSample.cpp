@@ -24,7 +24,7 @@ void ObjSample::CreateScence(Context *context, int width, int height)
 {
     Context_ = context;
     glViewport(0,0,width,height);
-    File* file = new File(Context_);
+    File* file = Context_->getSubsystem<File>();
     std::string vertexShaderSource = file->getStringFromFileAssets("PBRVertex.glsl");
     std::string fragShaderSource = file->getStringFromFileAssets("PBRFragment.glsl");
     glProgram = new GLProgram();

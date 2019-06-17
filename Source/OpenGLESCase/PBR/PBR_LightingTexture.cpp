@@ -36,7 +36,7 @@ void PBR_LightingTexture::CreateScence(Context *context, int width, int height)
     //组建一个球体模型数据
     Sphere_ = new Sphere();
 
-    File_ = new File(Context_);
+    File_ = Context_->getSubsystem<File>();
     std::string vertexShaderSource = File_->getStringFromFileAssets("PBRTextureVertex.glsl");
     std::string fragShaderSource = File_->getStringFromFileAssets("PBRTextureFragment.glsl");
     GLProgram_  = new GLProgram();

@@ -12,6 +12,8 @@ public:
 
     virtual ~Texture2D();
 
+    void release();
+
 protected:
     virtual bool create() override;
 

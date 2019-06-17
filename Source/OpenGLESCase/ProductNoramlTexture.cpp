@@ -16,7 +16,7 @@ ProductNoramlTexture::~ProductNoramlTexture()
 void ProductNoramlTexture::CreateScence(Context *context, int width, int height)
 {
     Context_ = context;
-    File_ = new File(Context_);
+    File_ = Context_->getSubsystem<File>();
     std::string vertexShaderSource = File_->getStringFromFileAssets("ProductNormalMapVertex.glsl");
     std::string fragShaderSource = File_->getStringFromFileAssets("ProductNormalMapFragment.glsl");
     GLProgram__  = new GLProgram();

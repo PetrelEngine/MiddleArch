@@ -16,6 +16,11 @@ Texture2D::~Texture2D()
 
 bool Texture2D::create()
 {
-
+    release();
     return true;
+}
+
+void Texture2D::release()
+{
+
 }

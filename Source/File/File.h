@@ -94,11 +94,12 @@ public:
     }
 };
 
-class File //: public Object
+class File : public Object
 {
-//    ENGINE_OBJECT(File,Object);
+    ENGINE_OBJECT(File,Object);
 public:
     File(Context *context):
+            Object(context),
             context_(context)
     {
     }

@@ -27,7 +27,7 @@ NormalMap::~NormalMap()
 void NormalMap::CreateScence(Context * context, int width, int height)
 {
     Context_ = context;
-    File_ = new File(Context_);
+    File_ = Context_->getSubsystem<File>();
     std::string vertexShaderSource = File_->getStringFromFileAssets("NormalMapingVertex.glsl");
     std::string fragShaderSource = File_->getStringFromFileAssets("NormalMappingFragment.glsl");
     GLProgram__  = new GLProgram();
