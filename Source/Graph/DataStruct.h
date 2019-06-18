@@ -11,7 +11,42 @@ enum ShaderType
     VS = 0,
     PS,
 };
+//纹理的filtering mode 纹理过滤模式
+enum TextureFilterMode
+{
+    FILTER_NEAREST = 0,//从最靠近纹理坐标的纹理中获得一个单点采样
+    FILTER_BILINEAR,//从最靠近纹理坐标的纹理中获得一个双线性样本
+    FILTER_TRILINEAR,//从两个最近的mip级别中获得双线性样本，然后在他们之间插值。这种也被称之为三线性插值，产生的模式是最佳的
+    FILTER_ANISOTROPIC,//各向异性过滤
+    FILTER_NEAREST_ANISOTROPIC,//最近的各向异性过滤
+    FILTER_DEFAULT,//默认的过滤模式
+    MAX_FILTERMODES//过滤模式
+};
 
+//纹理坐标的包装  用于指定纹理坐标超出【0，1】范围时所发生的行为
+enum TextureAddressMode
+{
+    ADDRESS_WRAP = 0,//超过范围如何处理
+    ADDRESS_MIRROR,//重复纹理和镜像
+    ADDRESS_CLAMP,//截取
+    ADDRESS_BORDER,//限定边缘
+    MAX_ADDRESSMODES
+};
+enum TextureCoordinate
+{
+    COORD_U = 0,
+    COORD_V,
+    COORD_W,
+    MAX_COORDS
+};
+//纹理使用的类型
+enum TextureUsage
+{
+    TEXTURE_STATIC = 0,
+    TEXTURE_DYNAMIC,
+    TEXTURE_RENDERTARGET,
+    TEXTURE_DEPTHSTENCIL
+};
 //混合模型
 enum BlendMode
 {
