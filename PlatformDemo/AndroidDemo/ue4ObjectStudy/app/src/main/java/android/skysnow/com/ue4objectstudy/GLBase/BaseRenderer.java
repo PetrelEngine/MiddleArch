@@ -35,9 +35,9 @@ public class BaseRenderer implements GLSurfaceView.Renderer
     public void onSurfaceChanged(GL10 gl, int width, int height)
     {
         mRendererContextClassId = mCoreObjectJNI.setAssetsManager(mContext.getAssets());
-//        int fishID = BitmapToTextureId.getInstence().getTextureId(R.drawable.fish,mContext);
-//        Log.i("SkySnow:", "onSurfaceChanged: "+fishID);
-//        mCoreObjectJNI.setTextureId(mRendererContextClassId,"fish",fishID);
+        int fishID = BitmapToTextureId.getInstence().getTextureId(R.drawable.fish,mContext);
+        Log.i("SkySnow:", "onSurfaceChanged: "+fishID);
+        mCoreObjectJNI.setTextureId(mRendererContextClassId,"fish",fishID);
 
 //        int box_diffuse = BitmapToTextureId.getInstence().getTextureId(R.drawable.toyboxdiffuse,mContext);
 //        int box_disp = BitmapToTextureId.getInstence().getTextureId(R.drawable.toyboxdisp,mContext);
