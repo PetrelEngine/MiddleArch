@@ -3,7 +3,8 @@
 //
 #include "NormalMapSample.h"
 
-NormalMapSample::NormalMapSample()
+NormalMapSample::NormalMapSample():
+        normalMap_(NULL)
 {
 
 }

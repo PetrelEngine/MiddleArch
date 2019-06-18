@@ -3,7 +3,8 @@
 //
 #include "StencilTestingSample.h"
 
-StencilTestingSample::StencilTestingSample()
+StencilTestingSample::StencilTestingSample():
+        StencilTesting_(NULL)
 {
 }
 

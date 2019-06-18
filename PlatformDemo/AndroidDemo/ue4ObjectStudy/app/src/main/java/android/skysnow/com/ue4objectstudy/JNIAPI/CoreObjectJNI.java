@@ -17,7 +17,6 @@ public class CoreObjectJNI
     {
 
     }
-    //==================多线程学习接口
 
 
     //=================
@@ -27,18 +26,18 @@ public class CoreObjectJNI
         return setAssetsManagerJNI(ass);
     }
 
-    public long RendererCreate(long RendererContextClassId,int width,int height)
+    public void RendererCreate(long ApplicationSystemClassId,int width,int height)
     {
-        return RendererCreateJNI(RendererContextClassId,width,height);
+        RendererCreateJNI(ApplicationSystemClassId,width,height);
     }
 
-    public void RendererFrame(long RendererContextClassId,long ApplicationSystemClassId)
+    public void RendererFrame(long ApplicationSystemClassId)
     {
-        RendererFrameJNI(RendererContextClassId,ApplicationSystemClassId);
+        RendererFrameJNI(ApplicationSystemClassId);
     }
-    public void setTextureId(long RendererContextClassId,String name,int texture2DId)
+    public void setTextureId(long ApplicationSystemClassId,String name,int texture2DId)
     {
-        setTexture2DId(RendererContextClassId,name,texture2DId);
+        setTexture2DId(ApplicationSystemClassId,name,texture2DId);
     }
 
     public void  moveObj(long ApplicationSystemClassId)
@@ -46,17 +45,22 @@ public class CoreObjectJNI
         move(ApplicationSystemClassId);
     }
 
-    //=========================================================================================
+    public void releaseEngine(long ApplicationSystemClassId)
+    {
+        engineRelease(ApplicationSystemClassId);
+    }
 
-    protected native void setTexture2DId(long RendererContextClassId,String name,int texture2DId);
+    //=========================================================================================
 
     protected native long setAssetsManagerJNI(AssetManager ass);
 
-    protected native String stringFromJNI();
+    protected native void setTexture2DId(long ApplicationSystemClassId,String name,int texture2DId);
 
-    protected native long RendererCreateJNI(long RendererContextClassId,int width,int height);
+    protected native void RendererCreateJNI(long ApplicationSystemClassId,int width,int height);
 
-    protected native void RendererFrameJNI(long RendererContextClassId,long ApplicationSystemClassId);
+    protected native void RendererFrameJNI(long ApplicationSystemClassId);
 
     protected native void move(long ApplicationSystemClassId);
+
+    protected native void engineRelease(long ApplicationSystemClassId);
 }

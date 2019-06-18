@@ -15,7 +15,6 @@ class Context
 public:
     Context()
     {
-        tempId_ = 0;
     }
     ~Context();
 
@@ -48,7 +47,6 @@ public:
 protected:
     SN_HashMap<string ,Object*> subsystem_;
     SN_HashMap<string,int>      textureList_;
-    int tempId_;
 #if PLATFORM == PLATFORM_ANDROID
     AAssetManager* mgr_;
 #endif

@@ -17,6 +17,12 @@ Texture2D::~Texture2D()
 bool Texture2D::create()
 {
     release();
+    if(!object_.name_ || !graphics_)
+    {
+        LOGE("No texture created, can not get data");
+        return false;
+    }
+
     return true;
 }
 

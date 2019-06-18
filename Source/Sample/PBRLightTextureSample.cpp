@@ -3,7 +3,8 @@
 //
 #include "PBRLightTextureSample.h"
 
-PBRLightTextureSample::PBRLightTextureSample()
+PBRLightTextureSample::PBRLightTextureSample():
+        PBR_LightingTexture_(NULL)
 {
 
 }

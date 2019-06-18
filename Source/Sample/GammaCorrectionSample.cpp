@@ -3,7 +3,8 @@
 //
 #include "GammaCorrectionSample.h"
 
-GammaCorrectionSample::GammaCorrectionSample()
+GammaCorrectionSample::GammaCorrectionSample():
+        GammaCorrection_(NULL)
 {
 
 }

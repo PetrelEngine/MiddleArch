@@ -20,11 +20,7 @@ HelloTriangleSample::HelloTriangleSample()
 
 HelloTriangleSample::~HelloTriangleSample()
 {
-    if(File_)
-    {
-        delete File_;
-        File_ = NULL;
-    }
+
 }
 
 void HelloTriangleSample::CreateScence(Context *context, int width, int height)

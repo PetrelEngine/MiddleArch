@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mGLView.release();
     }
 
     public void copyAssetsDir2Phone(String filePath) {

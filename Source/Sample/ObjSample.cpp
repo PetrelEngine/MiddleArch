@@ -10,14 +10,26 @@ ObjSample::ObjSample():
     Context_(NULL),
     PositionHandle_(0),
     TexcoordHandle_(0),
-    MVPMatrixHandle_(0)
+    MVPMatrixHandle_(0),
+    glProgram(NULL),
+    loadObj_(NULL)
 {
 
 }
 
 ObjSample::~ObjSample()
 {
+    if(glProgram)
+    {
+        delete glProgram;
+        glProgram = NULL;
+    }
 
+    if(loadObj_)
+    {
+        delete loadObj_;
+        loadObj_ = NULL;
+    }
 }
 
 void ObjSample::CreateScence(Context *context, int width, int height)

@@ -2,14 +2,33 @@
 // Created by liuqian8 on 2019/6/3.
 //
 #include "MTTestSample.h"
-MTTestSample::MTTestSample()
+MTTestSample::MTTestSample():
+        producer(NULL),
+        consumer(NULL),
+        mutex_(NULL)
 {
 
 }
 
 MTTestSample::~MTTestSample()
 {
+    if(producer)
+    {
+        delete producer;
+        producer = NULL;
+    }
 
+    if(consumer)
+    {
+        delete consumer;
+        consumer = NULL;
+    }
+
+    if(mutex_)
+    {
+        delete mutex_;
+        mutex_ = NULL;
+    }
 }
 
 void MTTestSample::CreateScence(Context *context, int width, int height)

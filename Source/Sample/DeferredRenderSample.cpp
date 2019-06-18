@@ -3,14 +3,19 @@
 //
 #include "DeferredRenderSample.h"
 
-DeferredRenderSample::DeferredRenderSample()
+DeferredRenderSample::DeferredRenderSample():
+        Deferred_(NULL)
 {
 
 }
 
 DeferredRenderSample::~DeferredRenderSample()
 {
-
+    if(Deferred_ != NULL)
+    {
+        delete Deferred_;
+        Deferred_ = NULL;
+    }
 }
 
 void DeferredRenderSample::Move()

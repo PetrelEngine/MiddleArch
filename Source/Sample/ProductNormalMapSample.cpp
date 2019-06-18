@@ -3,14 +3,19 @@
 //
 #include "ProductNormalMapSample.h"
 
-ProductNormalMapSample::ProductNormalMapSample()
+ProductNormalMapSample::ProductNormalMapSample():
+        productNormalTexture_(NULL)
 {
 
 }
 
 ProductNormalMapSample::~ProductNormalMapSample()
 {
-
+    if(productNormalTexture_)
+    {
+        delete productNormalTexture_;
+        productNormalTexture_ = NULL;
+    }
 }
 
 void ProductNormalMapSample::Move()

@@ -3,11 +3,22 @@
 //
 #include "Context.h"
 #include "Object.h"
-
+#include "Common.h"
 Context::~Context()
 
 {
+    SN_HashMap<string ,Object*>::iterator iter = subsystem_.begin();
+    for(;iter != subsystem_.end();iter ++)
+    {
+        delete iter->second;
+    }
     subsystem_.clear();
+
+//    SN_HashMap<string,int>::iterator titer = textureList_.begin();
+//    for(;titer != textureList_.end();titer++)
+//    {
+//        glDeleteTextures(1,&(titer->second));
+//    }
     textureList_.clear();
 }
 

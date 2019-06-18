@@ -35,14 +35,20 @@ public class GLView extends GLSurfaceView
         mBaseRenderer = new BaseRenderer(context);
         int glesMajorVersion = getGLESMajorVersion();
 
-//        if(glesMajorVersion<3){
-//            super.setEGLContextClientVersion(2);
-//        }else{
+        if(glesMajorVersion<3){
+            super.setEGLContextClientVersion(2);
+        }else{
             super.setEGLContextClientVersion(3);
-//        }
+        }
         setPreserveEGLContextOnPause(true);
         setRenderer(mBaseRenderer);
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+    }
+
+    public void release()
+    {
+        if(mBaseRenderer != null)
+            mBaseRenderer.release();
     }
 
     @Override

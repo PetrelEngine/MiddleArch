@@ -47,29 +47,26 @@ JNI_METHOD(jlong ,setAssetsManagerJNI)(JNIEnv *env,jobject jobject1,jobject asse
     AAssetManager* mgr = AAssetManager_fromJava(env,assetManagerTemp_);
     Context* context_ = new (std::nothrow)Context();
     context_->setSetAssetManager(mgr);
-    //引擎启动，我们注册相关的渲染core对象
-    Graphics* graphics = new Graphics(context_);
-    context_->registerSubsystem(graphics);
-    File* file = new File(context_);
-    context_->registerSubsystem(file);
-    return (uintptr_t)(context_);
+    ApplicationSystem* applicationSystem_ = new (std::nothrow)ApplicationSystem();
+    applicationSystem_->initialEngine(context_);
+
+    return (uintptr_t)(applicationSystem_);
 }
 
-JNI_METHOD(void,setTexture2DId)(JNIEnv *env,jobject jobject1,jlong contextClassId,jstring name,jint textureId)
+JNI_METHOD(void,setTexture2DId)(JNIEnv *env,jobject jobject1,jlong ApplicationSystemClassId,jstring name,jint textureId)
 {
     const char* nameStr = env->GetStringUTFChars(name,0);
     string nameT = const_cast<char*>(nameStr);
-    Context* context_ = ((Context*)contextClassId);
+    ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
+    Context* context_ = applicationSystem_->getContext();
     context_->setTextureId(nameT,textureId);
     env->ReleaseStringUTFChars(name,nameStr);
 }
 
 
-JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextClassId,jint width,jint height)
+JNI_METHOD(void ,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong ApplicationSystemClassId,jint width,jint height)
 {
-    Context* context_ = ((Context*)contextClassId);
-    ApplicationSystem* applicationSystem_ = new (std::nothrow)ApplicationSystem();
-
+    ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
 //    ObjSample* pbrSample = new ObjSample();
 //    applicationSystem_->RegisteredApplication(pbrSample);
 
@@ -97,23 +94,29 @@ JNI_METHOD(jlong,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong contextCl
 //    MTTestSample* mtTestSample = new MTTestSample();
 //    applicationSystem_->RegisteredApplication(mtTestSample);
 
-    applicationSystem_->CreateScence(context_,width,height);
-    return (uintptr_t)(applicationSystem_);
+    applicationSystem_->CreateScence(width,height);
 }
 
-JNI_METHOD(void,RendererFrameJNI)(JNIEnv *env,jobject jobject1,jlong contextClassId,jlong ApplicationSystemClassId)
+JNI_METHOD(void,RendererFrameJNI)(JNIEnv *env,jobject jobject1,jlong ApplicationSystemClassId)
 {
-    Context* context_ = ((Context*)contextClassId);
-
     ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
-    applicationSystem_->RenderOneFrame(context_);
+    applicationSystem_->RenderOneFrame();
 }
 
 JNI_METHOD(void ,move)(JNIEnv *env,jobject jobject1,jlong ApplicationSystemClassId)
 {
     ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
     applicationSystem_->Move();
+}
 
+JNI_METHOD(void,engineRelease)(JNIEnv *env,jobject jobject1,jlong ApplicationSystemClassId)
+{
+    ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
+    if(applicationSystem_ != NULL)
+    {
+        delete applicationSystem_;
+        applicationSystem_ = NULL;
+    }
 }
 
 

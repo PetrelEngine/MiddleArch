@@ -3,14 +3,19 @@
 //
 #include "ParallaxMappingSample.h"
 
-ParallaxMappingSample::ParallaxMappingSample()
+ParallaxMappingSample::ParallaxMappingSample():
+        ParallaxMapping_(NULL)
 {
 
 }
 
 ParallaxMappingSample::~ParallaxMappingSample()
 {
-
+    if(ParallaxMapping_)
+    {
+        delete ParallaxMapping_;
+        ParallaxMapping_ = NULL;
+    }
 }
 
 void ParallaxMappingSample::CreateScence(Context *context, int width, int height)

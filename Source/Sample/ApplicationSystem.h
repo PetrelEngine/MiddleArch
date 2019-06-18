@@ -14,14 +14,19 @@ public:
 
     void RegisteredApplication(Application* application);
 
+    void initialEngine(Context* context);
+
     Application* GetCurrApplication();
 
-    void CreateScence(Context* context,int width,int height);
+    void CreateScence(int width,int height);
 
-    void RenderOneFrame(Context* contex);
+    void RenderOneFrame();
 
     void Move();
 
+    Context* getContext();
+
 protected:
     Application* CurrApplication_;
+    Context*    context_;
 };
