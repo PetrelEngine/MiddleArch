@@ -52,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
                     copyAssetsDir2Phone(filePath);
 
                     filePath = filePath.substring(0, filePath.lastIndexOf(File.separator));
-                    Log.e("oldPath", filePath);
+//                    Log.e("oldPath", filePath);
                 }
             } else {//如果是文件
                 InputStream inputStream = getAssets().open(filePath);
                 //getFilesDir() 获得当前APP的安装路径 /data/data/包名/files 目录
                 File file = new File(Environment.getExternalStorageDirectory() + File.separator + filePath);
-                Log.i("copyAssets2Phone", "file:" + file);
+                Log.i("SkySnow:", "file:" + file);
                 if (!file.exists() || file.length() == 0) { // 文件不存在
                     File parent = file.getParentFile();
                     if (parent != null && !file.exists()) {
