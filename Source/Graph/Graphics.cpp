@@ -29,7 +29,9 @@ static const unsigned glElementTypes[] =
 };
 Graphics::Graphics(Context* context):
 Object(context),
-impl_(new GraphicsImpl())
+impl_(new GraphicsImpl()),
+defaultTextureFilterMode_(FILTER_TRILINEAR),
+defaultTextureAnisotropy_(4)
 {
 
 }

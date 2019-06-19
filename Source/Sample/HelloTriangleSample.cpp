@@ -12,7 +12,7 @@
 #include "ShaderVariation.h"
 #include "Shader.h"
 #include "Geometry.h"
-
+#include "Texture2D.h"
 HelloTriangleSample::HelloTriangleSample()
 {
 
@@ -66,7 +66,14 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
     batch_.geometry_ = geometry_;
     batch_.vertexShader_ = vertexShader_;
     batch_.pixelShader_ = fragmentShader_;
-    batch_.modelmatrix_ = glm::translate(glm::vec3(0,-1,-3))*glm::rotate(0.0f,glm::vec3(0,1,0))* glm::rotate(0.0f,glm::vec3(1,0,0))*glm::scale(glm::vec3(2.0f,2.0f,2.0f));
+    batch_.modelmatrix_ = glm::translate(glm::vec3(0,-1,-3))*glm::rotate(0.0f,glm::vec3(0,1,0))*
+            glm::rotate(0.0f,glm::vec3(1,0,0))*glm::scale(glm::vec3(2.0f,2.0f,2.0f));
+
+    Texture2D* texture2D = new Texture2D(context);
+
+    bool isLoad = texture2D->createTexture2D("/sdcard/SkySnowResources/CoreData/Textures/test.png");
+    if(isLoad)
+        LOGE("load file success.");
 }
 
 void HelloTriangleSample::RenderOneFrame(Context *context)

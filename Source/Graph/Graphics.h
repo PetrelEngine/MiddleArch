@@ -50,6 +50,9 @@ public:
     //索引法绘制
     void Draw(PrimitiveType type, unsigned indexStart, unsigned indexCount, unsigned minVertex, unsigned vertexCount);
 
+    TextureFilterMode getDefaultTextureFilterMode(){return defaultTextureFilterMode_;}
+
+    unsigned getDefaultTextureAnisotropy()const {return defaultTextureAnisotropy_;}
 private:
     /// Process dirtied state before draw.
     void PrepareDraw();
@@ -62,6 +65,8 @@ private:
     ShaderVariation* vertexShader_;
     /// Pixel shader in use.
     ShaderVariation* pixelShader_;
+    TextureFilterMode defaultTextureFilterMode_;
+    unsigned defaultTextureAnisotropy_;
 protected:
 
 };

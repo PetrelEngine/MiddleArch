@@ -12,6 +12,8 @@ public:
 
     virtual ~Texture2D();
 
+    bool createTexture2D(const string filePath);
+
     void release();
 
 protected:
