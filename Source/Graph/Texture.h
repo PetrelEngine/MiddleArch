@@ -2,13 +2,15 @@
 // Created by liuqian8 on 2019/6/14.
 //
 #pragma once
+
+#include "Resource.h"
 #include "GPUObject.h"
-#include "Object.h"
+
 #include "DataStruct.h"
 
-class Texture: public Object ,public GPUObject
+class Texture: public Resource ,public GPUObject
 {
-    ENGINE_OBJECT(Texture,Object);
+    ENGINE_OBJECT(Texture,Resource);
 public:
     Texture(Context* context);
 

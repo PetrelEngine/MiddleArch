@@ -4,7 +4,7 @@
 #include "Texture.h"
 #include "Graphics.h"
 Texture::Texture(Context* context):
-    Object(context),
+    Resource(context),
     GPUObject(getSubsystem<Graphics>())
 {
 }
