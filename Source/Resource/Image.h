@@ -3,9 +3,10 @@
 //
 #pragma once
 #include "Context.h"
-
-class Image
+#include "Resource.h"
+class Image:public Resource
 {
+    ENGINE_OBJECT(Image,Resource)
 public:
     Image(Context* context);
 
@@ -19,9 +20,11 @@ public:
 
     int getImageComponents();
 
+    unsigned char* getData();
+
 protected:
     int width_;
     int height_;
     int components_;
-    const unsigned char*  data_;
+    unsigned char*  data_;
 };

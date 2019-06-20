@@ -11,6 +11,21 @@ enum ShaderType
     VS = 0,
     PS,
 };
+enum TextureUnit
+{
+    TU_DIFFUSE = 0,
+    TU_ALBEDOBUFFER = 0,
+    TU_NORMAL = 1,
+    TU_NORMALBUFFER = 1,
+    TU_SPECULAR = 2,
+    TU_EMISSIVE = 3,
+    TU_ENVIRONMENT = 4,
+    TU_LIGHTRAMP = 5,
+    TU_LIGHTSHAPE = 6,
+    TU_SHADOWMAP = 7,
+    MAX_MATERIAL_TEXTURE_UNITS = 5,
+    MAX_TEXTURE_UNITS = 8
+};
 //纹理的filtering mode 纹理过滤模式
 enum TextureFilterMode
 {

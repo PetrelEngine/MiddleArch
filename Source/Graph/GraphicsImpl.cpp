@@ -5,7 +5,8 @@
 
 GraphicsImpl::GraphicsImpl():
         vertexBuffersDirty_(false),
-        shaderProgram_(nullptr)
+        shaderProgram_(nullptr),
+        activeTexture_(0)
 {
 
 }

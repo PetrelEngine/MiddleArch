@@ -26,6 +26,14 @@ public:
 
     bool getParametersDirty() const;
 
+    unsigned getTarget()const {return target_;}
+
+    TextureUsage getUsage()const {return usage_;}
+
+    unsigned getExternalFormat(unsigned format);
+
+    unsigned getDataType(unsigned format);
+
 protected:
     virtual bool create()
     {

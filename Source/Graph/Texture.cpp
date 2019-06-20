@@ -69,10 +69,7 @@ void Texture::regenerateLevels()
 void Texture::updateParameters()
 {
     if(!object_.name_ || !graphics_)
-    {
-        LOGE("texture updata failure.");
         return;
-    }
     //纹理展开方式的设置
     glTexParameteri(target_,GL_TEXTURE_WRAP_S,gl3WrapModes[COORD_U]);
     glTexParameteri(target_,GL_TEXTURE_WRAP_T,gl3WrapModes[COORD_U]);
@@ -133,6 +130,21 @@ void Texture::updateParameters()
 bool Texture::getParametersDirty() const
 {
     return parametersDirty_;
+}
+
+unsigned Texture::getExternalFormat(unsigned format)
+{
+    return format;
+}
+
+unsigned Texture::getDataType(unsigned format)
+{
+    if (format == GL_DEPTH_COMPONENT || format == GL_DEPTH_COMPONENT24_OES)
+        return GL_UNSIGNED_INT;
+    else if (format == GL_DEPTH_COMPONENT16)
+        return GL_UNSIGNED_SHORT;
+    else
+        return GL_UNSIGNED_BYTE;
 }
 
 

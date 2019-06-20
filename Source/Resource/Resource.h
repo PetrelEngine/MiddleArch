@@ -3,7 +3,6 @@
 //
 #pragma once
 #include "Object.h"
-#include "Image.h"
 class Resource:public Object
 {
     ENGINE_OBJECT(Resource,Object);
@@ -17,5 +16,5 @@ public:
 private:
     string name_;
 protected:
-    Image*  image_;
+//    Image*  image_;
 };

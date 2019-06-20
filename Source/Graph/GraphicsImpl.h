@@ -17,4 +17,6 @@ private:
     ShaderProgram* shaderProgram_;
     SN_Map<pair<ShaderVariation*,ShaderVariation*>,ShaderProgram*> shaderPrograms_;
     SN_Map<pair<char,string>,unsigned> vertexAttributes_;
+    unsigned activeTexture_;
+    unsigned textureTypes_[MAX_TEXTURE_UNITS];
 };

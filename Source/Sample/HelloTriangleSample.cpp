@@ -71,9 +71,9 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
 
     Texture2D* texture2D = new Texture2D(context);
 
-    bool isLoad = texture2D->createTexture2D("/sdcard/SkySnowResources/CoreData/Textures/test.png");
-    if(isLoad)
-        LOGE("load file success.");
+//    bool isLoad = texture2D->createTexture2D("/sdcard/SkySnowResources/CoreData/Textures/test.png");
+//    if(isLoad)
+//        LOGE("load file success.");
 }
 
 void HelloTriangleSample::RenderOneFrame(Context *context)

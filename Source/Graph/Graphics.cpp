@@ -7,6 +7,8 @@
 #include "GraphicsImpl.h"
 #include "ShaderProgram.h"
 #include <string>
+#include "Texture.h"
+#include "Texture.h"
 static const unsigned glElementComponents[] =
 {
         1,
@@ -273,6 +275,21 @@ void Graphics::setTexture(std::string param,unsigned index, int textureID)
             glUniform1i(info->location_,index);
         }
     }
+}
+
+void Graphics::setTextureForUpdate(Texture *texture)
+{
+    if(impl_->activeTexture_ != 0)
+    {
+        glActiveTexture(GL_TEXTURE0);
+        impl_->activeTexture_ = 0;
+    }
+    unsigned glType = texture->getTarget();
+    if(impl_->textureTypes_[0] && impl_->textureTypes_[0] != glType)
+        glBindTexture(impl_->textureTypes_[0],0);
+    glBindTexture(glType,texture->getGPUObjectName());
+    impl_->textureTypes_[0] = glType;
+    textures_[0] = texture;
 }
 
 void Graphics::SetVBO(unsigned object)

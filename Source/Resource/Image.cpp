@@ -6,6 +6,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 Image::Image(Context *context):
+    Resource(context),
     width_(0),
     height_(0),
     components_(0),
@@ -50,4 +51,9 @@ int Image::getImageHeight()
 int Image::getImageComponents()
 {
     return components_;
+}
+
+unsigned char* Image::getData()
+{
+    return data_;
 }

@@ -13,6 +13,8 @@ class IndexBuffer;
 class GPUObject;
 class VertexBuffer;
 class GraphicsImpl;
+class Texture;
+class Texture2D;
 class Graphics: public Object
 {
     ENGINE_OBJECT(Graphics,Object);
@@ -45,6 +47,8 @@ public:
     void setShaderParameter(std::string param,bool value);
     //设置纹理
     void setTexture(std::string param,unsigned index,int textureID);
+    //绑定纹理并更新纹理。
+    void setTextureForUpdate(Texture* texture);
     //三角形卷绕绘制
     void Draw(PrimitiveType type, unsigned vertexStart, unsigned vertexCount);
     //索引法绘制
@@ -67,6 +71,7 @@ private:
     ShaderVariation* pixelShader_;
     TextureFilterMode defaultTextureFilterMode_;
     unsigned defaultTextureAnisotropy_;
+    Texture* textures_[MAX_TEXTURE_UNITS];
 protected:
 
 };
