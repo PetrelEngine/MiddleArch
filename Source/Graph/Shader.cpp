@@ -3,21 +3,35 @@
 //
 #include "Shader.h"
 #include "ShaderVariation.h"
+#include "File.h"
 Shader::Shader(Context *context):
-    Object(context)
+    Resource(context),
+    vsSourceCode_(""),
+    psSourceCode_("")
 {
-
 }
 
 Shader::~Shader()
 {
-
+    vsSourceCode_ = "";
+    psSourceCode_ = "";
 }
 
-void Shader::SetShaderSourceCode(ShaderType type, std::string shaderCode)
+bool Shader::load(string vsName,string fsName)
 {
-    if(type == VS)
-        vsSourceCode_ = shaderCode;
+    string vsPasth = DEFAULTSHADER + vsName;
+    string fsPasth = DEFAULTSHADER + fsName;
+    File* file = context_->getSubsystem<File>();
+    bool vsflag,fsflag;
+    vsSourceCode_ = file->getStringFromFile(vsPasth);
+    if(vsSourceCode_.empty())
+        vsflag = false;
     else
-        psSourceCode_ = shaderCode;
+        vsflag = true;
+    psSourceCode_ = file->getStringFromFile(fsPasth);
+    if(psSourceCode_.empty())
+        fsflag = false;
+    else
+        fsflag = true;
+    return vsflag && fsflag;
 }

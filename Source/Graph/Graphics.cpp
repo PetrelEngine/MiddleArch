@@ -33,7 +33,10 @@ Graphics::Graphics(Context* context):
 Object(context),
 impl_(new GraphicsImpl()),
 defaultTextureFilterMode_(FILTER_TRILINEAR),
-defaultTextureAnisotropy_(4)
+defaultTextureAnisotropy_(4),
+indexBuffer_(NULL),
+pixelShader_(NULL),
+vertexShader_(NULL)
 {
 
 }
@@ -299,7 +302,6 @@ void Graphics::setTexture(unsigned index, Texture *texture)
                 glActiveTexture(GL_TEXTURE0 + index);
                 impl_->activeTexture_ = index;
             }
-
             glBindTexture(texture->getTarget(), texture->getGPUObjectName());
             if (texture->getParametersDirty())
                 texture->updateParameters();
@@ -348,8 +350,9 @@ void Graphics::Draw(PrimitiveType type, unsigned vertexStart, unsigned vertexCou
 //索引法绘制
 void Graphics::Draw(PrimitiveType type, unsigned indexStart, unsigned indexCount,unsigned minVertex, unsigned vertexCount)
 {
-    if(!indexCount||indexBuffer_ || !indexBuffer_->getGPUObjectName())
+    if(!indexCount||!indexBuffer_ || !indexBuffer_->getGPUObjectName())
         return;
+
     PrepareDraw();
 
     unsigned indexSize = indexBuffer_->GetIndexSize();

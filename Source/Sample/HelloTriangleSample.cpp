@@ -27,19 +27,21 @@ HelloTriangleSample::~HelloTriangleSample()
 void HelloTriangleSample::CreateScence(Context *context, int width, int height)
 {
     Context_ = context;
-    File_ = Context_->getSubsystem<File>();
-    std::string vertexShaderSource = File_->getStringFromFileAssets("SkySnowResources/CoreData/Shaders/BaseVertex.glsl");
-    std::string fragShaderSource = File_->getStringFromFileAssets("SkySnowResources/CoreData/Shaders/BaseFragment.glsl");
-
     Shader* shader_ = new Shader(context);
-    shader_->SetShaderSourceCode(VS,vertexShaderSource);
-    shader_->SetShaderSourceCode(PS,fragShaderSource);
+    shader_->load("BaseVertex.glsl","BaseFragment.glsl");
     ShaderVariation* vertexShader_ = new ShaderVariation(shader_,VS);
     ShaderVariation* fragmentShader_ = new ShaderVariation(shader_,PS);
 
     //组建顶点几何数据
     VertexBuffer* vertexBuffer_ = new VertexBuffer(context);
-//    indexBuffer_ = new IndexBuffer(context);
+    IndexBuffer* indexBuffer_ = new IndexBuffer(context);
+    int index[] =
+    {
+        0,1,2
+    };
+
+    indexBuffer_->SetSize(3,true);
+    indexBuffer_->SetData(index);
     Geometry* geometry_ = new Geometry(context);
     float vertex[] =
     {
@@ -56,7 +58,7 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
     vertexBuffer_->SetSize(3,elements);
 
     vertexBuffer_->setData(vertex);
-//    geometry_->SetIndexBuffer(indexBuffer_);
+    geometry_->SetIndexBuffer(indexBuffer_);
     geometry_->SetVertexBuffer(0,vertexBuffer_);
 
     camera_ = new Camera(context);
@@ -67,7 +69,7 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
     batch_.geometry_ = geometry_;
     batch_.vertexShader_ = vertexShader_;
     batch_.pixelShader_ = fragmentShader_;
-    batch_.modelmatrix_ = glm::translate(glm::vec3(0,-1,-3))*glm::rotate(0.0f,glm::vec3(0,1,0))*
+    batch_.modelmatrix_ = glm::translate(glm::vec3(0,-1,-3))*glm::rotate(0.1f,glm::vec3(0,1,0))*
             glm::rotate(0.0f,glm::vec3(1,0,0))*glm::scale(glm::vec3(2.0f,2.0f,2.0f));
 
     Image* image = new Image(context);
@@ -81,7 +83,7 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
 
 void HelloTriangleSample::RenderOneFrame(Context *context)
 {
-    context->getSubsystem<Graphics>()->setTexture(0,texture2D_);
+//    context->getSubsystem<Graphics>()->setTexture(0,texture2D_);
     batch_.Draw(view_,camera_);
 }
 

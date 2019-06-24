@@ -1,22 +1,21 @@
 //
 // Created by liuqian8 on 2019/5/23.
 //
-
 #pragma once
-
+#include "Resource.h"
 #include "Context.h"
 #include "DataStruct.h"
-
+#define DEFAULTSHADER "/sdcard/SkySnowResources/CoreData/Shaders/"
 class ShaderVariation;
-class Shader:public Object
+class Shader:public Resource
 {
-    ENGINE_OBJECT(Shader,Object);
+    ENGINE_OBJECT(Shader,Resource);
 public:
     Shader(Context* context);
 
     ~Shader();
 
-    void SetShaderSourceCode(ShaderType type,std::string shaderCode);
+    bool load(string vsName,string fsName);
 
     const string& GetSourceCode(ShaderType type) const { return type == VS ? vsSourceCode_ : psSourceCode_; }
 private:
