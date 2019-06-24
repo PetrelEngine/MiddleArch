@@ -8,6 +8,7 @@
 #include "Context.h"
 #include "Application.h"
 #include "Batch.h"
+#include "Texture2D.h"
 class HelloTriangleSample: public Application
 {
 public:
@@ -27,4 +28,5 @@ private:
     Batch                       batch_;
     View*                       view_;
     Camera*                     camera_;
+    Texture2D*                  texture2D_;
 };

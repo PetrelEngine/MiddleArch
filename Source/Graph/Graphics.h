@@ -46,7 +46,7 @@ public:
     //设置布尔类型
     void setShaderParameter(std::string param,bool value);
     //设置纹理
-    void setTexture(std::string param,unsigned index,int textureID);
+    void setTexture(unsigned index, Texture* texture);
     //绑定纹理并更新纹理。
     void setTextureForUpdate(Texture* texture);
     //三角形卷绕绘制

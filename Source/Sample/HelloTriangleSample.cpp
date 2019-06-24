@@ -13,6 +13,7 @@
 #include "Shader.h"
 #include "Geometry.h"
 #include "Texture2D.h"
+#include "Image.h"
 HelloTriangleSample::HelloTriangleSample()
 {
 
@@ -69,15 +70,18 @@ void HelloTriangleSample::CreateScence(Context *context, int width, int height)
     batch_.modelmatrix_ = glm::translate(glm::vec3(0,-1,-3))*glm::rotate(0.0f,glm::vec3(0,1,0))*
             glm::rotate(0.0f,glm::vec3(1,0,0))*glm::scale(glm::vec3(2.0f,2.0f,2.0f));
 
-    Texture2D* texture2D = new Texture2D(context);
+    Image* image = new Image(context);
+    image->loadImage("/sdcard/SkySnowResources/CoreData/Textures/fish.png");
+    texture2D_ = new Texture2D(context);
+    bool flag = texture2D_->setData(image);
+    if(flag)
+        LOGE("创建纹理成功。");
 
-//    bool isLoad = texture2D->createTexture2D("/sdcard/SkySnowResources/CoreData/Textures/test.png");
-//    if(isLoad)
-//        LOGE("load file success.");
 }
 
 void HelloTriangleSample::RenderOneFrame(Context *context)
 {
+    context->getSubsystem<Graphics>()->setTexture(0,texture2D_);
     batch_.Draw(view_,camera_);
 }
 

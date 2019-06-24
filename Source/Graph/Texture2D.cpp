@@ -55,8 +55,8 @@ bool Texture2D::setData(unsigned level, int x, int y, int width, int height, con
         LOGE("illegal mip level for setting data.");
         return false;
     }
-    graphics_->setTextureForUpdate(this);
-    glTexImage2D(target_, level, format_, width, height, 0, getExternalFormat(format_), getDataType(format_), data);
+
+    glTexImage2D(target_, level, format_, width, height, 0, getExternalFormat(format_),getDataType(format_), data);
     return true;
 }
 
@@ -116,17 +116,9 @@ bool Texture2D::create()
     }
 
     glGenTextures(1,&object_.name_);
-    if(usage_ == TEXTURE_DEPTHSTENCIL)
-    {
-        requestedLevels_ = 1;
-    }else if(usage_ == TEXTURE_RENDERTARGET)
-    {
-        if(requestedLevels_ != 1)
-        {
-            regenerateLevels();
-            requestedLevels_ = 0;
-        }
-    }
+
+    graphics_->setTextureForUpdate(this);
+
     levels_ = 1;
     updateParameters();
 

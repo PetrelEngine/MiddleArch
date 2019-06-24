@@ -20,7 +20,7 @@ public:
 
     void setAddressMode(TextureCoordinate coord, TextureAddressMode mode);
 
-    void regenerateLevels();
+//    void regenerateLevels();
 
     void updateParameters();
 
@@ -54,7 +54,7 @@ protected:
 
     unsigned levels_;
 
-    unsigned requestedLevels_;
+//    unsigned requestedLevels_;
 
     bool parametersDirty_;
 

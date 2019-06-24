@@ -24,7 +24,6 @@ Texture::Texture(Context* context):
     height_(0),
     depth_(0),
     filterMode_(FILTER_DEFAULT),
-    requestedLevels_(0),
     levelsDirty_(false),
     shadowCompare_(false),
     anisotropy_(0)
@@ -40,10 +39,7 @@ Texture::~Texture()
 
 void Texture::setNumLevels(unsigned levels)
 {
-    if(usage_ > TEXTURE_RENDERTARGET)
-        requestedLevels_ = 1;
-    else
-        requestedLevels_ = levels;
+    levels_ = levels;
 }
 
 void Texture::setFilterMode(TextureFilterMode mode)
@@ -58,14 +54,6 @@ void Texture::setAddressMode(TextureCoordinate coord, TextureAddressMode mode)
     parametersDirty_ = true;
 }
 
-void Texture::regenerateLevels()
-{
-    if (!object_.name_)
-        return;
-    glGenerateMipmap(target_);
-    levelsDirty_ = false;
-}
-
 void Texture::updateParameters()
 {
     if(!object_.name_ || !graphics_)
@@ -73,8 +61,9 @@ void Texture::updateParameters()
     //纹理展开方式的设置
     glTexParameteri(target_,GL_TEXTURE_WRAP_S,gl3WrapModes[COORD_U]);
     glTexParameteri(target_,GL_TEXTURE_WRAP_T,gl3WrapModes[COORD_U]);
+
     //暂时不开启对于w的展开方式设置
-    //glTexParameteri(target_, GL_TEXTURE_WRAP_R, GetWrapMode(addressMode_[COORD_W]));
+//    glTexParameteri(target_, GL_TEXTURE_WRAP_R, GetWrapMode(addressMode_[COORD_W]));
     //过滤器的设置
     TextureFilterMode filterMode = filterMode_;
     if(filterMode == FILTER_DEFAULT)
@@ -116,13 +105,12 @@ void Texture::updateParameters()
     unsigned maxAnisotropy = anisotropy_ ? anisotropy_ : graphics_->getDefaultTextureAnisotropy();
     glTexParameterf(target_, GL_TEXTURE_MAX_ANISOTROPY_EXT,
                     (filterMode == FILTER_ANISOTROPIC || filterMode == FILTER_NEAREST_ANISOTROPIC) ? (float)maxAnisotropy : 1.0f);
-    // Shadow compare
+//     Shadow compare
     if (shadowCompare_)
     {
         glTexParameteri(target_, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
         glTexParameteri(target_, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
-    }
-    else
+    }else
         glTexParameteri(target_, GL_TEXTURE_COMPARE_MODE, GL_NONE);
     parametersDirty_ = false;
 }

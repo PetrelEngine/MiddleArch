@@ -263,16 +263,46 @@ void Graphics::setShaderParameter(std::string param, bool value)
     }
 }
 
-void Graphics::setTexture(std::string param,unsigned index, int textureID)
+void Graphics::setTexture(unsigned index, Texture *texture)
 {
-    if(impl_->shaderProgram_)
+    if(index >= MAX_TEXTURE_UNITS)
+        return;
+    if(textures_[index] != texture)
     {
-        const ShaderParameter* info = impl_->shaderProgram_->GetParameter(param);
-        if(info)
+        if(impl_->activeTexture_ != index)
         {
-            glActiveTexture(GL_TEXTURE + index);
-            glBindTexture(info->glType_, textureID);
-            glUniform1i(info->location_,index);
+            glActiveTexture(GL_TEXTURE0 + index);
+            impl_->activeTexture_ = index;
+        }
+        if(texture)
+        {
+            unsigned glType = texture->getTarget();
+
+            if(impl_->textureTypes_[index] && impl_->textureTypes_[index] != glType)
+                glBindTexture(impl_->textureTypes_[index],0);
+            glBindTexture(glType, texture->getGPUObjectName());
+            impl_->textureTypes_[index] = glType;
+
+            if (texture->getParametersDirty())
+                texture->updateParameters();
+        }else if(impl_->textureTypes_[index])
+        {
+            glBindTexture(impl_->textureTypes_[index], 0);
+            impl_->textureTypes_[index] = 0;
+        }
+        textures_[index] = texture;
+    }else{
+        if (texture && texture->getParametersDirty())
+        {
+            if (impl_->activeTexture_ != index)
+            {
+                glActiveTexture(GL_TEXTURE0 + index);
+                impl_->activeTexture_ = index;
+            }
+
+            glBindTexture(texture->getTarget(), texture->getGPUObjectName());
+            if (texture->getParametersDirty())
+                texture->updateParameters();
         }
     }
 }
