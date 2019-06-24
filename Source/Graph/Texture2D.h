@@ -14,7 +14,7 @@ public:
 
     void release();
 
-    bool setSize(int width,int height, unsigned format,TextureUsage usage = TEXTURE_STATIC,int multiSample = 1,bool autoResolve = true);
+    bool setSize(int width,int height, unsigned format,TextureUsage usage = TEXTURE_RENDERTARGET,int multiSample = 1,bool autoResolve = true);
 
     bool setData(unsigned level, int x, int y, int width, int height, const void* data);
 

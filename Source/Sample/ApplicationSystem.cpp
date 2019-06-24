@@ -6,7 +6,8 @@
 #include "File.h"
 
 ApplicationSystem::ApplicationSystem():
-    CurrApplication_(NULL)
+    CurrApplication_(NULL),
+    context_(NULL)
 {
 
 }
@@ -18,8 +19,11 @@ ApplicationSystem::~ApplicationSystem()
         delete CurrApplication_;
         CurrApplication_ = NULL;
     }
-
-
+    if(context_ != NULL)
+    {
+        delete context_;
+        context_ = NULL;
+    }
 }
 
 void ApplicationSystem::initialEngine(Context* context)

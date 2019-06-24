@@ -54,6 +54,8 @@ public:
     //索引法绘制
     void Draw(PrimitiveType type, unsigned indexStart, unsigned indexCount, unsigned minVertex, unsigned vertexCount);
 
+    Texture* getTexture(unsigned index)const;
+
     TextureFilterMode getDefaultTextureFilterMode(){return defaultTextureFilterMode_;}
 
     unsigned getDefaultTextureAnisotropy()const {return defaultTextureAnisotropy_;}

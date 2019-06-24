@@ -307,6 +307,11 @@ void Graphics::setTexture(unsigned index, Texture *texture)
     }
 }
 
+Texture* Graphics::getTexture(unsigned index)const
+{
+    return index < MAX_TEXTURE_UNITS ? textures_[index] : nullptr;
+}
+
 void Graphics::setTextureForUpdate(Texture *texture)
 {
     if(impl_->activeTexture_ != 0)

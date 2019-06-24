@@ -27,7 +27,7 @@ bool Texture2D::setSize(int width, int height, unsigned format, TextureUsage usa
     {
         addressMode_[COORD_U] = ADDRESS_CLAMP;
         addressMode_[COORD_V] = ADDRESS_CLAMP;
-        filterMode_ = FILTER_NEAREST;
+        filterMode_ = FILTER_DEFAULT;
     }
     usage_ = usage;
     width_ = width;
@@ -131,14 +131,13 @@ void Texture2D::release()
     {
         if(!graphics_)
             return;
-//        for (unsigned i = 0; i < MAX_TEXTURE_UNITS; ++i)
-//        {
-//            if (graphics_->getTexture(i) == this)
-//                graphics_->setTexture(i, nullptr);
-//        }
+        for (unsigned i = 0; i < MAX_TEXTURE_UNITS; ++i)
+        {
+            if (graphics_->getTexture(i) == this)
+                graphics_->setTexture(i, nullptr);
+        }
         glDeleteTextures(1, &object_.name_);
         object_.name_ = 0;
     }
-
     levelsDirty_ = false;
 }
