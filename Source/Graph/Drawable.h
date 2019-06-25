@@ -8,7 +8,7 @@
 #include "type_mat4x4.hpp"
 
 class Geometry;
-
+class Material;
 struct SourceBatch
 {
     SourceBatch();
@@ -22,4 +22,12 @@ struct SourceBatch
     Geometry* geometry_;
 
     glm::mat4 wordTransform_;
+
+    float distance_;
+
+    void* instancingData_;
+
+    Material* material_;
+
+    unsigned numWorldTransforms_;
 };

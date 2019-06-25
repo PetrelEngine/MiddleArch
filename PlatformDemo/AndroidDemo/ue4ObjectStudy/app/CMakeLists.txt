@@ -14,6 +14,7 @@ file(GLOB srcSource "${Source_Common_Dir}/CoreObject/*.cpp"
                     "${Source_Common_Dir}/PostProcess/*.cpp"
                     "${Source_Common_Dir}/SkeletalAnimation/*.cpp"
                     "${Source_Common_Dir}/SkeletalAnimation/*.cpp"
+                    "${Source_Common_Dir}/Math/*.cpp"
                     "${Source_Common_Dir}/Mesh/*.cpp"
                     "${Source_Common_Dir}/File/*.cpp"
                     "${Source_Common_Dir}/Graph/*.cpp"
@@ -37,6 +38,7 @@ target_include_directories( StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Co
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/RenderCore/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/ShaderCore/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Engine/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Math/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Mesh/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/File/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Resource/>

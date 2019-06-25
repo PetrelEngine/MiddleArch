@@ -3,6 +3,8 @@
 //
 #pragma once
 
+#include "CubeBox.h"
+#include "Plane.h"
 #include "File.h"
 #include "GLProgram.hpp"
 #include "Context.h"
@@ -10,7 +12,7 @@
 #include "type_mat4x4.hpp"
 #include "vec3.hpp"
 #include "Common.h"
-
+#include "Texture2D.h"
 struct GraphShadowMap
 {
     GLuint       positionsHandle;   //位置数据
@@ -46,6 +48,11 @@ public:
 
     void CreateScence(Context* context,int width,int height);
 
+
+    void initialPlane();
+
+    void initialCubeBox();
+
     void RenderScence();
 
     void Move();
@@ -57,15 +64,20 @@ private:
 
 protected:
     Context*                    context_;
-    File*                       File_;
+    File*                       file_;
 
-    int                         planeVAO;
-    GraphShadowMap              GraphShadowMapPlan;
-    GLProgram*                  GLProgramPlane_;
+    unsigned                         planeVAO;
+    unsigned                         cubeVAO;
+    unsigned                         cubeVBO;
 
-    int                         cubeVAO;
-    int                         cubeVBO;
-    GraphShadowMap              GraphShadowMapCube;
-    GLProgram*                  GLProgramCube_;
+    GraphShadowMap              Graph_Depth_;
+    GraphShadowMap              Graph_use_Depth_;
 
+    GLProgram*                  GLProgram_depth_;
+    GLProgram*                  GLProgram_use_depth_;
+
+    Texture2D*                  texture_;
+
+    Plane* plane_;
+    CubeBox* cubeBox_;
 };

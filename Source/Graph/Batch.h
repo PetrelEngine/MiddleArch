@@ -7,11 +7,15 @@
 #include "type_mat.hpp"
 #include "type_mat4x4.hpp"
 #include "Drawable.h"
+#include <vector>
 class View;
 class Geometry;
 class ShaderVariation;
 class Drawable;
 class Camera;
+class Texture2D;
+class Material;
+class Pass;
 //Queued 3D geometry draw call.
 struct Batch
 {
@@ -21,7 +25,11 @@ struct Batch
 
     Batch(const SourceBatch& rhs):
             geometry_(rhs.geometry_),
-            modelmatrix_(rhs.wordTransform_)
+            modelmatrix_(rhs.wordTransform_),
+            distance_(rhs.distance_),
+            instancingData_(rhs.instancingData_),
+            material_(rhs.material_),
+            numWorldTransforms_(rhs.numWorldTransforms_)
     {
     }
 
@@ -36,6 +44,31 @@ struct Batch
     ShaderVariation* vertexShader_;
 
     ShaderVariation* pixelShader_;
+
+    float distance_;
+
+    void* instancingData_;
+
+    Material* material_;
+
+    unsigned numWorldTransforms_;
+};
+//一个实例化几何体的几何数据
+struct InstanceData
+{
+    InstanceData()
+    {
+    }
+
+    InstanceData(const glm::mat4 worldTransform,const void* instanceData,float distance)
+    {
+
+    }
+
+    glm::mat4 worldTrancsform_;
+    const void* instancingData_;
+
+    float distance_;
 };
 
 struct BatchGroup:public Batch
@@ -56,6 +89,15 @@ struct BatchGroup:public Batch
 
     }
 
+    void addTransforms(const Batch& batch)
+    {
+        InstanceData newInstance;
+        newInstance.distance_ = batch.distance_;
+        newInstance.instancingData_ = batch.instancingData_;
+        newInstance.worldTrancsform_ = batch.modelmatrix_;
+    }
+
     void Draw(View* view, bool allowDepthWrite) const;
     unsigned startIndex_;
+    std::vector<InstanceData> instances_;
 };
