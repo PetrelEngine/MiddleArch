@@ -28,9 +28,9 @@ public:
     void use();
     void destroy();
     
-    std::string getVertexShaderLog();
-    std::string getFragmentShaderLog();
-    std::string getProgramLog();
+//    std::string getVertexShaderLog();
+//    std::string getFragmentShaderLog();
+//    std::string getProgramLog();
     
     bool isInitialized() const;
     GLuint getProgramId() const;

@@ -14,11 +14,11 @@ public:
 
     float* getCubedata()
     {
-        return cubeData;
+        return nullptr;
     }
 
 private:
     void initial(float radius);
 
-    float cubeData[];
+//    float cubeData[];
 };

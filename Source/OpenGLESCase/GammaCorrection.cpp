@@ -2,7 +2,7 @@
 // Created by liuqian8 on 2019/5/17.
 //
 #include <glm/ext.hpp>
-#include <Graph/GLProgram.hpp>
+#include <OpenGLESCase/GLProgram.hpp>
 #include "GammaCorrection.h"
 
 GammaCorrection::GammaCorrection()

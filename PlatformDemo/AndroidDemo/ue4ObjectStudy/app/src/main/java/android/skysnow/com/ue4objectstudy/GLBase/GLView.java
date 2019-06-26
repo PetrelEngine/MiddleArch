@@ -33,14 +33,15 @@ public class GLView extends GLSurfaceView
     {
         super(context, attributeSet);
         mBaseRenderer = new BaseRenderer(context);
-        int glesMajorVersion = getGLESMajorVersion();
-
-        if(glesMajorVersion<3){
-            super.setEGLContextClientVersion(2);
-        }else{
+//        int glesMajorVersion = getGLESMajorVersion();
+//
+//        if(glesMajorVersion<3){
+//            super.setEGLContextClientVersion(2);
+//        }else{
             super.setEGLContextClientVersion(3);
-        }
-        setPreserveEGLContextOnPause(true);
+//        }
+        super.setEGLConfigChooser(8,8,8,8,24,8);
+//        setPreserveEGLContextOnPause(true);
         setRenderer(mBaseRenderer);
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }

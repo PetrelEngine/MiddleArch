@@ -164,17 +164,6 @@ void GLProgram::destroy() {
         glDeleteProgram(_program);
 }
 
-std::string GLProgram::getVertexShaderLog() {
-    return _vertexShaderErrorLog;
-}
-
-std::string GLProgram::getFragmentShaderLog() {
-    return _fragmentShaderErrorLog;
-}
-
-std::string GLProgram::getProgramLog() {
-    return _programErrorLog;
-}
 
 bool GLProgram::isInitialized() const {
     return _initialized;

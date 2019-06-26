@@ -16,6 +16,7 @@
 #include "ApplicationSystem.h"
 #include "ObjSample.h"
 #include "ProductNormalMapSample.h"
+#include "ShadowMapingDepthSample.h"
 using namespace std;
 
 #define JNI_METHOD(return_type, method_name) \
@@ -88,11 +89,14 @@ JNI_METHOD(void ,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong Applicati
 //    NormalMapSample* normalMapSample = new NormalMapSample();
 //    applicationSystem_->RegisteredApplication(normalMapSample);
 
-    HelloTriangleSample* helloTriangleSample = new HelloTriangleSample();
-    applicationSystem_->RegisteredApplication(helloTriangleSample);
+//    HelloTriangleSample* helloTriangleSample = new HelloTriangleSample();
+//    applicationSystem_->RegisteredApplication(helloTriangleSample);
 
 //    MTTestSample* mtTestSample = new MTTestSample();
 //    applicationSystem_->RegisteredApplication(mtTestSample);
+
+    ShadowMapingDepthSample* shadowMapingDepthSample = new ShadowMapingDepthSample();
+    applicationSystem_->RegisteredApplication(shadowMapingDepthSample);
 
     applicationSystem_->CreateScence(width,height);
 }
