@@ -6,14 +6,32 @@
 #include "Image.h"
 ShadowMapingDepth::ShadowMapingDepth():
         cubeVAO(0),
-        planeVAO(0)
+        planeVAO(0),
+        GLProgram_use_depth_(NULL),
+        GLProgram_depth_(NULL),
+        texture_(NULL)
 {
 
 }
 
 ShadowMapingDepth::~ShadowMapingDepth()
 {
+    if(GLProgram_use_depth_)
+    {
+        delete GLProgram_use_depth_;
+        GLProgram_use_depth_ = NULL;
+    }
+    if(GLProgram_depth_)
+    {
+        delete GLProgram_depth_;
+        GLProgram_depth_ = NULL;
+    }
 
+    if(texture_)
+    {
+        delete texture_;
+        texture_ = NULL;
+    }
 }
 
 void ShadowMapingDepth::CreateScence(Context *context, int width, int height)

@@ -68,5 +68,9 @@ void Sphere::ProductSphere() {
 
 Sphere::~Sphere()
 {
-
+    Data_.clear();
+    Positions_.clear();
+    Uv_.clear();
+    Normals_.clear();
+    Indices_.clear();
 }

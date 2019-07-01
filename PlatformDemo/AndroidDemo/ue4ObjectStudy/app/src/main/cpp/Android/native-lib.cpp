@@ -17,6 +17,7 @@
 #include "ObjSample.h"
 #include "ProductNormalMapSample.h"
 #include "ShadowMapingDepthSample.h"
+#include "FresnelReflectionSample.h"
 using namespace std;
 
 #define JNI_METHOD(return_type, method_name) \
@@ -95,8 +96,11 @@ JNI_METHOD(void ,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong Applicati
 //    MTTestSample* mtTestSample = new MTTestSample();
 //    applicationSystem_->RegisteredApplication(mtTestSample);
 
-    ShadowMapingDepthSample* shadowMapingDepthSample = new ShadowMapingDepthSample();
-    applicationSystem_->RegisteredApplication(shadowMapingDepthSample);
+//    ShadowMapingDepthSample* shadowMapingDepthSample = new ShadowMapingDepthSample();
+//    applicationSystem_->RegisteredApplication(shadowMapingDepthSample);
+
+    FresnelReflectionSample* fresnelReflectionSample = new FresnelReflectionSample();
+    applicationSystem_->RegisteredApplication(fresnelReflectionSample);
 
     applicationSystem_->CreateScence(width,height);
 }
