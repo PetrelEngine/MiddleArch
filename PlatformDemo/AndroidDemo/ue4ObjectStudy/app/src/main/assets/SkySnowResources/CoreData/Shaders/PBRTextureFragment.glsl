@@ -23,7 +23,7 @@ vec3 getNormalFromMap()
     vec3 T = normalize(Q1 * st2.t - Q2 * st1.t);
     vec3 B = -normalize(cross(N,T));
     mat3 TBN = mat3(T,B,N);
-    return normalize(TBN * tangentNormal);
+    return normalize(TBN * tangentNormal * vec3(30.0,30.0,1.0));
 }
 float DistributionGGX(vec3 N, vec3 H,float roughness)
 {
@@ -69,13 +69,13 @@ void main()
     F0 = mix(F0,albedo,metallic);
 
     vec3 Lo = vec3(0.0);
-    for(int i = 0; i < 4; i++)
-    {
-        vec3 L = normalize(lightPositions[i] - vPositions);
+//    for(int i = 0; i < 4; i++)
+//    {
+        vec3 L = normalize(lightPositions[1] - vPositions);
         vec3 H = normalize(V + L);
-        float dis = length(lightPositions[i] - vPositions);
+        float dis = length(lightPositions[1] - vPositions);
         float attenuation = 1.0/(dis *dis);
-        vec3 radiance = lightColors[i] * attenuation;
+        vec3 radiance = lightColors[0] * attenuation;
         float NDF = DistributionGGX(N,H,roughness);
         float G   = GeometrySmith(N,V,L,roughness);
         vec3  F   = fresnelSchlick(max(dot(H,V),0.0),F0);
@@ -87,7 +87,7 @@ void main()
         kD *= 1.0 - metallic;
         float NdotL = max(dot(N,L),0.0);
         Lo +=(kD * albedo/PI +specular)*radiance *NdotL;
-    }
+//    }
     vec3 ambient = vec3(0.03)* albedo * ao;
     vec3 color = ambient + Lo;
     color = color/(color + vec3(1.0));

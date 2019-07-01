@@ -55,27 +55,27 @@ public class BaseRenderer implements GLSurfaceView.Renderer
 //        int GammaTextureId = BitmapToTextureId.getInstence().getTextureId(R.drawable.wood,mContext);
 //        mCoreObjectJNI.setTextureId(mRendererContextClassId,"gamma",GammaTextureId);
 
-//        int iron_albedo = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_albedo,mContext);
-//        int iron_ao = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_ao,mContext);
-//        int iron_metallic = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_metallic,mContext);
-//        int iron_normal = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_normal,mContext);
-//        int iron_roughness = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_roughness,mContext);
-//        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"iron_albedo",iron_albedo);
-//        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"iron_ao",iron_ao);
-//        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"iron_metallic",iron_metallic);
-//        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"iron_normal",iron_normal);
-//        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"iron_roughness",iron_roughness);
+        int iron_albedo = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_albedo,mContext);
+        int iron_ao = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_ao,mContext);
+        int iron_metallic = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_metallic,mContext);
+        int iron_normal = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_normal,mContext);
+        int iron_roughness = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_roughness,mContext);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"iron_albedo",iron_albedo);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"iron_ao",iron_ao);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"iron_metallic",iron_metallic);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"iron_normal",iron_normal);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"iron_roughness",iron_roughness);
 
-//        int wall_albedo = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_albedo,mContext);
-//        int wall_ao = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_ao,mContext);
-//        int wall_metallic = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_metallic,mContext);
-//        int wall_normal = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_normal,mContext);
-//        int wall_roughness = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_roughness,mContext);
-//        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"wall_albedo",wall_albedo);
-//        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"wall_ao",wall_ao);
-//        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"wall_metallic",wall_metallic);
-//        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"wall_normal",wall_normal);
-//        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"wall_roughness",wall_roughness);
+        int wall_albedo = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_albedo,mContext);
+        int wall_ao = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_ao,mContext);
+        int wall_metallic = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_metallic,mContext);
+        int wall_normal = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_normal,mContext);
+        int wall_roughness = BitmapToTextureId.getInstence().getTextureId(R.drawable.wall_roughness,mContext);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"wall_albedo",wall_albedo);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"wall_ao",wall_ao);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"wall_metallic",wall_metallic);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"wall_normal",wall_normal);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"wall_roughness",wall_roughness);
 
         mCoreObjectJNI.RendererCreate(mApplicationSystemClassId,width,height);
     }

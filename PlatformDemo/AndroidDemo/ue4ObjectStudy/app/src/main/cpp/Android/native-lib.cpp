@@ -84,8 +84,8 @@ JNI_METHOD(void ,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong Applicati
 //    GammaCorrectionSample* gammaCorrectionSample = new GammaCorrectionSample();
 //    applicationSystem_->RegisteredApplication(gammaCorrectionSample);
 
-//    PBRLightTextureSample* pbrLightTextureSample = new PBRLightTextureSample();
-//    applicationSystem_->RegisteredApplication(pbrLightTextureSample);
+    PBRLightTextureSample* pbrLightTextureSample = new PBRLightTextureSample();
+    applicationSystem_->RegisteredApplication(pbrLightTextureSample);
 
 //    NormalMapSample* normalMapSample = new NormalMapSample();
 //    applicationSystem_->RegisteredApplication(normalMapSample);
@@ -99,8 +99,8 @@ JNI_METHOD(void ,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong Applicati
 //    ShadowMapingDepthSample* shadowMapingDepthSample = new ShadowMapingDepthSample();
 //    applicationSystem_->RegisteredApplication(shadowMapingDepthSample);
 
-    FresnelReflectionSample* fresnelReflectionSample = new FresnelReflectionSample();
-    applicationSystem_->RegisteredApplication(fresnelReflectionSample);
+//    FresnelReflectionSample* fresnelReflectionSample = new FresnelReflectionSample();
+//    applicationSystem_->RegisteredApplication(fresnelReflectionSample);
 
     applicationSystem_->CreateScence(width,height);
 }

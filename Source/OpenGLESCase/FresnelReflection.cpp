@@ -41,7 +41,7 @@ void FresnelReflection::createScence(Context *context,int width,int height)
     //球的纹理加载
     texture2D_ = new Texture2D(context);
     Image* image = new Image(context);
-    image->loadImage("/sdcard/SkySnowResources/CoreData/Textures/wood.png");
+    image->loadImage("/sdcard/SkySnowResources/CoreData/Textures/glass.jpg");
     texture2D_->setData(image);
 
     sphere_ = new Sphere();
@@ -71,11 +71,11 @@ void FresnelReflection::createScence(Context *context,int width,int height)
     projectMat_ = glm::mat4(1.0);
     vpMat4_ = glm::mat4(1.0);
 
-    eyePos_ = glm::vec3(0,0,3);
-    lightPos_ = glm::vec3(3,0,3);
+    eyePos_ = glm::vec3(0,0,4);
+    lightPos_ = glm::vec3(0,0,-4);
 
-    model_ = glm::translate(glm::vec3(0.0f,-0.5f,0.0f))*glm::rotate(0.0f,glm::vec3(0,1,0))
-             *glm::rotate(-SN_PI/2.0f,glm::vec3(1,0,0))*glm::scale(glm::vec3(1.5f,1.5f,1.5f));
+    model_ = glm::translate(glm::vec3(0.0f,0.0f,0.0f))*glm::rotate(0.0f,glm::vec3(0,1,0))
+             *glm::rotate(0.0f,glm::vec3(1,0,0))*glm::scale(glm::vec3(1.5f,1.5f,1.5f));
     eyeMat_ = glm::lookAt(eyePos_,glm::vec3(0,0,0),glm::vec3(0,1,0));
     projectMat_ = glm::perspective(glm::radians(120.0f), (float)width / (float)height, 0.1f, 100.0f);
     vpMat4_ = projectMat_ * eyeMat_;
@@ -107,7 +107,7 @@ void FresnelReflection::drawScence(Context *context)
 void FresnelReflection::move()
 {
     //计算相机的z轴的位置
-    eyePos_ = glm::vec3(3 * cosf(count * (SN_PI/100)),0,3 * sinf(count * (SN_PI/100)));
+    eyePos_ = glm::vec3(4 * cosf(count * (SN_PI/100)),0,4 * sinf(count * (SN_PI/100)));
     eyeMat_ = glm::lookAt(eyePos_,glm::vec3(0,0,0),glm::vec3(0,1,0));
     vpMat4_ = projectMat_ * eyeMat_;
     count ++;
