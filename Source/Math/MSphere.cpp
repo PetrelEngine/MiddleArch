@@ -3,11 +3,11 @@
 //
 #include "MSphere.h"
 #include <math.h>
-#define SN_PI 3.141592653589793f
+#include "Common.h"
 MSphere::MSphere():
     longitude_(150.0f),
     latitude_(75.0f),
-    longitude_(1.0f),
+    longiRadio_(1.0f),
     latiRadio_(2.0f),
     sphereRadius_(2.0f)
 {

@@ -11,7 +11,7 @@
 
 #define DEBUG 1
 #define PLATFORM PLATFORM_UNKOW
-
+#define SN_PI 3.141592653589793f
 #include <string>
 using namespace std;
 

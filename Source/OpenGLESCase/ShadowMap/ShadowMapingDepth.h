@@ -2,9 +2,6 @@
 // Created by liuqian8 on 2019/5/23.
 //
 #pragma once
-
-#include "CubeBox.h"
-#include "Plane.h"
 #include "File.h"
 #include "CaseShaderProgram.h"
 #include "Context.h"
@@ -13,7 +10,7 @@
 #include "vec3.hpp"
 #include "Common.h"
 #include "Texture2D.h"
-
+#include "matrix_transform.hpp"
 class ShadowMapingDepth
 {
 public:
@@ -48,8 +45,6 @@ protected:
     CaseShaderProgram*                  GLProgram_use_depth_;
 
     Texture2D*                  texture_;
-
-    CubeBox* cubeBox_;
 
     unsigned depthMapFbo;
     unsigned depthMap = 0;

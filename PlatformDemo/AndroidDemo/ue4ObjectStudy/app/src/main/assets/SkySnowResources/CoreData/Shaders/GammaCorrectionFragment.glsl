@@ -20,6 +20,7 @@ vec3 BlinnPhone(vec3 normal,vec3 wordPos,vec3 lPos,vec3 lColor)
     vec3 halfDir = normalize(lightDir + eyeDir);
     float specularRadius = 0.0;
     specularRadius = pow (max(dot(normal,halfDir),0.0),64.0);
+    //specularRadius = pow (saturate(dot(normal,halfDir),0.0),64.0);
     vec3 specular = specularRadius * lColor;
     //simple attenuation
     float max_distance = 1.5;
