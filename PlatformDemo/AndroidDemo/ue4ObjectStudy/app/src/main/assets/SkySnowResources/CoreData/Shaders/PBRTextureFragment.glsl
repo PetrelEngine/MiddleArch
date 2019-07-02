@@ -23,7 +23,7 @@ vec3 getNormalFromMap()
     vec3 T = normalize(Q1 * st2.t - Q2 * st1.t);
     vec3 B = -normalize(cross(N,T));
     mat3 TBN = mat3(T,B,N);
-    return normalize(TBN * tangentNormal * vec3(30.0,30.0,1.0));
+    return normalize(TBN * tangentNormal * vec3(100.0,100.0,1.0));
 }
 float DistributionGGX(vec3 N, vec3 H,float roughness)
 {
@@ -31,6 +31,7 @@ float DistributionGGX(vec3 N, vec3 H,float roughness)
     float a2 = a* a;
     float NdotH = max(dot(N,H),0.0);
     float Ndoth2 = NdotH * NdotH;
+
     float nom = a2;
     float denom = (Ndoth2 * (a2 - 1.0) + 1.0);
     denom = PI * denom *denom;
@@ -69,27 +70,32 @@ void main()
     F0 = mix(F0,albedo,metallic);
 
     vec3 Lo = vec3(0.0);
-//    for(int i = 0; i < 4; i++)
-//    {
-        vec3 L = normalize(lightPositions[1] - vPositions);
+    for(int i = 0; i < 4; i++)
+    {
+        vec3 L = normalize(lightPositions[i] - vPositions);
         vec3 H = normalize(V + L);
-        float dis = length(lightPositions[1] - vPositions);
+        float dis = length(lightPositions[i] - vPositions);
         float attenuation = 1.0/(dis *dis);
-        vec3 radiance = lightColors[0] * attenuation;
+        vec3 radiance = lightColors[i] * attenuation;
+
         float NDF = DistributionGGX(N,H,roughness);
         float G   = GeometrySmith(N,V,L,roughness);
         vec3  F   = fresnelSchlick(max(dot(H,V),0.0),F0);
         vec3 nominator = NDF * G * F;
         float denominator = 4.0 * max(dot(N,V),0.0) * max(dot(N,L),0.0) + 0.001;
         vec3 specular = nominator/denominator;
+
         vec3 kS = F;
         vec3 kD = vec3(1.0) - kS;
         kD *= 1.0 - metallic;
+
         float NdotL = max(dot(N,L),0.0);
+
         Lo +=(kD * albedo/PI +specular)*radiance *NdotL;
-//    }
+    }
     vec3 ambient = vec3(0.03)* albedo * ao;
     vec3 color = ambient + Lo;
+
     color = color/(color + vec3(1.0));
     color = pow(color,vec3(1.0/2.2));
     fragColor = vec4(color,1.0);
