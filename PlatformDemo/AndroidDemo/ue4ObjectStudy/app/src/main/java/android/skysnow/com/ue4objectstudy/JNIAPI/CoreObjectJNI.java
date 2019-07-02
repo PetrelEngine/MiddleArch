@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
  * Created by liuqian8 on 2019/3/10.
  */
 
+
 public class CoreObjectJNI
 {
     // Used to load the 'native-lib' library on application startup.
@@ -15,15 +16,28 @@ public class CoreObjectJNI
 
     public CoreObjectJNI()
     {
-
     }
 
+    public enum applicationType
+    {
+        ObjSample,
+        DeferredRenderSample,
+        ProductNormalMapSample,
+        ParallaxMappingSample,
+        GammaCorrectionSample,
+        PBRLightTextureSample,
+        NormalMapSample,
+        HelloTriangleSample,
+        MTTestSample,
+        ShadowMapingDepthSample,
+        FresnelReflectionSample
+    }
 
     //=================
 
-    public long setAssetsManager(AssetManager ass)
+    public long InitialEngine(AssetManager ass,int width,int height)
     {
-        return setAssetsManagerJNI(ass);
+        return initialEngine(ass,width,height);
     }
 
     public void RendererCreate(long ApplicationSystemClassId,int width,int height)
@@ -52,7 +66,7 @@ public class CoreObjectJNI
 
     //=========================================================================================
 
-    protected native long setAssetsManagerJNI(AssetManager ass);
+    protected native long initialEngine(AssetManager ass,int width,int height);
 
     protected native void setTexture2DId(long ApplicationSystemClassId,String name,int texture2DId);
 
@@ -63,4 +77,6 @@ public class CoreObjectJNI
     protected native void move(long ApplicationSystemClassId);
 
     protected native void engineRelease(long ApplicationSystemClassId);
+
+    protected native void switchApplication(long ApplicationSystemClassId,applicationType type);
 }

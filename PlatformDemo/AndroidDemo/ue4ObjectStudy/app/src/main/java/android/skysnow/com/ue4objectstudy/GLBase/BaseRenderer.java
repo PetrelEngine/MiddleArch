@@ -20,6 +20,7 @@ public class BaseRenderer implements GLSurfaceView.Renderer
     private Context mContext;
     private CoreObjectJNI mCoreObjectJNI;
     private long mApplicationSystemClassId;
+    private boolean isRealease = false;
     public BaseRenderer(Context context)
     {
         mContext = context;
@@ -33,16 +34,16 @@ public class BaseRenderer implements GLSurfaceView.Renderer
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height)
     {
-        mApplicationSystemClassId = mCoreObjectJNI.setAssetsManager(mContext.getAssets());
+        mApplicationSystemClassId = mCoreObjectJNI.InitialEngine(mContext.getAssets(),width,height);
         int fishID = BitmapToTextureId.getInstence().getTextureId(R.drawable.fish,mContext);
         mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"fish",fishID);
 
-//        int box_diffuse = BitmapToTextureId.getInstence().getTextureId(R.drawable.toyboxdiffuse,mContext);
-//        int box_disp = BitmapToTextureId.getInstence().getTextureId(R.drawable.toyboxdisp,mContext);
-//        int box_normal = BitmapToTextureId.getInstence().getTextureId(R.drawable.toyboxnormal,mContext);
-//        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"box_diffuse",box_diffuse);
-//        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"box_disp",box_disp);
-//        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"box_normal",box_normal);
+        int box_diffuse = BitmapToTextureId.getInstence().getTextureId(R.drawable.toyboxdiffuse,mContext);
+        int box_disp = BitmapToTextureId.getInstence().getTextureId(R.drawable.toyboxdisp,mContext);
+        int box_normal = BitmapToTextureId.getInstence().getTextureId(R.drawable.toyboxnormal,mContext);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"box_diffuse",box_diffuse);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"box_disp",box_disp);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"box_normal",box_normal);
 
         int bri_diffuse = BitmapToTextureId.getInstence().getTextureId(R.drawable.bricks2,mContext);
         int bri_disp = BitmapToTextureId.getInstence().getTextureId(R.drawable.bricks2_disp,mContext);
@@ -52,8 +53,8 @@ public class BaseRenderer implements GLSurfaceView.Renderer
         mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"bri_disp",bri_disp);
         mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"bri_normal",bri_normal);
 
-//        int GammaTextureId = BitmapToTextureId.getInstence().getTextureId(R.drawable.wood,mContext);
-//        mCoreObjectJNI.setTextureId(mRendererContextClassId,"gamma",GammaTextureId);
+        int GammaTextureId = BitmapToTextureId.getInstence().getTextureId(R.drawable.wood,mContext);
+        mCoreObjectJNI.setTextureId(mApplicationSystemClassId,"gamma",GammaTextureId);
 
         int iron_albedo = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_albedo,mContext);
         int iron_ao = BitmapToTextureId.getInstence().getTextureId(R.drawable.iron_ao,mContext);
@@ -83,18 +84,23 @@ public class BaseRenderer implements GLSurfaceView.Renderer
     @Override
     public void onDrawFrame(GL10 gl)
     {
-        GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT|GLES30.GL_DEPTH_BUFFER_BIT);
-        GLES30.glClearColor(0,0,0,0);
-        mCoreObjectJNI.RendererFrame(mApplicationSystemClassId);
+        if(!isRealease)
+        {
+            GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT|GLES30.GL_DEPTH_BUFFER_BIT);
+            GLES30.glClearColor(0,0,0,0);
+            mCoreObjectJNI.RendererFrame(mApplicationSystemClassId);
+        }else{
+            mCoreObjectJNI.releaseEngine(mApplicationSystemClassId);
+        }
     }
 
     public void release()
     {
-        mCoreObjectJNI.releaseEngine(mApplicationSystemClassId);
+        isRealease = true;
     }
 
     //触控回调方法
-    public boolean onTouchEvent(MotionEvent e)
+    public boolean onTouchEvent(MotionEvent e,CoreObjectJNI.applicationType type)
     {
 
         switch (e.getAction())

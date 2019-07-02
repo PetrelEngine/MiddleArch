@@ -43,14 +43,14 @@ JNI_METHOD(jstring,stringFromJNI)(JNIEnv *env,jobject jobject1)
     return env->NewStringUTF(hello.c_str());
 }
 
-JNI_METHOD(jlong ,setAssetsManagerJNI)(JNIEnv *env,jobject jobject1,jobject assetManager)
+JNI_METHOD(jlong ,initialEngine)(JNIEnv *env,jobject jobject1,jobject assetManager,jint width,jint height)
 {
     jobject assetManagerTemp_ = env->NewGlobalRef(assetManager);
     AAssetManager* mgr = AAssetManager_fromJava(env,assetManagerTemp_);
     Context* context_ = new (std::nothrow)Context();
     context_->setSetAssetManager(mgr);
     ApplicationSystem* applicationSystem_ = new (std::nothrow)ApplicationSystem();
-    applicationSystem_->initialEngine(context_);
+    applicationSystem_->initialEngine(context_,width,height);
 
     return (uintptr_t)(applicationSystem_);
 }
@@ -69,38 +69,9 @@ JNI_METHOD(void,setTexture2DId)(JNIEnv *env,jobject jobject1,jlong ApplicationSy
 JNI_METHOD(void ,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong ApplicationSystemClassId,jint width,jint height)
 {
     ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
-//    ObjSample* pbrSample = new ObjSample();
-//    applicationSystem_->RegisteredApplication(pbrSample);
-
-//    DeferredRenderSample* deferredRenderSample = new DeferredRenderSample();
-//    applicationSystem_->RegisteredApplication(deferredRenderSample);
-
-//    ProductNormalMapSample* productNormalMapSample = new ProductNormalMapSample();
-//    applicationSystem_->RegisteredApplication(productNormalMapSample);
-
-//    ParallaxMappingSample* parallaxMappingSample = new ParallaxMappingSample();
-//    applicationSystem_->RegisteredApplication(parallaxMappingSample);
-
-//    GammaCorrectionSample* gammaCorrectionSample = new GammaCorrectionSample();
-//    applicationSystem_->RegisteredApplication(gammaCorrectionSample);
 
     PBRLightTextureSample* pbrLightTextureSample = new PBRLightTextureSample();
     applicationSystem_->RegisteredApplication(pbrLightTextureSample);
-
-//    NormalMapSample* normalMapSample = new NormalMapSample();
-//    applicationSystem_->RegisteredApplication(normalMapSample);
-
-//    HelloTriangleSample* helloTriangleSample = new HelloTriangleSample();
-//    applicationSystem_->RegisteredApplication(helloTriangleSample);
-
-//    MTTestSample* mtTestSample = new MTTestSample();
-//    applicationSystem_->RegisteredApplication(mtTestSample);
-
-//    ShadowMapingDepthSample* shadowMapingDepthSample = new ShadowMapingDepthSample();
-//    applicationSystem_->RegisteredApplication(shadowMapingDepthSample);
-
-//    FresnelReflectionSample* fresnelReflectionSample = new FresnelReflectionSample();
-//    applicationSystem_->RegisteredApplication(fresnelReflectionSample);
 
     applicationSystem_->CreateScence(width,height);
 }
@@ -124,6 +95,71 @@ JNI_METHOD(void,engineRelease)(JNIEnv *env,jobject jobject1,jlong ApplicationSys
     {
         delete applicationSystem_;
         applicationSystem_ = NULL;
+    }
+}
+
+JNI_METHOD(void,switchApplication)(JNIEnv *env,jobject jobject1,jlong ApplicationSystemClassId,jint type)
+{
+    ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
+    int aTtype = type;
+    switch (aTtype)
+    {
+        case 0:
+        {
+            ObjSample* pbrSample = new ObjSample();
+            applicationSystem_->RegisteredApplication(pbrSample);
+        }break;
+        case 1:
+        {
+            DeferredRenderSample* deferredRenderSample = new DeferredRenderSample();
+            applicationSystem_->RegisteredApplication(deferredRenderSample);
+        }break;
+        case 2:
+        {
+            ProductNormalMapSample* productNormalMapSample = new ProductNormalMapSample();
+            applicationSystem_->RegisteredApplication(productNormalMapSample);
+        }break;
+        case 3:
+        {
+            ParallaxMappingSample* parallaxMappingSample = new ParallaxMappingSample();
+            applicationSystem_->RegisteredApplication(parallaxMappingSample);
+        }break;
+        case 4:
+        {
+            GammaCorrectionSample* gammaCorrectionSample = new GammaCorrectionSample();
+            applicationSystem_->RegisteredApplication(gammaCorrectionSample);
+        }break;
+        case 5:
+        {
+            PBRLightTextureSample* pbrLightTextureSample = new PBRLightTextureSample();
+            applicationSystem_->RegisteredApplication(pbrLightTextureSample);
+        }break;
+        case 6:
+        {
+            NormalMapSample* normalMapSample = new NormalMapSample();
+            applicationSystem_->RegisteredApplication(normalMapSample);
+        }break;
+        case 7:
+        {
+            HelloTriangleSample* helloTriangleSample = new HelloTriangleSample();
+            applicationSystem_->RegisteredApplication(helloTriangleSample);
+        }break;
+        case 8:
+        {
+            MTTestSample* mtTestSample = new MTTestSample();
+            applicationSystem_->RegisteredApplication(mtTestSample);
+        }break;
+        case 9:
+        {
+            ShadowMapingDepthSample* shadowMapingDepthSample = new ShadowMapingDepthSample();
+            applicationSystem_->RegisteredApplication(shadowMapingDepthSample);
+        }break;
+        case 10:
+        {
+            FresnelReflectionSample* fresnelReflectionSample = new FresnelReflectionSample();
+            applicationSystem_->RegisteredApplication(fresnelReflectionSample);
+        }break;
+
     }
 }
 

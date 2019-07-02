@@ -1,4 +1,6 @@
 package android.skysnow.com.ue4objectstudy;
+import android.app.Activity;
+import android.opengl.GLSurfaceView;
 import android.os.Environment;
 import android.skysnow.com.ue4objectstudy.GLBase.GLView;
 import android.support.v7.app.AppCompatActivity;
@@ -10,15 +12,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private GLView mGLView;
     private String mAssetsPath = "SkySnowResources";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         copyAssetsDir2Phone(mAssetsPath);
-        mGLView = new GLView(this);
-        setContentView(mGLView);
+        mGLView = (GLView) findViewById(R.id.gl_view);
+//        setContentView(mGLView);
     }
 
 

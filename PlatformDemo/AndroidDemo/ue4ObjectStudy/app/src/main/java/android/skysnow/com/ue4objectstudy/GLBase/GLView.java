@@ -4,6 +4,7 @@ import android.content.Context;
 import android.opengl.EGLExt;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
+import android.skysnow.com.ue4objectstudy.JNIAPI.CoreObjectJNI;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -12,6 +13,8 @@ import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLContext;
 import javax.microedition.khronos.egl.EGLDisplay;
+
+import static android.skysnow.com.ue4objectstudy.JNIAPI.CoreObjectJNI.applicationType.*;
 
 /**
  * Created by liuqian8 on 2019/4/16.
@@ -33,15 +36,15 @@ public class GLView extends GLSurfaceView
     {
         super(context, attributeSet);
         mBaseRenderer = new BaseRenderer(context);
-//        int glesMajorVersion = getGLESMajorVersion();
-//
-//        if(glesMajorVersion<3){
-//            super.setEGLContextClientVersion(2);
-//        }else{
+        int glesMajorVersion = getGLESMajorVersion();
+
+        if(glesMajorVersion<3){
+            super.setEGLContextClientVersion(2);
+        }else{
             super.setEGLContextClientVersion(3);
-//        }
+        }
         super.setEGLConfigChooser(8,8,8,8,24,8);
-//        setPreserveEGLContextOnPause(true);
+        setPreserveEGLContextOnPause(true);
         setRenderer(mBaseRenderer);
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
@@ -55,7 +58,16 @@ public class GLView extends GLSurfaceView
     @Override
     public boolean onTouchEvent(MotionEvent e)
     {
-        return mBaseRenderer.onTouchEvent(e);
+        CoreObjectJNI.applicationType type = ObjSample;
+        switch (e.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+        }
+        return mBaseRenderer.onTouchEvent(e,type);
     }
 
     private   int getGLESMajorVersion(){

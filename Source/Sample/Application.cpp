@@ -3,7 +3,8 @@
 //
 #include "Application.h"
 
-Application::Application()
+Application::Application():
+        isInitial_(false)
 {
 
 }
@@ -11,4 +12,10 @@ Application::Application()
 Application::~Application()
 {
 
+}
+
+void Application::BaseCreateScence(Context *context, int width, int height)
+{
+    CreateScence(context,width,height);
+    isInitial_ = true;
 }

@@ -14,7 +14,7 @@ public:
 
     void RegisteredApplication(Application* application);
 
-    void initialEngine(Context* context);
+    void initialEngine(Context* context,int width,int height);
 
     Application* GetCurrApplication();
 
@@ -29,4 +29,6 @@ public:
 protected:
     Application* CurrApplication_;
     Context*    context_;
+    int width_;
+    int height_;
 };

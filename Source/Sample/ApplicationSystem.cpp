@@ -26,7 +26,7 @@ ApplicationSystem::~ApplicationSystem()
     }
 }
 
-void ApplicationSystem::initialEngine(Context* context)
+void ApplicationSystem::initialEngine(Context* context,int width,int height)
 {
     context_ = context;
     //引擎启动，我们注册相关的渲染core对象
@@ -34,7 +34,8 @@ void ApplicationSystem::initialEngine(Context* context)
     context_->registerSubsystem(graphics);
     File* file = new File(context_);
     context_->registerSubsystem(file);
-
+    height_ = height;
+    width_ = width;
 }
 
 void ApplicationSystem::RegisteredApplication(Application *application)
@@ -59,11 +60,13 @@ void ApplicationSystem::CreateScence(int width, int height)
         LOGE("ApplicationSystem.cpp Application is NULL pointer!");
         return ;
     }
-    CurrApplication_->CreateScence(context_,width,height);
+    CurrApplication_->BaseCreateScence(context_,width,height);
 }
 
 void ApplicationSystem::RenderOneFrame()
 {
+    if(!CurrApplication_->isInitial())
+        CreateScence(width_,height_);
     if(CurrApplication_ == NULL)
     {
         LOGE("ApplicationSystem.cpp Application is NULL pointer!");
