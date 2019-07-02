@@ -4,6 +4,9 @@
 #include "Context.h"
 #include "Object.h"
 #include "Common.h"
+#include <vector>
+#include "File.h"
+#include "Graphics.h"
 Context::~Context()
 
 {
@@ -13,6 +16,7 @@ Context::~Context()
         delete iter->second;
     }
     subsystem_.clear();
+
 
 //    SN_HashMap<string,int>::iterator titer = textureList_.begin();
 //    for(;titer != textureList_.end();titer++)

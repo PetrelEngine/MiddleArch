@@ -20,7 +20,6 @@ public class BaseRenderer implements GLSurfaceView.Renderer
     private Context mContext;
     private CoreObjectJNI mCoreObjectJNI;
     private long mApplicationSystemClassId;
-    private boolean isRealease = false;
     public BaseRenderer(Context context)
     {
         mContext = context;
@@ -84,19 +83,14 @@ public class BaseRenderer implements GLSurfaceView.Renderer
     @Override
     public void onDrawFrame(GL10 gl)
     {
-        if(!isRealease)
-        {
-            GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT|GLES30.GL_DEPTH_BUFFER_BIT);
-            GLES30.glClearColor(0,0,0,0);
-            mCoreObjectJNI.RendererFrame(mApplicationSystemClassId);
-        }else{
-            mCoreObjectJNI.releaseEngine(mApplicationSystemClassId);
-        }
+        GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT|GLES30.GL_DEPTH_BUFFER_BIT);
+        GLES30.glClearColor(0,0,0,0);
+        mCoreObjectJNI.RendererFrame(mApplicationSystemClassId);
     }
 
     public void release()
     {
-        isRealease = true;
+        mCoreObjectJNI.releaseEngine(mApplicationSystemClassId);
     }
 
     //触控回调方法

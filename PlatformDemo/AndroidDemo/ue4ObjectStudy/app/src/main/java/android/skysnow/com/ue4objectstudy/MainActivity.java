@@ -18,10 +18,10 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
         copyAssetsDir2Phone(mAssetsPath);
-        mGLView = (GLView) findViewById(R.id.gl_view);
-//        setContentView(mGLView);
+        mGLView = new GLView(this);
+        setContentView(mGLView);
     }
 
 

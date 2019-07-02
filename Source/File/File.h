@@ -99,8 +99,7 @@ class File : public Object
     ENGINE_OBJECT(File,Object);
 public:
     File(Context *context):
-            Object(context),
-            context_(context)
+            Object(context)
     {
     }
 
@@ -119,7 +118,4 @@ protected:
     }
 
     Status getContents(const std::string& filename,ResizableBuffer* buffer);
-
-
-    Context* context_;
 };
