@@ -4,7 +4,9 @@
 #include <File/File.h>
 #include "Deferred.h"
 
-Deferred::Deferred()
+Deferred::Deferred():
+        objModel(nullptr),
+        rect2D(nullptr)
 {
 
 }

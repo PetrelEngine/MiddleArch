@@ -3,30 +3,60 @@
 //
 #include <glm/ext.hpp>
 #include "PBR_LightingTexture.h"
-
-PBR_LightingTexture::PBR_LightingTexture()
+#include "Image.h"
+PBR_LightingTexture::PBR_LightingTexture():
+        GLProgram_(nullptr),
+        Sphere_(nullptr),
+        albedo_(nullptr),
+        ao_(nullptr),
+        metallic_(nullptr),
+        normal_(nullptr),
+        roughness_(nullptr)
 {
 
 }
 
 PBR_LightingTexture::~PBR_LightingTexture()
 {
-    if(File_)
-    {
-        delete File_;
-        File_ = NULL;
-    }
-
     if(GLProgram_)
     {
         delete GLProgram_;
         GLProgram_ = NULL;
     }
-
     if(Sphere_)
     {
         delete Sphere_;
         Sphere_ = NULL;
+    }
+    if(Sphere_)
+    {
+        delete Sphere_;
+        Sphere_ = nullptr;
+    }
+    if(albedo_)
+    {
+        delete albedo_;
+        albedo_ = nullptr;
+    }
+    if(ao_)
+    {
+        delete ao_;
+        ao_ = nullptr;
+    }
+    if(metallic_)
+    {
+        delete metallic_;
+        metallic_ = nullptr;
+    }
+    if(normal_)
+    {
+        delete normal_;
+        normal_ = nullptr;
+    }
+    if(roughness_)
+    {
+        delete roughness_;
+        roughness_ = nullptr;
     }
 }
 
@@ -85,11 +115,30 @@ void PBR_LightingTexture::CreateScence(Context *context, int width, int height)
     PRBGraph_.lightColor[2] = glm::vec3(50.0f);
     PRBGraph_.lightColor[3] = glm::vec3(50.0f);
     //生锈的铁球
-    PRBGraph_.albedoMapId = Context_->getTextureId("iron_albedo");
-    PRBGraph_.aoMapId = Context_->getTextureId("iron_ao");
-    PRBGraph_.metallicMapId = Context_->getTextureId("iron_metallic");
-    PRBGraph_.normalMapId = Context_->getTextureId("iron_normal");
-    PRBGraph_.roughnessMapId = Context_->getTextureId("iron_roughness");
+    albedo_ = new Texture2D(context);
+    Image* image1 = new Image(context);
+    image1->loadImage("/sdcard/SkySnowResources/CoreData/Textures/iron_albedo.png");
+    albedo_->setData(image1);
+
+    ao_ = new Texture2D(context);
+    Image* image2 = new Image(context);
+    image2->loadImage("/sdcard/SkySnowResources/CoreData/Textures/iron_ao.png");
+    ao_->setData(image2);
+
+    metallic_ = new Texture2D(context);
+    Image* image3 = new Image(context);
+    image3->loadImage("/sdcard/SkySnowResources/CoreData/Textures/iron_metallic.png");
+    metallic_->setData(image3);
+
+    normal_ = new Texture2D(context);
+    Image* image4 = new Image(context);
+    image4->loadImage("/sdcard/SkySnowResources/CoreData/Textures/iron_normal.png");
+    normal_->setData(image4);
+
+    roughness_ = new Texture2D(context);
+    Image* image5 = new Image(context);
+    image5->loadImage("/sdcard/SkySnowResources/CoreData/Textures/iron_roughness.png");
+    roughness_->setData(image5);
     //墙体
 //    PRBGraph_.albedoMapId = Context_->getTextureId("wall_albedo");
 //    PRBGraph_.aoMapId = Context_->getTextureId("wall_ao");
@@ -139,23 +188,23 @@ void PBR_LightingTexture::RenderScence()
     glUseProgram(GLProgram_->getProgramId());
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, PRBGraph_.albedoMapId);
+    glBindTexture(GL_TEXTURE_2D, albedo_->getGPUObjectName());
     glUniform1i(PRBGraph_.albedoMapHandle,0);
 
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, PRBGraph_.aoMapId);
+    glBindTexture(GL_TEXTURE_2D, ao_->getGPUObjectName());
     glUniform1i(PRBGraph_.aoMapHandle,1);
 
     glActiveTexture(GL_TEXTURE2);
-    glBindTexture(GL_TEXTURE_2D, PRBGraph_.metallicMapId);
+    glBindTexture(GL_TEXTURE_2D, metallic_->getGPUObjectName());
     glUniform1i(PRBGraph_.metallicMapHandle,2);
 
     glActiveTexture(GL_TEXTURE3);
-    glBindTexture(GL_TEXTURE_2D, PRBGraph_.normalMapId);
+    glBindTexture(GL_TEXTURE_2D, normal_->getGPUObjectName());
     glUniform1i(PRBGraph_.normalMapHandle,3);
 
     glActiveTexture(GL_TEXTURE4);
-    glBindTexture(GL_TEXTURE_2D, PRBGraph_.roughnessMapId);
+    glBindTexture(GL_TEXTURE_2D, roughness_->getGPUObjectName());
     glUniform1i(PRBGraph_.roughnessMapHandle,4);
 
     glUniform3fv(PRBGraph_.lightPositionHandle, 4, (float*)&PRBGraph_.lightPos);

@@ -55,17 +55,6 @@ JNI_METHOD(jlong ,initialEngine)(JNIEnv *env,jobject jobject1,jobject assetManag
     return (uintptr_t)(applicationSystem_);
 }
 
-JNI_METHOD(void,setTexture2DId)(JNIEnv *env,jobject jobject1,jlong ApplicationSystemClassId,jstring name,jint textureId)
-{
-    const char* nameStr = env->GetStringUTFChars(name,0);
-    string nameT = const_cast<char*>(nameStr);
-    ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
-    Context* context_ = applicationSystem_->getContext();
-    context_->setTextureId(nameT,textureId);
-    env->ReleaseStringUTFChars(name,nameStr);
-}
-
-
 JNI_METHOD(void ,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong ApplicationSystemClassId,jint width,jint height)
 {
     ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);

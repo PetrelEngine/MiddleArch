@@ -9,7 +9,7 @@
 #include "Context.h"
 #include "Sphere.h"
 #include "GraphPBR.h"
-
+#include "Texture2D.h"
 class PBR_LightingTexture
 {
 public:
@@ -30,4 +30,10 @@ protected:
     GLProgram*                  GLProgram_;
     PRBGraph                    PRBGraph_;
     int                         count = 0;
+
+    Texture2D*  albedo_;
+    Texture2D*  ao_;
+    Texture2D*  metallic_;
+    Texture2D*  normal_;
+    Texture2D*  roughness_;
 };

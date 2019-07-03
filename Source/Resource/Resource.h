@@ -11,7 +11,7 @@ public:
 
     virtual ~Resource();
 
-    bool loadFile(const string filePath);
+//    bool loadFile(const string filePath);
 
 private:
     string name_;

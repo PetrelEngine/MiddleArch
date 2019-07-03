@@ -16,14 +16,6 @@ Context::~Context()
         delete iter->second;
     }
     subsystem_.clear();
-
-
-//    SN_HashMap<string,int>::iterator titer = textureList_.begin();
-//    for(;titer != textureList_.end();titer++)
-//    {
-//        glDeleteTextures(1,&(titer->second));
-//    }
-    textureList_.clear();
 }
 
 void Context::registerSubsystem(Object* subsystem)
@@ -31,22 +23,6 @@ void Context::registerSubsystem(Object* subsystem)
     if(!subsystem)
         return;
     subsystem_[subsystem->getType()] = subsystem;
-}
-
-void Context::setTextureId(string nameType, int textureId)
-{
-    if(nameType.size() == 0)
-        return;
-    textureList_[nameType] = textureId;
-}
-
-int Context::getTextureId(string name)
-{
-    SN_HashMap<string ,int >::const_iterator i = textureList_.find(name);
-    if(i!=textureList_.end())
-        return i->second;
-    else
-        return -1;
 }
 
 Object* Context::getSubsystem(string type) const

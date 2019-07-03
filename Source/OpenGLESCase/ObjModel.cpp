@@ -4,33 +4,37 @@
 
 #include "ObjModel.h"
 #include "ShaderStr.h"
-
-ObjModel::ObjModel()
+#include "Image.h"
+ObjModel::ObjModel():
+        texture2D_(NULL),
+        GLProgram__(nullptr),
+        loadObj_(nullptr)
 {
 
 }
 
 ObjModel::~ObjModel()
 {
-    if(File_)
-    {
-        delete File_;
-        File_ = NULL;
-    }
-
     if(GLProgram__)
     {
         delete GLProgram__;
         GLProgram__ = NULL;
+    }
+    if(texture2D_)
+    {
+        delete texture2D_;
+        texture2D_ = nullptr;
+    }
+    if(loadObj_)
+    {
+        delete loadObj_;
+        loadObj_ = nullptr;
     }
 }
 
 void ObjModel::CreateObj(Context *context, int width, int height)
 {
     Context_ = context;
-//    File_ = new File(Context_);
-//    std::string vertexShaderSource = File_->getStringFromFileAssets("deferredVertex.glsl");
-//    std::string fragShaderSource = File_->getStringFromFileAssets("deferredFragment.glsl");
     GLProgram__  = new GLProgram();
     GLProgram__->initWithVertexShaderString(ShaderStr::deferrVertex,ShaderStr::deferrfragment);//ShaderStr::deferrVertex,ShaderStr::deferrfragment   vertexShaderSource,fragShaderSource
     GLProgram__->addAttribute("position");
@@ -68,10 +72,11 @@ void ObjModel::CreateObj(Context *context, int width, int height)
     ObjGraph_.ProjectMatrix_ = glm::frustumRH(-1,1,-1,1,1,1000);
 
     ObjGraph_.MVPMatrix_ = ObjGraph_.ProjectMatrix_*ObjGraph_.CameraMatrix_* ObjGraph_.ModelMatrix_;
-    textureId_ = context->getTextureId("fish");
 
-    LOGE("fish textureid:%d",textureId_);
-    LOGE("GLProgram__->getProgramId():%d",GLProgram__->getProgramId());
+    texture2D_ = new Texture2D(context);
+    Image* image = new Image(context);
+    image->loadImage("/sdcard/SkySnowResources/CoreData/Textures/fish.png");
+    texture2D_->setData(image);
 }
 
 void ObjModel::move()
@@ -92,7 +97,7 @@ void ObjModel::drawObj(Context *context)
     glUseProgram(GLProgram__->getProgramId());
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureId_);
+    glBindTexture(GL_TEXTURE_2D, texture2D_->getGPUObjectName());
     glUniform1i(ObjGraph_.DefaultTextureHandle,0);
 
     glEnableVertexAttribArray(ObjGraph_.positionHandle);

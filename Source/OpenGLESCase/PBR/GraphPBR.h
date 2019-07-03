@@ -29,11 +29,6 @@ struct PRBGraph
     glm::mat4    cameraMatrix;
     glm::mat4    projectMatrix;
     glm::mat4    mvpMatrix;
-    int          albedoMapId;
-    int          normalMapId;
-    int          metallicMapId;
-    int          roughnessMapId;
-    int          aoMapId;
     glm::vec3    lightPos[4];
     glm::vec3    lightColor[4];
     glm::vec3    eyePos;

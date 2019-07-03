@@ -12,8 +12,8 @@ Resource::~Resource()
 {
 }
 
-bool Resource::loadFile(const string filePath)
-{
-    name_ = filePath;
-    return true;
-}
+//bool Resource::loadFile(const string filePath)
+//{
+//    name_ = filePath;
+//    return true;
+//}

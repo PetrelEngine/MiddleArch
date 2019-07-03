@@ -10,7 +10,7 @@
 #include "File.h"
 #include "Context.h"
 #include "RectData.h"
-
+#include "Texture2D.h"
 struct GraphNormal
 {
     GLuint          positionHandle;
@@ -31,8 +31,8 @@ struct GraphNormal
     glm::mat4       projectMatrix;
     glm::mat4       mvpMatrix;
     glm::vec3       eyePos;
-    int             texture2DId;
-    int             normal2DId;
+//    int             texture2DId;
+//    int             normal2DId;
     float           normalScale = 10.0f;
     glm::vec3       lightPos;
     glm::vec3       lightColor;
@@ -56,4 +56,8 @@ protected:
     GLProgram*                  GLProgram__;
     GraphNormal                 GraphNormal_;
     Rect3D                      Rect3D_;
+
+    Texture2D* texture2DN_;
+    Texture2D* texture2DD_;
+
 };

@@ -7,7 +7,7 @@
 #include "File.h"
 #include "Context.h"
 #include "RectData.h"
-
+#include "Texture2D.h"
 class ProductNoramlTexture
 {
 public:
@@ -29,7 +29,9 @@ protected:
     GLuint                      u_PositionHandle;
     GLuint                      u_TexCoordsHandle;
     GLProgram*                GLProgram__;
-    GLuint                      textureId_ ;
+
     RectScreen*                 RectScreen_;
     float*                      imageSize_;
+
+    Texture2D*  texture2D_;
 };

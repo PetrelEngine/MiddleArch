@@ -4,23 +4,31 @@
 #include "matrix_transform.hpp"
 #include "NormalMap.h"
 #include <glm/ext.hpp>
-NormalMap::NormalMap()
+#include "Image.h"
+NormalMap::NormalMap():
+        texture2DD_(nullptr),
+        texture2DN_(nullptr)
 {
-
 }
 
 NormalMap::~NormalMap()
 {
-    if(File_)
-    {
-        delete File_;
-        File_ = NULL;
-    }
-
     if(GLProgram__)
     {
         delete GLProgram__;
         GLProgram__ = NULL;
+    }
+
+    if(texture2DD_)
+    {
+        delete texture2DD_;
+        texture2DD_ = nullptr;
+    }
+
+    if(texture2DN_)
+    {
+        delete texture2DN_;
+        texture2DN_ = nullptr;
     }
 }
 
@@ -68,11 +76,16 @@ void NormalMap::CreateScence(Context * context, int width, int height)
     //光照颜色
     GraphNormal_.lightColor = glm::vec3(10.25);
 
-    GraphNormal_.texture2DId = Context_->getTextureId("bri_diffuse");
-    GraphNormal_.normal2DId = Context_->getTextureId("bri_normal");
 
-    LOGE("GraphNormal_.texture2DId:%d",GraphNormal_.texture2DId);
-    LOGE("GraphNormal_.normal2DId:%d",GraphNormal_.normal2DId);
+    texture2DD_ = new Texture2D(context);
+    Image* image1 = new Image(context);
+    image1->loadImage("/sdcard/SkySnowResources/CoreData/Textures/bricks2.jpg");
+    texture2DD_->setData(image1);
+
+    texture2DN_ = new Texture2D(context);
+    Image* image2 = new Image(context);
+    image2->loadImage("/sdcard/SkySnowResources/CoreData/Textures/bricks2_normal.jpg");
+    texture2DN_->setData(image2);
 }
 
 void NormalMap::RenderScence()
@@ -83,11 +96,11 @@ void NormalMap::RenderScence()
     glUseProgram(GLProgram__->getProgramId());
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, GraphNormal_.texture2DId);
+    glBindTexture(GL_TEXTURE_2D, texture2DD_->getGPUObjectName());
     glUniform1i(GraphNormal_.colorMapHandle,0);
 
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, GraphNormal_.normal2DId);
+    glBindTexture(GL_TEXTURE_2D,texture2DN_->getGPUObjectName());
     glUniform1i(GraphNormal_.normalMapHandle,1);
 
     glEnableVertexAttribArray(GraphNormal_.positionHandle);

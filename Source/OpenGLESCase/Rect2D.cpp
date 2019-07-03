@@ -5,19 +5,15 @@
 #include "Rect2D.h"
 #include "ShaderStr.h"
 
-Rect2D::Rect2D()
+Rect2D::Rect2D():
+        GLProgram__(nullptr),
+        RectHandle(nullptr)
 {
 
 }
 
 Rect2D::~Rect2D()
 {
-    if(File_)
-    {
-        delete File_;
-        File_ = NULL;
-    }
-
     if(GLProgram__)
     {
         delete GLProgram__;
@@ -36,9 +32,6 @@ void Rect2D::CreateRect2D(Context *context,int width,int height)
     Context_ = context;
     //显示GBuffer数据的矩形数据。
     RectHandle = new Rect();
-//    File_ = new File(Context_);
-//    string vertexShaderSource = File_->getStringFromFileAssets("uiVertex.glsl");
-//    string fragShaderSource = File_->getStringFromFileAssets("uiFragment.glsl");
 
     GLProgram__ = new GLProgram();
     GLProgram__->initWithVertexShaderString(ShaderStr::uiVertex,ShaderStr::uifragment);//ShaderStr::uiVertex,ShaderStr::uifragment  vertexShaderSource,fragShaderSource

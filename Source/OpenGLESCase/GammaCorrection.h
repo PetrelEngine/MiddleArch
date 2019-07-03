@@ -10,7 +10,7 @@
 #include "type_mat.hpp"
 #include "Context.h"
 #include "RectData.h"
-
+#include "Texture2D.h"
 struct GraphGamma
 {
     GLuint       positionsHandle;//位置数据
@@ -55,4 +55,6 @@ protected:
     Rect3D*                     Rect3D_;
     GLProgram*                  GLProgram__;
     GraphGamma                  GraphGamma_;
+
+    Texture2D*  texture2D_;
 };

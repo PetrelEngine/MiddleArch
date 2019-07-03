@@ -4,20 +4,17 @@
 #include <glm/ext.hpp>
 #include <OpenGLESCase/GLProgram.hpp>
 #include "GammaCorrection.h"
-
-GammaCorrection::GammaCorrection()
+#include "Image.h"
+GammaCorrection::GammaCorrection():
+        GLProgram__(nullptr),
+        Rect3D_(nullptr),
+        texture2D_(nullptr)
 {
 
 }
 
 GammaCorrection::~GammaCorrection()
 {
-    if(File_)
-    {
-        delete File_;
-        File_ = NULL;
-    }
-
     if(GLProgram__)
     {
         delete GLProgram__;
@@ -28,6 +25,12 @@ GammaCorrection::~GammaCorrection()
     {
         delete Rect3D_;
         Rect3D_ = NULL;
+    }
+
+    if(texture2D_)
+    {
+        delete texture2D_;
+        texture2D_ = nullptr;
     }
 }
 
@@ -84,7 +87,10 @@ void GammaCorrection::CreateScence(Context *context, int width, int height)
     GraphGamma_.isGamma = true;
 
     //纹理Id
-    GraphGamma_.texture2DId = Context_->getTextureId("gamma");
+    texture2D_ = new Texture2D(context);
+    Image* image = new Image(context);
+    image->loadImage("/sdcard/SkySnowResources/CoreData/Textures/wood.png");
+    texture2D_->setData(image);
     //创建顶点、法线、纹理坐标等数据
     Rect3D_ = new Rect3D();
 }
@@ -102,7 +108,7 @@ void GammaCorrection::RenderFrame()
     glUseProgram(GLProgram__->getProgramId());
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, GraphGamma_.texture2DId);
+    glBindTexture(GL_TEXTURE_2D, texture2D_->getGPUObjectName());
     glUniform1i(GraphGamma_.textureHandle,0);
 
     glEnableVertexAttribArray(GraphGamma_.positionsHandle);

@@ -3,15 +3,41 @@
 //
 #include "ext.hpp"
 #include "ParallaxMapping.h"
-
-ParallaxMapping::ParallaxMapping()
+#include "Image.h"
+ParallaxMapping::ParallaxMapping():
+        GLProgram__(nullptr),
+        texture2DD_(nullptr),
+        texture2DN_(nullptr),
+        texture2DDsp_(nullptr)
 {
 
 }
 
 ParallaxMapping::~ParallaxMapping()
 {
+    if(GLProgram__)
+    {
+        delete GLProgram__;
+        GLProgram__ = nullptr;
+    }
 
+    if(texture2DD_)
+    {
+        delete  texture2DD_;
+        texture2DD_ = nullptr;
+    }
+
+    if(texture2DN_)
+    {
+        delete texture2DN_;
+        texture2DN_ = nullptr;
+    }
+
+    if(texture2DDsp_)
+    {
+        delete texture2DDsp_;
+        texture2DDsp_ = nullptr;
+    }
 }
 
 void ParallaxMapping::CreateScence(Context *context, int width, int height)
@@ -43,9 +69,21 @@ void ParallaxMapping::CreateScence(Context *context, int width, int height)
     GraphParallax_.MVPMatrixHandle = GLProgram__->getUniformIndex("mvpMatrix");
     GraphParallax_.heightScaleHandle = GLProgram__->getUniformIndex("heightScale");
 
-    GraphParallax_.diffuseMapTextureId = Context_->getTextureId("bri_diffuse");
-    GraphParallax_.depthMapTextureId = Context_->getTextureId("bri_disp");
-    GraphParallax_.normalMapTextureId = Context_->getTextureId("bri_normal");
+    texture2DD_ = new Texture2D(context);
+    Image* image1 = new Image(context);
+    image1->loadImage("/sdcard/SkySnowResources/CoreData/Textures/bricks2.jpg");
+    texture2DD_->setData(image1);
+
+    texture2DN_ = new Texture2D(context);
+    Image* image2 = new Image(context);
+    image1->loadImage("/sdcard/SkySnowResources/CoreData/Textures/bricks2_normal.jpg");
+    texture2DN_->setData(image2);
+
+    texture2DDsp_ = new Texture2D(context);
+    Image* image3 = new Image(context);
+    image1->loadImage("/sdcard/SkySnowResources/CoreData/Textures/bricks2_disp.jpg");
+    texture2DDsp_->setData(image3);
+
 
     GraphParallax_.MVPMatrix_ = glm::mat4(1.0);
     GraphParallax_.modelMatrix_ = glm::mat4(1.0);
@@ -182,15 +220,15 @@ void ParallaxMapping::RenderParallaxMapping()
     glUseProgram(GLProgram__->getProgramId());
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, GraphParallax_.diffuseMapTextureId);
+    glBindTexture(GL_TEXTURE_2D, texture2DD_->getGPUObjectName());
     glUniform1i(GraphParallax_.diffuseMapHandle,0);
 
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, GraphParallax_.depthMapTextureId);
+    glBindTexture(GL_TEXTURE_2D, texture2DN_->getGPUObjectName());
     glUniform1i(GraphParallax_.depthMapHandle,1);
 
     glActiveTexture(GL_TEXTURE2);
-    glBindTexture(GL_TEXTURE_2D, GraphParallax_.normalMapTextureId);
+    glBindTexture(GL_TEXTURE_2D, texture2DDsp_->getGPUObjectName());
     glUniform1i(GraphParallax_.normalMapHandle,2);
 
     glEnableVertexAttribArray(GraphParallax_.positionHandle);

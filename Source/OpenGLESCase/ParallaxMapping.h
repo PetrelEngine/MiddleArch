@@ -3,6 +3,7 @@
 //
 #pragma once
 
+#include "Texture2D.h"
 #include "GLProgram.hpp"
 #include "type_mat4x4.hpp"
 #include "type_mat.hpp"
@@ -24,10 +25,6 @@ struct GraphParallax
     GLuint      MVPMatrixHandle;
     GLuint      lightPosHandle;
     GLuint      eyePosHandle;
-
-    int         diffuseMapTextureId;
-    int         normalMapTextureId;
-    int         depthMapTextureId;
 
     float       heightScale = 0.2f;
 
@@ -56,4 +53,9 @@ protected:
     Rect3D*                     Rect3D_;
     GLProgram*                GLProgram__;
     GraphParallax               GraphParallax_;
+
+    Texture2D* texture2DN_;
+    Texture2D* texture2DD_;
+    Texture2D* texture2DDsp_;
+
 };

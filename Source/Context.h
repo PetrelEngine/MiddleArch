@@ -18,10 +18,6 @@ public:
     }
     ~Context();
 
-    void setTextureId(string nameType, int textureId) ;
-
-    int getTextureId(string name) ;
-
     void registerSubsystem(Object* subsystem);
 
     Object* getSubsystem(string type) const;
@@ -46,7 +42,6 @@ public:
 #endif
 protected:
     SN_HashMap<string ,Object*> subsystem_;
-    SN_HashMap<string,int>      textureList_;
 #if PLATFORM == PLATFORM_ANDROID
     AAssetManager* mgr_;
 #endif

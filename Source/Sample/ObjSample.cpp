@@ -6,13 +6,15 @@
 #include "ObjSample.h"
 #include "File.h"
 #include <math.h>
+#include "Image.h"
 ObjSample::ObjSample():
     Context_(NULL),
     PositionHandle_(0),
     TexcoordHandle_(0),
     MVPMatrixHandle_(0),
     glProgram(NULL),
-    loadObj_(NULL)
+    loadObj_(NULL),
+    texture2D_(nullptr)
 {
 
 }
@@ -29,6 +31,11 @@ ObjSample::~ObjSample()
     {
         delete loadObj_;
         loadObj_ = NULL;
+    }
+    if(texture2D_)
+    {
+        delete texture2D_;
+        texture2D_ = nullptr;
     }
 }
 
@@ -74,7 +81,10 @@ void ObjSample::CreateScence(Context *context, int width, int height)
     ProjectMatrix_ = glm::frustumRH(-1,1,-1,1,1,1000);
 
     MVPMatrix_ = ProjectMatrix_*CameraMatrix_* ModelMatrix_;
-    textureId_ = context->getTextureId("fish");
+    texture2D_ = new Texture2D(context);
+    Image* image = new Image(context);
+    image->loadImage("/sdcard/SkySnowResources/CoreData/Textures/fish.png");
+    texture2D_->setData(image);
 }
 
 void ObjSample::Move()
@@ -97,7 +107,7 @@ void ObjSample::RenderOneFrame(Context *context)
     glProgram->use();
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureId_);
+    glBindTexture(GL_TEXTURE_2D, texture2D_->getGPUObjectName());
     glUniform1i(TextureHandle_,0);
 
 

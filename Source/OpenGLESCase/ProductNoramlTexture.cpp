@@ -2,15 +2,28 @@
 // Created by liuqian8 on 2019/5/13.
 //
 #include "ProductNoramlTexture.h"
-
-ProductNoramlTexture::ProductNoramlTexture()
+#include "Image.h"
+ProductNoramlTexture::ProductNoramlTexture():
+        GLProgram__(nullptr),
+        texture2D_(nullptr),
+        RectScreen_(nullptr)
 {
 
 }
 
 ProductNoramlTexture::~ProductNoramlTexture()
 {
+    if(GLProgram__)
+    {
+        delete GLProgram__;
+        GLProgram__ = nullptr;
+    }
 
+    if(texture2D_)
+    {
+        delete texture2D_;
+        texture2D_ = nullptr;
+    }
 }
 
 void ProductNoramlTexture::CreateScence(Context *context, int width, int height)
@@ -29,7 +42,12 @@ void ProductNoramlTexture::CreateScence(Context *context, int width, int height)
     u_TexCoordsHandle = GLProgram__->getAttributeIndex("texCoord");
     u_ImageHandle = GLProgram__->getUniformIndex("colorMap");
     u_ImageSizeHandle = GLProgram__->getUniformIndex("imageSize");
-    textureId_ = context->getTextureId("fish");
+
+    texture2D_ = new Texture2D(context);
+    Image* image = new Image(context);
+    image->loadImage("/sdcard/SkySnowResources/CoreData/Textures/fish.png");
+    texture2D_->setData(image);
+
     RectScreen_ = new RectScreen();
     imageSize_ = new float[2];
     imageSize_[0] = 128.0f;
@@ -44,7 +62,7 @@ void ProductNoramlTexture::Renderer()
     glUseProgram(GLProgram__->getProgramId());
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureId_);
+    glBindTexture(GL_TEXTURE_2D, texture2D_->getGPUObjectName());
     glUniform1i(u_ImageHandle,0);
 
     glEnableVertexAttribArray(u_PositionHandle);

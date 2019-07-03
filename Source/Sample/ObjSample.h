@@ -3,6 +3,7 @@
 //
 #pragma once
 
+#include "Texture2D.h"
 #include "GLProgram.hpp"
 #include "LoadObj.h"
 #include "Application.h"
@@ -25,7 +26,6 @@ private:
     Context*                    Context_;
     GLProgram*                glProgram;
     LoadObj*                    loadObj_;
-    int                         textureId_;
 
     GLuint                      PositionHandle_;
     GLuint                      MVPMatrixHandle_;
@@ -40,4 +40,5 @@ private:
     glm::mat4                   MVPMatrix_;
 
     int count = 0;
+    Texture2D*  texture2D_;
 };

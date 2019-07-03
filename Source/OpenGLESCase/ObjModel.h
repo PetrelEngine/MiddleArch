@@ -11,7 +11,7 @@
 #include "Context.h"
 #include "type_mat.hpp"
 #include "type_mat4x4.hpp"
-
+#include "Texture2D.h"
 struct ObjGraph
 {
     GLuint positionHandle;
@@ -43,7 +43,9 @@ protected:
     File*                       File_;
     GLProgram*                  GLProgram__;
     LoadObj*                    loadObj_;
-    int                         textureId_;
+//    int                         textureId_;
     ObjGraph                    ObjGraph_;
     int count = 0;
+
+    Texture2D*  texture2D_;
 };
