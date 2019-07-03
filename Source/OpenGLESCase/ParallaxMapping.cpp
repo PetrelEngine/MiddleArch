@@ -76,12 +76,12 @@ void ParallaxMapping::CreateScence(Context *context, int width, int height)
 
     texture2DN_ = new Texture2D(context);
     Image* image2 = new Image(context);
-    image1->loadImage("/sdcard/SkySnowResources/CoreData/Textures/bricks2_normal.jpg");
+    image2->loadImage("/sdcard/SkySnowResources/CoreData/Textures/bricks2_normal.jpg");
     texture2DN_->setData(image2);
 
     texture2DDsp_ = new Texture2D(context);
     Image* image3 = new Image(context);
-    image1->loadImage("/sdcard/SkySnowResources/CoreData/Textures/bricks2_disp.jpg");
+    image3->loadImage("/sdcard/SkySnowResources/CoreData/Textures/bricks2_disp.jpg");
     texture2DDsp_->setData(image3);
 
 
