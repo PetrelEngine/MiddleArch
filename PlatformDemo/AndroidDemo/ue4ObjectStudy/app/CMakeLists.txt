@@ -26,6 +26,7 @@ file(GLOB srcSource "${Source_Common_Dir}/CoreObject/*.cpp"
                     "${Source_Common_Dir}/OpenGLESCase/PBR/*.cpp"
                     "${Source_Common_Dir}/OpenGLESCase/ShadowMap/*.cpp"
                     "${Source_Common_Dir}/OpenGLESCase/MTRender/*.cpp"
+                    "${Source_Common_Dir}/OpenGLESCase/ImageAlgoritm/*.cpp"
                     "${Source_TP_Dir}/stbImage/*.cpp"
                     "${Source_TP_Dir}/glm/detail/*.cpp"
                     "${Source_Android_Dir}/Android/*.cpp"
@@ -51,6 +52,7 @@ target_include_directories( StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Co
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/OpenGLESCase/PBR/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/OpenGLESCase/ShadowMap/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/OpenGLESCase/MTRender/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/OpenGLESCase/ImageAlgoritm/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_TP_Dir}/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_TP_Dir}/glm>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_TP_Dir}/glm/gtc/>

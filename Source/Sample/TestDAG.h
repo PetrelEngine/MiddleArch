@@ -1,43 +1,23 @@
 //
 // Created by liuqian8 on 2019/2/21.
 //
-
 #pragma once
-
+#include "Application.h"
 #include "RenderingCompositionGraph.h"
 #include "PassPostProcessAA.h"
 
-class TestDAG
+class TestDAG: public Application
 {
 public:
     TestDAG();
     virtual ~TestDAG();
 
-    void DAGTest()
-    {
-        RenderingCompositeOutputRef PostProcessDownsample;
-        PassPostProcessAA* nodes = new PassPostProcessAA();
-        renderProcessContext_ = new RenderingCompositePassContext();
+    virtual void Move();
 
-        PassDag_->RegisterPass(nodes);
+    virtual void CreateScence(Context* context,int width,int height);
 
-        PostProcessDownsample = RenderingCompositeOutputRef(nodes);
-        nodes->SetInput(ePId_Input0,PostProcessDownsample);
-//        renderProcessContext_ = new RenderingCompositePassContext();
+    virtual void RenderOneFrame(Context* context);
 
-        renderProcessContext_->Process(nodes);
-
-
-    }
-
-    int Sum_Solution(int n)
-    {
-        int result = 0;
-        int temp = 0;
-        bool flag = (n>0) && temp == (result = Sum_Solution(n - 1));
-        result += n;
-        return result;
-    }
 
 private:
     RenderingCompositionGraph*  PassDag_;

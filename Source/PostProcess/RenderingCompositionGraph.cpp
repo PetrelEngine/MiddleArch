@@ -30,7 +30,7 @@ void RenderingCompositionGraph::RecursivelyGatherDependencies(RenderingComposite
     {
         LOGI("RecursivelyGatherDependencies contains iterate.");
         RenderingCompositeOutput* InputOutput = OutputRefIt->GetOutput();
-        LOGI("InputOutput is NULL.: %p",InputOutput);
+        LOGI("InputOutput is.: %p",InputOutput);
         if(InputOutput)
         {
             LOGI("RecursivelyGatherDependencies add dependency.");
@@ -57,7 +57,7 @@ void RenderingCompositionGraph::RecursivelyProcess(const RenderingCompositeOutpu
     }
 
     Pass->bProcessWasCalled = true;
-
+    // iterate through all inputs and additional dependencies of this pass
     int Index = 0;
     while(const RenderingCompositeOutputRef* OutputRefIt = Pass->GetDependency(Index++))
     {
@@ -77,7 +77,7 @@ void RenderingCompositionGraph::RecursivelyProcess(const RenderingCompositeOutpu
     }
 
     Context.Pass = Pass;
-
+//    Context.SetViewportInvalid();
     // then process the pass itself
     Pass->Process(Context);
 
@@ -109,19 +109,42 @@ RenderingCompositePassContext::~RenderingCompositePassContext()
 
 }
 
-void RenderingCompositePassContext::Process(const vector<RenderingCompositePass *> &TargetRoots)
+void RenderingCompositePassContext::Process(const vector<RenderingCompositePass *> &TargetedRoots)
 {
     bWasProcessed = true;
-    if(TargetRoots.size() == 0)
+    if(TargetedRoots.size() == 0)
     {
         return;
     }
     LOGI("Process..");
-    for(RenderingCompositePass* Root:TargetRoots)
+    for(RenderingCompositePass* Root:TargetedRoots)
     {
         LOGI("Process for iterate.");
         Graph.RecursivelyGatherDependencies(Root);
     }
+    LOGI("Graph.Nodes Size() 0:%d",Graph.size());
+    bool bNewOrder = true;
+
+    if(bNewOrder)
+    {
+        LOGI("RenderingCompositePass iterate start。");
+        LOGI("Graph.Nodes Size():%d",Graph.Nodes.size());
+        for(RenderingCompositePass* Node : Graph.Nodes)
+        {
+            LOGI("bNewOrder is true,递归处理所有的输出操作。");
+            if(Node->WasComputeOutputDescCalled())
+            {
+                LOGI("开始收集输出依赖项。");
+                Graph.RecursivelyProcess(Node, *this);
+            }
+        }
+    } else{
+        for (RenderingCompositePass* Root : TargetedRoots)
+        {
+            Graph.RecursivelyProcess(Root, *this);
+        }
+    }
+
 }
 
 unsigned RenderingCompositePass::ComputeInputCount()

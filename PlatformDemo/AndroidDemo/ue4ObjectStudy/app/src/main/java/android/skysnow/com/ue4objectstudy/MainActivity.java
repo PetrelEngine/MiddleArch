@@ -18,10 +18,12 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
         copyAssetsDir2Phone(mAssetsPath);
-        mGLView = new GLView(this);
-        setContentView(mGLView);
+//        mGLView = new GLView(this);
+//        setContentView(mGLView);
+        mGLView = (GLView) findViewById(R.id.gl_view);
+//        setContentView(mGLView);
     }
 
 
@@ -61,7 +63,7 @@ public class MainActivity extends Activity {
                 InputStream inputStream = getAssets().open(filePath);
                 //getFilesDir() 获得当前APP的安装路径 /data/data/包名/files 目录
                 File file = new File(Environment.getExternalStorageDirectory() + File.separator + filePath);
-                Log.i("SkySnow:", "file:" + file);
+//                Log.i("SkySnow:", "file:" + file);
                 if (!file.exists() || file.length() == 0) { // 文件不存在
                     File parent = file.getParentFile();
                     if (parent != null && !file.exists()) {
@@ -76,9 +78,9 @@ public class MainActivity extends Activity {
                     fos.flush();
                     inputStream.close();
                     fos.close();
-                    showToast("文件夹数据复制完毕");
+//                    showToast("文件夹数据复制完毕");
                 } else {
-                    showToast("文件夹数据已存在，无需复制");
+//                    showToast("文件夹数据已存在，无需复制");
                 }
             }
         } catch (IOException e) {

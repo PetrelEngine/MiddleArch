@@ -31,6 +31,11 @@ public:
         return InPass;
     }
 
+    int size()
+    {
+        LOGI("nodes size  eenene:%d",Nodes.size());
+        return Nodes.size();
+    }
     friend struct RenderingCompositePassContext;
 private:
     std::vector<RenderingCompositePass*> Nodes;
@@ -118,6 +123,8 @@ struct RenderingCompositePass
     /** Convenience method as this could have been done with GetOutput() alone, performance: O(n) */
     unsigned ComputeOutputCount();
 
+    bool WasComputeOutputDescCalled() const { return bComputeOutputDescWasCalled; }
+
 protected:
     //to avoid wasteful recomputation and to support graph/DAG traversal, if ComputeOutputDesc() was called
     bool bComputeOutputDescWasCalled;
@@ -171,9 +178,9 @@ struct RenderingCompositeOutput
 
     void AddDependency()
     {
-        LOGI("DAG 0: %d:",Dependencies);
+        LOGI("DAG add start: %d:",Dependencies);
         ++Dependencies;
-        LOGI("DAG 1: %d:",Dependencies);
+        LOGI("DAG add end: %d:",Dependencies);
     }
 
     unsigned GetDependencyCount() const

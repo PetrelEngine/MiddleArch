@@ -18,6 +18,7 @@
 #include "ProductNormalMapSample.h"
 #include "ShadowMapingDepthSample.h"
 #include "FresnelReflectionSample.h"
+#include "BilateralFilterSample.h"
 using namespace std;
 
 #define JNI_METHOD(return_type, method_name) \
@@ -26,22 +27,6 @@ using namespace std;
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-
-static TestDAG* dag_;
-JNI_METHOD(jstring,stringFromJNI)(JNIEnv *env,jobject jobject1)
-{
-    std::string hello = "CoreObject";
-    if(dag_ == NULL)
-    {
-        dag_ = new TestDAG();
-    }
-    dag_->DAGTest();
-
-    int result = dag_->Sum_Solution(10);
-    hello += "::"+std::to_string(result);
-    return env->NewStringUTF(hello.c_str());
-}
 
 JNI_METHOD(jlong ,initialEngine)(JNIEnv *env,jobject jobject1,jobject assetManager,jint width,jint height)
 {
@@ -59,8 +44,14 @@ JNI_METHOD(void ,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong Applicati
 {
     ApplicationSystem* applicationSystem_ = (ApplicationSystem*)(ApplicationSystemClassId);
 
-    PBRLightTextureSample* pbrLightTextureSample = new PBRLightTextureSample();
-    applicationSystem_->RegisteredApplication(pbrLightTextureSample);
+//    PBRLightTextureSample* pbrLightTextureSample = new PBRLightTextureSample();
+//    applicationSystem_->RegisteredApplication(pbrLightTextureSample);
+
+//    BilateralFilterSample* bilateralFilterSample = new BilateralFilterSample();
+//    applicationSystem_->RegisteredApplication(bilateralFilterSample);
+
+    TestDAG* testDAG = new TestDAG();
+    applicationSystem_->RegisteredApplication(testDAG);
 
     applicationSystem_->CreateScence(width,height);
 }

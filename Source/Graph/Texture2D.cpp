@@ -56,7 +56,7 @@ bool Texture2D::setData(unsigned level, int x, int y, int width, int height, con
         return false;
     }
 
-    glTexImage2D(target_, level, format_, width, height, 0, getExternalFormat(format_),getDataType(format_), data);
+    glTexImage2D(target_,level, format_, width, height, 0, getExternalFormat(format_),getDataType(format_), data);
     return true;
 }
 

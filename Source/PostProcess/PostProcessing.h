@@ -5,6 +5,7 @@
 #include "RenderingCompositionGraph.h"
 
 //后期渲染控制模块
+//the context used to setup a post-process pass
 class PostprocessContext
 {
 public:
@@ -13,4 +14,11 @@ public:
     RenderingCompositionGraph& Graph;
     RenderingCompositePass* SceneDepth;
     RenderingCompositeOutputRef FinalOutput;
+};
+
+
+class PostProcessing
+{
+public:
+
 };

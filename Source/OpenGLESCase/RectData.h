@@ -25,6 +25,18 @@ struct RectScreen
                     0,1,2,
                     0,2,3
             };
+
+    float data[16]=
+            {
+                    1,1, 1,1,
+                    1,-1,1,0,
+                    -1,-1,0,0,
+                    -1,1,0,1
+            };
+    int dataSize = 16 * sizeof(float);
+    int indexSize = 6 * sizeof(int);
+    int indexCount = 6 * sizeof(int);
+    float DataStride = (2 + 2) * sizeof(float);
 };
 
 struct Rect3D
