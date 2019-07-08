@@ -20,6 +20,6 @@ public:
 
 
 private:
-    RenderingCompositionGraph*  PassDag_;
+//    RenderingCompositionGraph*  PassDag_;
     RenderingCompositePassContext* renderProcessContext_;
 };

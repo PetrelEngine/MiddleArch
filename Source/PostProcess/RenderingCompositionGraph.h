@@ -30,12 +30,6 @@ public:
         LOGI("nodes length:%d",Nodes.size());
         return InPass;
     }
-
-    int size()
-    {
-        LOGI("nodes size  eenene:%d",Nodes.size());
-        return Nodes.size();
-    }
     friend struct RenderingCompositePassContext;
 private:
     std::vector<RenderingCompositePass*> Nodes;

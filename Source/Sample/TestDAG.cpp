@@ -4,19 +4,18 @@
 #include "TestDAG.h"
 
 TestDAG::TestDAG():
-        renderProcessContext_(nullptr),
-        PassDag_(nullptr)
+        renderProcessContext_(nullptr)
 {
 
 }
 
 TestDAG::~TestDAG()
 {
-    if(PassDag_)
-    {
-        delete PassDag_ ;
-        PassDag_ = nullptr;
-    }
+//    if(PassDag_)
+//    {
+//        delete PassDag_ ;
+//        PassDag_ = nullptr;
+//    }
 
     if(renderProcessContext_)
     {
@@ -27,13 +26,14 @@ TestDAG::~TestDAG()
 
 void TestDAG::CreateScence(Context *context, int width, int height)
 {
-    PassDag_ = new RenderingCompositionGraph();
+//    PassDag_ = new RenderingCompositionGraph();
 
     RenderingCompositeOutputRef PostProcessDownsample;
     PassPostProcessAA* nodes = new PassPostProcessAA();
     renderProcessContext_ = new RenderingCompositePassContext();
 
-    PassDag_->RegisterPass(nodes);
+    renderProcessContext_->Graph.RegisterPass(nodes);
+//    PassDag_->RegisterPass(nodes);
 
     PostProcessDownsample = RenderingCompositeOutputRef(nodes);
     nodes->SetInput(ePId_Input0,PostProcessDownsample);

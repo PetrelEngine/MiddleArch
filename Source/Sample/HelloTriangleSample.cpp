@@ -14,21 +14,40 @@
 #include "Geometry.h"
 #include "Texture2D.h"
 #include "Image.h"
-HelloTriangleSample::HelloTriangleSample()
+HelloTriangleSample::HelloTriangleSample():
+        view_(nullptr),
+        camera_(nullptr),
+        texture2D_(nullptr)
 {
 
 }
 
 HelloTriangleSample::~HelloTriangleSample()
 {
+    if(view_)
+    {
+        delete view_;
+        view_ = nullptr;
+    }
 
+    if(camera_)
+    {
+        delete camera_;
+        camera_ = nullptr;
+    }
+
+    if(texture2D_)
+    {
+        delete texture2D_;
+        texture2D_ = nullptr;
+    }
 }
 
 void HelloTriangleSample::CreateScence(Context *context, int width, int height)
 {
     Context_ = context;
     Shader* shader_ = new Shader(context);
-    shader_->load("BaseVertex.glsl","BaseFragment.glsl");
+    shader_->loadAssets("BaseVertex.glsl","BaseFragment.glsl");
     ShaderVariation* vertexShader_ = new ShaderVariation(shader_,VS);
     ShaderVariation* fragmentShader_ = new ShaderVariation(shader_,PS);
 

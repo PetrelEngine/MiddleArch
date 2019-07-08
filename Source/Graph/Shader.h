@@ -6,6 +6,7 @@
 #include "Context.h"
 #include "DataStruct.h"
 #define DEFAULTSHADER "/sdcard/SkySnowResources/CoreData/Shaders/"
+#define DEFAULTASSETSSHADER "SkySnowResources/CoreData/Shaders/"
 class ShaderVariation;
 class Shader:public Resource
 {
@@ -16,6 +17,8 @@ public:
     ~Shader();
 
     bool load(string vsName,string fsName);
+
+    bool loadAssets(string vsName,string fsName);
 
     const string& GetSourceCode(ShaderType type) const { return type == VS ? vsSourceCode_ : psSourceCode_; }
 private:

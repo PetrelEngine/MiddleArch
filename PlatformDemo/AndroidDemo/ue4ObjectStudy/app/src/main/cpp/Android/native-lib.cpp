@@ -50,8 +50,11 @@ JNI_METHOD(void ,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong Applicati
 //    BilateralFilterSample* bilateralFilterSample = new BilateralFilterSample();
 //    applicationSystem_->RegisteredApplication(bilateralFilterSample);
 
-    TestDAG* testDAG = new TestDAG();
-    applicationSystem_->RegisteredApplication(testDAG);
+//    TestDAG* testDAG = new TestDAG();
+//    applicationSystem_->RegisteredApplication(testDAG);
+
+    HelloTriangleSample* helloTriangleSample = new HelloTriangleSample();
+    applicationSystem_->RegisteredApplication(helloTriangleSample);
 
     applicationSystem_->CreateScence(width,height);
 }

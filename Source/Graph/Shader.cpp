@@ -35,3 +35,22 @@ bool Shader::load(string vsName,string fsName)
         fsflag = true;
     return vsflag && fsflag;
 }
+
+bool Shader::loadAssets(string vsName, string fsName)
+{
+    string vsPasth = DEFAULTASSETSSHADER + vsName;
+    string fsPasth = DEFAULTASSETSSHADER + fsName;
+    File* file = context_->getSubsystem<File>();
+    bool vsflag,fsflag;
+    vsSourceCode_ = file->getStringFromFileAssets(vsPasth);
+    if(vsSourceCode_.empty())
+        vsflag = false;
+    else
+        vsflag = true;
+    psSourceCode_ = file->getStringFromFileAssets(fsPasth);
+    if(psSourceCode_.empty())
+        fsflag = false;
+    else
+        fsflag = true;
+    return vsflag && fsflag;
+}

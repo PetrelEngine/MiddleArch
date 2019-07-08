@@ -10,6 +10,7 @@ SET(Source_Android_Dir "${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp")
 file(GLOB srcSource "${Source_Common_Dir}/CoreObject/*.cpp"
                     "${Source_Common_Dir}/RenderCore/*.cpp"
                     "${Source_Common_Dir}/ShaderCore/*.cpp"
+                    "${Source_Common_Dir}/Container/*.cpp"
                     "${Source_Common_Dir}/*.cpp"
                     "${Source_Common_Dir}/PostProcess/*.cpp"
                     "${Source_Common_Dir}/SkeletalAnimation/*.cpp"
@@ -36,6 +37,7 @@ add_library(StudyCoreObjec SHARED ${srcSource})
 
 target_include_directories( StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/CoreObject/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Container/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/RenderCore/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/ShaderCore/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Engine/>

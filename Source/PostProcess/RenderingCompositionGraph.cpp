@@ -49,13 +49,14 @@ void RenderingCompositionGraph::RecursivelyGatherDependencies(RenderingComposite
 
 void RenderingCompositionGraph::RecursivelyProcess(const RenderingCompositeOutputRef &InOutputRef,RenderingCompositePassContext &Context) const
 {
+    LOGI("RecursivelyProcess  start");
     RenderingCompositePass *Pass = InOutputRef.GetPass();
     RenderingCompositeOutput *Output = InOutputRef.GetOutput();
     if(Pass->bProcessWasCalled)
     {
         return;
     }
-
+    LOGI("RecursivelyProcess  start iterate.");
     Pass->bProcessWasCalled = true;
     // iterate through all inputs and additional dependencies of this pass
     int Index = 0;
@@ -68,7 +69,7 @@ void RenderingCompositionGraph::RecursivelyProcess(const RenderingCompositeOutpu
                 // Pass doesn't have more inputs
                 break;
             }
-
+            LOGI("RecursivelyProcess  start iterate 内部.");
             RenderingCompositeOutput* Input = OutputRefIt->GetOutput();
 
             Context.Pass = Pass;
@@ -122,7 +123,6 @@ void RenderingCompositePassContext::Process(const vector<RenderingCompositePass 
         LOGI("Process for iterate.");
         Graph.RecursivelyGatherDependencies(Root);
     }
-    LOGI("Graph.Nodes Size() 0:%d",Graph.size());
     bool bNewOrder = true;
 
     if(bNewOrder)
@@ -177,11 +177,9 @@ RenderingCompositePass* RenderingCompositeOutputRef::GetPass() const
 
 RenderingCompositeOutput* RenderingCompositeOutputRef::GetOutput() const
 {
-    LOGI("GetOutput() start.");
     if(Source == NULL)
     {
         return NULL;
     }
-    LOGI("GetOutput() source not null.");
     return Source->GetOutput(PassOutputId);
 }
