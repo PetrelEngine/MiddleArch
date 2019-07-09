@@ -361,7 +361,7 @@ void Graphics::Draw(PrimitiveType type, unsigned indexStart, unsigned indexCount
 
     GetGLPrimitiveType(indexCount, type, primitiveCount, glPrimitiveType);
     GLenum indexType = indexSize == sizeof(unsigned short) ? GL_UNSIGNED_SHORT : GL_UNSIGNED_INT;
-    glDrawElements(glPrimitiveType, indexCount, indexType, reinterpret_cast<const GLvoid*>(indexStart * indexSize));
+    glDrawElements(glPrimitiveType, indexCount, indexType, reinterpret_cast<const GLvoid*>(indexStart * indexSize));//indexCount
 }
 
 void Graphics::PrepareDraw()
@@ -384,10 +384,8 @@ void Graphics::PrepareDraw()
                 {
                     unsigned location = k->second;
                     glEnableVertexAttribArray(location);
-
                     // Enable/disable instancing divisor as necessary
                     unsigned dataStart = element.offset_;
-
                     SetVBO(buffer->getGPUObjectName());
                     glVertexAttribPointer(location,glElementComponents[element.type_],glElementTypes[element.type_],
                                           element.type_ == TYPE_UBYTE4_NORM ? GL_TRUE : GL_FALSE, (unsigned)buffer->GetVertexSize(),

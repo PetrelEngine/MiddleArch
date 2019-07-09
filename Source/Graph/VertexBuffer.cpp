@@ -58,9 +58,8 @@ void VertexBuffer::UpdateOffsets()
     unsigned elementOffset = 0;
     for(int i = 0; i < elements_.size(); i ++)
     {
-        VertexElement vertexElement = elements_[i];
-        vertexElement.offset_ = elementOffset;
-        elementOffset += ELEMENT_TYPESIZE[vertexElement.type_];
+        elements_[i].offset_ = elementOffset;
+        elementOffset += ELEMENT_TYPESIZE[elements_[i].type_];
     }
     vertexSize_ = elementOffset;
 }

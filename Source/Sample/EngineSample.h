@@ -9,11 +9,11 @@
 #include "Application.h"
 #include "Batch.h"
 #include "Texture2D.h"
-class HelloTriangleSample: public Application
+class EngineSample: public Application
 {
 public:
-    HelloTriangleSample();
-    ~HelloTriangleSample();
+    EngineSample();
+    ~EngineSample();
 
     virtual void CreateScence(Context* context,int width,int height);
 

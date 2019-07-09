@@ -5,7 +5,7 @@
 #include <iostream>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
-#include <Sample/HelloTriangleSample.h>
+#include <Sample/EngineSample.h>
 #include <Sample/MTTestSample.h>
 #include "Graphics.h"
 #include "PBRLightTextureSample.h"
@@ -53,7 +53,7 @@ JNI_METHOD(void ,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong Applicati
 //    TestDAG* testDAG = new TestDAG();
 //    applicationSystem_->RegisteredApplication(testDAG);
 
-    HelloTriangleSample* helloTriangleSample = new HelloTriangleSample();
+    EngineSample* helloTriangleSample = new EngineSample();
     applicationSystem_->RegisteredApplication(helloTriangleSample);
 
     applicationSystem_->CreateScence(width,height);
@@ -124,7 +124,7 @@ JNI_METHOD(void,switchApplication)(JNIEnv *env,jobject jobject1,jlong Applicatio
         }break;
         case 7:
         {
-            HelloTriangleSample* helloTriangleSample = new HelloTriangleSample();
+            EngineSample* helloTriangleSample = new EngineSample();
             applicationSystem_->RegisteredApplication(helloTriangleSample);
         }break;
         case 8:

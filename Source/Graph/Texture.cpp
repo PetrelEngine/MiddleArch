@@ -59,8 +59,8 @@ void Texture::updateParameters()
     if(!object_.name_ || !graphics_)
         return;
     //纹理展开方式的设置
-    glTexParameteri(target_,GL_TEXTURE_WRAP_S,gl3WrapModes[addressMode_[COORD_U]]);
-    glTexParameteri(target_,GL_TEXTURE_WRAP_T,gl3WrapModes[addressMode_[COORD_V]]);
+    glTexParameteri(target_,GL_TEXTURE_WRAP_S,gl3WrapModes[addressMode_[COORD_U]]);//gl3WrapModes[addressMode_[COORD_U]]
+    glTexParameteri(target_,GL_TEXTURE_WRAP_T,gl3WrapModes[addressMode_[COORD_V]]);//gl3WrapModes[addressMode_[COORD_V]]
 
     //暂时不开启对于w的展开方式设置
 //    glTexParameteri(target_, GL_TEXTURE_WRAP_R, GetWrapMode(addressMode_[COORD_W]));

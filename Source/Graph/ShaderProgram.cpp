@@ -66,6 +66,7 @@ bool ShaderProgram::Link()
             if(flag != name.npos)
             {
                 semantic = (VertexElementSemantic)j;
+                LOGI("ShaderProgram active attributes name:%s",name.c_str());
                 break;
             }
         }
@@ -80,6 +81,7 @@ bool ShaderProgram::Link()
         glGetActiveUniform(object_.name_,(GLuint)i,MAX_NAME_LENGTH,nullptr, &elementCount, &type, nameBuffer);
         int location = glGetUniformLocation(object_.name_, nameBuffer);
         string name(nameBuffer);
+        LOGI("ShaderProgram uniform name:%s",name.c_str());
         if(name[0] == 'c')//处理uniform变量
         {
             ShaderParameter parameter;
