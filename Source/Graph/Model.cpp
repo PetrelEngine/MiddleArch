@@ -14,10 +14,10 @@ Model::~Model()
 
 }
 
-bool Model::beginLoad(std::string path)
-{
-    return true;
-}
+//bool Model::beginLoad(std::string path)
+//{
+//    return true;
+//}
 
 bool Model::setIndexBuffers(std::vector<IndexBuffer *> &buffers)
 {

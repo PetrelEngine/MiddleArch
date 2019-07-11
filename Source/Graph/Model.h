@@ -12,7 +12,7 @@ public:
 
     virtual ~Model();
 
-    virtual bool beginLoad(std::string path) override ;
+//    virtual bool beginLoad(std::string path) override ;
 
     bool setIndexBuffers(std::vector<IndexBuffer*>& buffers);
 };

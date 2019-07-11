@@ -5,7 +5,7 @@
 #include "Camera.h"
 
 Camera::Camera(Context *context):
-    Object(context),
+    Component(context),
     cameraPos_(0,0,0),
     cameraLookAt_(0,0,1),
     cameraUpvec_(0,1,0),

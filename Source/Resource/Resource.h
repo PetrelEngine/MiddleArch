@@ -11,7 +11,7 @@ public:
 
     virtual ~Resource();
 
-    virtual bool beginLoad(std::string path);
+//    virtual bool beginLoad(std::string path);
 //    bool loadFile(const string filePath);
 
 private:

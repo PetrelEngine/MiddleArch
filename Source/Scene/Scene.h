@@ -12,7 +12,7 @@ public:
 
     virtual ~Scene();
 
-    virtual bool load(std::string source, bool setInstanceDefault = false) override;
+//    virtual bool load(std::string source, bool setInstanceDefault = false) override;
 
 
 };

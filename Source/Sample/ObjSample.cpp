@@ -14,25 +14,25 @@ ObjSample::ObjSample():
     MVPMatrixHandle_(0),
     glProgram(NULL),
     loadObj_(NULL),
-    texture2D_(nullptr)
+    texture2D_(NULL)
 {
 
 }
 
 ObjSample::~ObjSample()
 {
-    if(glProgram)
+    if(glProgram != NULL)
     {
         delete glProgram;
         glProgram = NULL;
     }
 
-    if(loadObj_)
+    if(loadObj_ != NULL)
     {
         delete loadObj_;
         loadObj_ = NULL;
     }
-    if(texture2D_)
+    if(texture2D_ != NULL)
     {
         delete texture2D_;
         texture2D_ = nullptr;

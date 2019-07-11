@@ -14,10 +14,10 @@ Node::~Node()
 
 }
 
-bool Node::load(std::string source, bool setInstanceDefault)
-{
-    return false;
-}
+//bool Node::load(std::string source, bool setInstanceDefault)
+//{
+//    return false;
+//}
 
 Node* Node::createChild(const string &name, CreateMode mode, unsigned int id, bool temporary)
 {

@@ -14,7 +14,7 @@ Scene::~Scene()
 
 }
 
-bool Scene::load(std::string source, bool setInstanceDefault)
-{
-    return true;
-}
+//bool Scene::load(std::string source, bool setInstanceDefault)
+//{
+//    return true;
+//}

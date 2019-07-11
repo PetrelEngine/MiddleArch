@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 #include "Vertex.h"
-#include "Material.h"
 
 struct Mesh
 {
@@ -29,6 +28,6 @@ struct Mesh
     std::vector<unsigned int> Indices;
 
     // Material
-    Material MeshMaterial;
+//    Material MeshMaterial;
 };
 

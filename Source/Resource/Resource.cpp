@@ -12,10 +12,10 @@ Resource::~Resource()
 {
 }
 
-bool Resource::beginLoad(std::string path)
-{
-    return false;
-}
+//bool Resource::beginLoad(std::string path)
+//{
+//    return false;
+//}
 
 
 ResourceWithMetadata::ResourceWithMetadata(Context *context):

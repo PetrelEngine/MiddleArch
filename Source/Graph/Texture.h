@@ -2,7 +2,6 @@
 // Created by liuqian8 on 2019/6/14.
 //
 #pragma once
-
 #include "Resource.h"
 #include "GPUObject.h"
 #include "DataStruct.h"

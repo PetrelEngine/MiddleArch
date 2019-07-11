@@ -6,11 +6,11 @@
 #include "vec3.hpp"
 #include "type_mat4x4.hpp"
 #include "type_mat.hpp"
-#include "Object.h"
+#include "Component.h"
 
-class Camera : public Object
+class Camera : public Component
 {
-    ENGINE_OBJECT(Camera,Object);
+    ENGINE_OBJECT(Camera,Component);
 public:
     Camera(Context* context);
 

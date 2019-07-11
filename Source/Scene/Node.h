@@ -21,7 +21,7 @@ public:
 
     virtual ~Node();
 
-    virtual bool load(std::string source, bool setInstanceDefault = false);
+//    virtual bool load(std::string source, bool setInstanceDefault = false);
 
     Node* createChild(const string& name = "", CreateMode mode = REPLICATED, unsigned id = 0, bool temporary = false);
 
