@@ -11,10 +11,20 @@ public:
 
     virtual ~Resource();
 
+    virtual bool beginLoad(std::string path);
 //    bool loadFile(const string filePath);
 
 private:
     string name_;
 protected:
 //    Image*  image_;
+};
+
+class ResourceWithMetadata:public Resource
+{
+    ENGINE_OBJECT(ResourceWithMetadata,Resource);
+public:
+    ResourceWithMetadata(Context* context);
+
+    virtual ~ResourceWithMetadata();
 };

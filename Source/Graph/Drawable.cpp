@@ -30,3 +30,21 @@ SourceBatch& SourceBatch::operator=(const SourceBatch &rhs)
     wordTransform_ = rhs.wordTransform_;
     return *this;
 }
+
+
+
+Drawable::Drawable(Context *context):
+    Component(context)
+{
+
+}
+
+Drawable::~Drawable()
+{
+
+}
+
+void Drawable::updateBatches(const FrameInfo& frame)
+{
+
+}

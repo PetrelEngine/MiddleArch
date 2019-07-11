@@ -12,8 +12,19 @@ Resource::~Resource()
 {
 }
 
-//bool Resource::loadFile(const string filePath)
-//{
-//    name_ = filePath;
-//    return true;
-//}
+bool Resource::beginLoad(std::string path)
+{
+    return false;
+}
+
+
+ResourceWithMetadata::ResourceWithMetadata(Context *context):
+    Resource(context)
+{
+
+}
+
+ResourceWithMetadata::~ResourceWithMetadata()
+{
+
+}

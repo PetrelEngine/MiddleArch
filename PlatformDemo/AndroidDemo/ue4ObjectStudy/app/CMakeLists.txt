@@ -23,6 +23,7 @@ file(GLOB srcSource "${Source_Common_Dir}/CoreObject/*.cpp"
                     "${Source_Common_Dir}/Sample/*.cpp"
                     "${Source_Common_Dir}/Engine/*.cpp"
                     "${Source_Common_Dir}/Resource/*.cpp"
+                    "${Source_Common_Dir}/Scene/*.cpp"
                     "${Source_Common_Dir}/OpenGLESCase/*.cpp"
                     "${Source_Common_Dir}/OpenGLESCase/PBR/*.cpp"
                     "${Source_Common_Dir}/OpenGLESCase/ShadowMap/*.cpp"
@@ -41,6 +42,7 @@ target_include_directories( StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Co
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/RenderCore/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/ShaderCore/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Engine/>
+                            StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Scene/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Math/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/Mesh/>
                             StudyCoreObjec PRIVATE $<BUILD_INTERFACE:${Source_Common_Dir}/File/>
