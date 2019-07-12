@@ -17,7 +17,7 @@ public:
     Material(Context* context);
     virtual ~Material();
 
-
+    virtual bool beginLoad(Deserializer& source) override;
 
 private:
 

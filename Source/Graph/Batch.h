@@ -16,6 +16,7 @@ class Camera;
 class Texture2D;
 class Material;
 class Pass;
+class Zone;
 //Queued 3D geometry draw call.
 struct Batch
 {
@@ -100,4 +101,25 @@ struct BatchGroup:public Batch
     void Draw(View* view, bool allowDepthWrite) const;
     unsigned startIndex_;
     std::vector<InstanceData> instances_;
+};
+
+struct BatchGroupKey
+{
+    BatchGroupKey()
+    {
+
+    }
+
+
+
+
+    Zone* zone_;
+
+    Pass* pass_;
+
+    Material* material_;
+
+    Geometry* geometry_;
+
+    unsigned char renderOrder_;
 };

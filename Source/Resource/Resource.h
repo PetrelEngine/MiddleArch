@@ -3,6 +3,9 @@
 //
 #pragma once
 #include "Object.h"
+
+class Deserializer;
+
 class Resource:public Object
 {
     ENGINE_OBJECT(Resource,Object);
@@ -11,7 +14,7 @@ public:
 
     virtual ~Resource();
 
-//    virtual bool beginLoad(std::string path);
+    virtual bool beginLoad(Deserializer& source);
 //    bool loadFile(const string filePath);
 
 private:

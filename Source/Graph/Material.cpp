@@ -12,3 +12,10 @@ Material::~Material()
 {
 
 }
+
+bool Material::beginLoad(Deserializer &source)
+{
+
+
+    return true;
+}
