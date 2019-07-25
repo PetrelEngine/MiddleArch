@@ -8,6 +8,9 @@
 #include "type_mat.hpp"
 #include "type_mat4x4.hpp"
 #include "Component.h"
+
+static const unsigned DEFAULT_VIEWMASK = UINT_MAX;
+static const unsigned DRAWABLE_ANY = 0xff;
 class Geometry;
 class Material;
 class Camera;
