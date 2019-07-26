@@ -326,3 +326,33 @@ bool XMLElement::setBuffer(const std::string& name, const std::vector<unsigned c
     else
         return setBuffer(name, &value[0], value.size());
 }
+
+
+
+
+
+
+XPathResultSet::XPathResultSet()
+{
+
+}
+
+XPathResultSet::XPathResultSet(XMLFile *file, pugi::xpath_node_set *resultSet)
+{
+
+}
+
+XPathQuery::XPathQuery()
+{
+
+}
+
+XPathQuery::XPathQuery(const std::string &queryString, const std::string &variableString)
+{
+
+}
+
+XPathQuery::~XPathQuery()
+{
+
+}
