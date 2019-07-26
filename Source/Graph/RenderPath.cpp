@@ -27,19 +27,19 @@ bool RenderPath::append(XMLFile *file)
         return false;
 
     XMLElement rootElem = file->getRoot();
-    if (!rootElem)
-        return false;
-
-    XMLElement rtElem = rootElem.getChild("rendertarget");
-    while (rtElem)
-    {
+//    if (!rootElem)
+//        return false;
+//
+//    XMLElement rtElem = rootElem.getChild("rendertarget");
+//    while (rtElem)
+//    {
         RenderTargetInfo info;
 //        info.load(rtElem);
 //        if (!info.name_.Trimmed().Empty())
 //            renderTargets_.push_back(info);
 //
 //        rtElem = rtElem.getNext("rendertarget");
-    }
+//    }
 //
 //    XMLElement cmdElem = rootElem->getChild("command");
 //    while (cmdElem)

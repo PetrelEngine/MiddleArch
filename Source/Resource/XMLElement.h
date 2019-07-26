@@ -16,6 +16,8 @@ class xpath_node_set;
 class xpath_query;
 class xpath_variable_set;
 class XMLFile;
+class XPathResultSet;
+class XPathQuery;
 class XMLElement
 {
 public:

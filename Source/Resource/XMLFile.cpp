@@ -4,7 +4,7 @@
 #include "XMLFile.h"
 #include "XMLElement.h"
 XMLFile::XMLFile(Context *context):
-    Resource(context)
+        Resource(context)
 {
 }
 
@@ -25,7 +25,7 @@ XMLElement XMLFile::getRoot(const string &name)
     if (root.empty())
         return XMLElement();
 
-    if (!(name == nullptr) && name != root.name())
+    if (!(name == "") && name != root.name())
         return XMLElement();
     else
         return XMLElement(this, root.internal_object());
