@@ -34,9 +34,11 @@ struct Batch
     {
     }
 
-    void Prepare(View* view,Camera* camera);
+    void Prepare(View* view,Camera* camera,bool setModelTransform, bool allowDepthWrite);
 
-    void Draw(View* view,Camera* camera);
+    void Draw(View* view,Camera* camera, bool allowDepthWrite);
+
+    Zone* zone_;
 
     glm::mat4        modelmatrix_;
 
@@ -51,6 +53,8 @@ struct Batch
     void* instancingData_;
 
     Material* material_;
+
+    Pass* pass_;
 
     unsigned numWorldTransforms_;
 };
@@ -98,7 +102,7 @@ struct BatchGroup:public Batch
         newInstance.worldTrancsform_ = batch.modelmatrix_;
     }
 
-    void Draw(View* view, bool allowDepthWrite) const;
+    void Draw(View* view,Camera* camera, bool allowDepthWrite) const;
     unsigned startIndex_;
     std::vector<InstanceData> instances_;
 };
@@ -122,4 +126,13 @@ struct BatchGroupKey
     Geometry* geometry_;
 
     unsigned char renderOrder_;
+};
+
+struct BatchQueue
+{
+public:
+
+    void clear(int maxSortedInstances);
+
+    void draw(View* view, Camera* camera, bool markToStencil, bool usingLightOptimization, bool allowDepthWrite) const;
 };

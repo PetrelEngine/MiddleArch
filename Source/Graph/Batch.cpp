@@ -7,7 +7,7 @@
 #include "Graphics.h"
 #include "View.h"
 #include "Camera.h"
-void Batch::Prepare(View* view,Camera* camera)
+void Batch::Prepare(View* view,Camera* camera,bool setModelTransform, bool allowDepthWrite)
 {
     if(!vertexShader_ || !pixelShader_)
         return;
@@ -20,17 +20,17 @@ void Batch::Prepare(View* view,Camera* camera)
     view->setCameraShaderParameters(camera);
 }
 
-void Batch::Draw(View* view,Camera* camera)
+void Batch::Draw(View* view,Camera* camera,bool allowDepthWrite)
 {
     if(!geometry_->IsEmpty())
     {
-        Prepare(view,camera);
+        Prepare(view,camera,true,allowDepthWrite);
         geometry_->Draw(view->GetGraphics());
     }
 }
 
 
-void BatchGroup::Draw(View *view, bool allowDepthWrite) const
+void BatchGroup::Draw(View *view,Camera* camera, bool allowDepthWrite) const
 {
 
 }

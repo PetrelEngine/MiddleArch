@@ -4,7 +4,7 @@
 #include "ApplicationSystem.h"
 #include "Graphics.h"
 #include "File.h"
-
+#include "ResourceCache.h"
 ApplicationSystem::ApplicationSystem():
     CurrApplication_(NULL),
     context_(NULL)
@@ -34,6 +34,8 @@ void ApplicationSystem::initialEngine(Context* context,int width,int height)
     context_->registerSubsystem(graphics);
     File* file = new File(context_);
     context_->registerSubsystem(file);
+    ResourceCache* resourceCache = new ResourceCache(context_);
+    context_->registerSubsystem(resourceCache);
     height_ = height;
     width_ = width;
 }

@@ -8,6 +8,7 @@
 class xml_document;
 class xml_node;
 class xpath_node;
+class XMLElement;
 class XMLFile: public Resource
 {
     ENGINE_OBJECT(XMLFile,Resource);
@@ -17,6 +18,9 @@ public:
     virtual ~XMLFile();
 
     virtual bool beginLoad(Deserializer& source) override;
+
+
+    XMLElement getRoot(const std::string& name = "");
 
 private:
     pugi::xml_document document_;

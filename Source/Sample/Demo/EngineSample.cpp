@@ -105,7 +105,7 @@ void EngineSample::CreateScence(Context *context, int width, int height)
 
 void EngineSample::RenderOneFrame(Context *context)
 {
-    batch_.Draw(view_,camera_);
+    batch_.Draw(view_,camera_,true);
 }
 
 void EngineSample::Move()

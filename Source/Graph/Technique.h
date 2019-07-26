@@ -36,6 +36,8 @@ public:
 
     CompareMode getDepteTestMode() const {return depthTestMode_;}
 
+    bool getAlphaToCoverage() const { return alphaToCoverage_; }
+
     unsigned getIndex() const {return index_;}
 
     std::string getName() const {return name_;}

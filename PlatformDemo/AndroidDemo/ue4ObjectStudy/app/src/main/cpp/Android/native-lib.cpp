@@ -5,8 +5,8 @@
 #include <iostream>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
-#include <Sample/EngineSample.h>
-#include <Sample/MTTestSample.h>
+#include "EngineSample.h"
+#include "MTTestSample.h"
 #include "Graphics.h"
 #include "PBRLightTextureSample.h"
 #include "NormalMapSample.h"
