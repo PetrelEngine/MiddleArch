@@ -84,23 +84,23 @@ bool XMLElement::notNull() const
     return node_ || (xpathNode_ && !xpathNode_->operator !());
 }
 
-XMLElement XMLElement::getOrCreateChild(const std::string& name)
-{
-    XMLElement child = getChild(name);
-    if (child.notNull())
-        return child;
-    else
-        return createChild(name);
-}
+//XMLElement XMLElement::getOrCreateChild(const std::string& name)
+//{
+//    XMLElement child = getChild(name);
+//    if (child.notNull())
+//        return child;
+//    else
+//        return createChild(name);
+//}
 
-XMLElement XMLElement::getOrCreateChild(const char* name)
-{
-    XMLElement child = getChild(name);
-    if (child.notNull())
-        return child;
-    else
-        return createChild(name);
-}
+//XMLElement XMLElement::getOrCreateChild(const char* name)
+//{
+//    XMLElement child = getChild(name);
+//    if (child.notNull())
+//        return child;
+//    else
+//        return createChild(name);
+//}
 
 bool XMLElement::appendChild(XMLElement element, bool asCopy)
 {
