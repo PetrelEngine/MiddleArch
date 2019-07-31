@@ -14,7 +14,9 @@ public:
 
     virtual ~Resource();
 
-    virtual bool beginLoad(Deserializer& source);
+    virtual bool beginLoad(Deserializer* source);
+
+    bool load(Deserializer* source);
 //    bool loadFile(const string filePath);
 
 private:

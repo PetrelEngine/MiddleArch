@@ -13,7 +13,7 @@ XMLFile::~XMLFile()
 
 }
 
-bool XMLFile::beginLoad(Deserializer &source)
+bool XMLFile::beginLoad(Deserializer* source)
 {
 
     return true;
@@ -21,6 +21,7 @@ bool XMLFile::beginLoad(Deserializer &source)
 
 XMLElement XMLFile::getRoot(const string &name)
 {
+    LOGE("getRoot start.");
     pugi::xml_node root = document_.first_child();
     if (root.empty())
         return XMLElement();

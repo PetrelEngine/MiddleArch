@@ -28,9 +28,13 @@ bool RenderPath::append(XMLFile *file)
 
     XMLElement rootElem = file->getRoot();
 //    if (!rootElem)
+//    {
+//        LOGE("RenderPath 中rootElem栈上内存为空。");
 //        return false;
+//    }
+    LOGE("RenderPath 中rootElem栈上内存不为空。");
 //
-//    XMLElement rtElem = rootElem.getChild("rendertarget");
+    XMLElement rtElem = rootElem.getChild("rendertarget");
 //    while (rtElem)
 //    {
         RenderTargetInfo info;

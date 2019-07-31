@@ -29,6 +29,57 @@ static const unsigned glElementTypes[] =
         GL_UNSIGNED_BYTE,
         GL_UNSIGNED_BYTE
 };
+
+static const unsigned glSrcBlend[] =
+{
+        GL_ONE,
+        GL_ONE,
+        GL_DST_COLOR,
+        GL_SRC_ALPHA,
+        GL_SRC_ALPHA,
+        GL_ONE,
+        GL_ONE_MINUS_DST_ALPHA,
+        GL_ONE,
+        GL_SRC_ALPHA
+};
+
+static const unsigned glDestBlend[] =
+{
+        GL_ZERO,
+        GL_ONE,
+        GL_ZERO,
+        GL_ONE_MINUS_SRC_ALPHA,
+        GL_ONE,
+        GL_ONE_MINUS_SRC_ALPHA,
+        GL_DST_ALPHA,
+        GL_ONE,
+        GL_ONE
+};
+
+static const unsigned glBlendOp[] =
+{
+        GL_FUNC_ADD,
+        GL_FUNC_ADD,
+        GL_FUNC_ADD,
+        GL_FUNC_ADD,
+        GL_FUNC_ADD,
+        GL_FUNC_ADD,
+        GL_FUNC_ADD,
+        GL_FUNC_REVERSE_SUBTRACT,
+        GL_FUNC_REVERSE_SUBTRACT
+};
+
+static const unsigned glCmpFunc[] =
+{
+        GL_ALWAYS,
+        GL_EQUAL,
+        GL_NOTEQUAL,
+        GL_LESS,
+        GL_LEQUAL,
+        GL_GREATER,
+        GL_GEQUAL
+};
+
 Graphics::Graphics(Context* context):
 Object(context),
 impl_(new GraphicsImpl()),
@@ -36,9 +87,12 @@ defaultTextureFilterMode_(FILTER_TRILINEAR),
 defaultTextureAnisotropy_(4),
 indexBuffer_(NULL),
 pixelShader_(NULL),
-vertexShader_(NULL)
+vertexShader_(NULL),
+alphaToCoverage_(false),
+depthWrite_(false)
 {
-
+    blendMode_ = BLEND_REPLACE;
+    depthTestMode_ = CMP_ALWAYS;
 }
 
 Graphics::~Graphics()
@@ -327,6 +381,48 @@ void Graphics::setTextureForUpdate(Texture *texture)
     glBindTexture(glType,texture->getGPUObjectName());
     impl_->textureTypes_[0] = glType;
     textures_[0] = texture;
+}
+
+void Graphics::setBlendMode(BlendMode mode, bool alphaToCoverage)
+{
+    if(mode != blendMode_)
+    {
+        if(mode == BLEND_REPLACE)
+            glDisable(GL_BLEND);
+        else
+        {
+            glEnable(GL_BLEND);
+            glBlendFunc(glSrcBlend[mode],glDestBlend[mode]);
+            glBlendEquation(glBlendOp[mode]);
+        }
+    }
+    if(alphaToCoverage != alphaToCoverage_)
+    {
+        if (alphaToCoverage)
+            glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE);
+        else
+            glDisable(GL_SAMPLE_ALPHA_TO_COVERAGE);
+
+        alphaToCoverage_ = alphaToCoverage;
+    }
+}
+
+void Graphics::setDepthTest(CompareMode mode)
+{
+    if (mode != depthTestMode_)
+    {
+        glDepthFunc(glCmpFunc[mode]);
+        depthTestMode_ = mode;
+    }
+}
+
+void Graphics::setDepthWrite(bool enable)
+{
+    if (enable != depthWrite_)
+    {
+        glDepthMask(enable ? GL_TRUE : GL_FALSE);
+        depthWrite_ = enable;
+    }
 }
 
 void Graphics::SetVBO(unsigned object)

@@ -4,7 +4,8 @@
 #include "Material.h"
 
 Material::Material(Context* context):
-    Resource(context)
+    Resource(context),
+    alphaToCoverage_(false)
 {
 }
 
@@ -13,7 +14,7 @@ Material::~Material()
 
 }
 
-bool Material::beginLoad(Deserializer &source)
+bool Material::beginLoad(Deserializer* source)
 {
 
 

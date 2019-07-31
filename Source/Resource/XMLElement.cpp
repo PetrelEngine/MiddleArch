@@ -327,7 +327,17 @@ bool XMLElement::setBuffer(const std::string& name, const std::vector<unsigned c
         return setBuffer(name, &value[0], value.size());
 }
 
+XMLElement XMLElement::getChild(const char* name) const
+{
+    if (!file_ || (!node_ && !xpathNode_))
+        return XMLElement();
 
+    const pugi::xml_node& node = xpathNode_ ? xpathNode_->node() : pugi::xml_node(node_);
+    if (!std::string(name).length())
+        return XMLElement(file_, node.first_child().internal_object());
+    else
+        return XMLElement(file_, node.child(name).internal_object());
+}
 
 
 

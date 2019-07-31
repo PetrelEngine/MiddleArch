@@ -7,6 +7,7 @@
 #include "Graphics.h"
 #include "View.h"
 #include "Camera.h"
+#include "Technique.h"
 void Batch::Prepare(View* view,Camera* camera,bool setModelTransform, bool allowDepthWrite)
 {
     if(!vertexShader_ || !pixelShader_)
@@ -16,6 +17,14 @@ void Batch::Prepare(View* view,Camera* camera,bool setModelTransform, bool allow
     graphics->SetShaders(vertexShader_,pixelShader_);
     //设置模型矩阵
     graphics->setShaderParameter(VSP_MODEL,modelmatrix_);
+    if(pass_ && material_)
+    {
+        BlendMode blend = pass_->getBlendMode();
+        graphics->setBlendMode(blend,pass_->getAlphaToCoverage()||material_->getAlphaToCoverage());
+
+        graphics->setDepthTest(pass_->getDepthTestMode());
+        graphics->setDepthWrite(pass_->getDepthWrite() && allowDepthWrite);
+    }
     //设置相机相关的参数
     view->setCameraShaderParameters(camera);
 }

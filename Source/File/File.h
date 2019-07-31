@@ -7,6 +7,7 @@
 #include "Context.h"
 #include "Data.h"
 #include "Context.h"
+#include "AbstractFile.h"
 using namespace std;
 enum FileMode
 {
@@ -94,12 +95,13 @@ public:
     }
 };
 
-class File : public Object
+class File : public Object, public AbstractFile
 {
     ENGINE_OBJECT(File,Object);
 public:
     File(Context *context):
-            Object(context)
+            Object(context),
+            AbstractFile()
     {
     }
 

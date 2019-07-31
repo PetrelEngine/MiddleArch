@@ -17,8 +17,10 @@ public:
     Material(Context* context);
     virtual ~Material();
 
-    virtual bool beginLoad(Deserializer& source) override;
+    virtual bool beginLoad(Deserializer* source) override;
+
+    bool getAlphaToCoverage() const { return alphaToCoverage_; }
 
 private:
-
+    bool alphaToCoverage_;
 };

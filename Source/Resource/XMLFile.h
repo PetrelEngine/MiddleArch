@@ -17,7 +17,7 @@ public:
 
     virtual ~XMLFile();
 
-    virtual bool beginLoad(Deserializer& source) override;
+    virtual bool beginLoad(Deserializer* source) override;
 
 
     XMLElement getRoot(const std::string& name = "");

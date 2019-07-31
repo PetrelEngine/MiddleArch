@@ -34,9 +34,11 @@ public:
 
     CullMode getCullMode() const {return cullMode_;}
 
-    CompareMode getDepteTestMode() const {return depthTestMode_;}
+    CompareMode getDepthTestMode() const {return depthTestMode_;}
 
     bool getAlphaToCoverage() const { return alphaToCoverage_; }
+
+    bool getDepthWrite() const { return depthWrite_; }
 
     unsigned getIndex() const {return index_;}
 
@@ -50,9 +52,12 @@ private:
     unsigned                        index_;
     std::string                     vertexShaderName_;
     std::string                     pixelShaderName_;
+    std::string                     vertexShaderDefines_;
+    std::string                     pixelShaderDefines_;
     std::vector<ShaderVariation*>   vertexShaders_;
     std::vector<ShaderVariation*>   pixelShaders_;
     std::string                     name_;
+    bool depthWrite_;
 };
 
 class Technique : public Resource
@@ -63,7 +68,7 @@ public:
 
     virtual ~Technique();
 
-    virtual bool beginLoad(Deserializer& source) override;
+    virtual bool beginLoad(Deserializer* source) override;
 
     Pass* createPass(const std::string& passName);
 

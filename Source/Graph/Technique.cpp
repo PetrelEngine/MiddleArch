@@ -8,7 +8,8 @@ Pass::Pass(const string &passName):
     cullMode_(MAX_CULLMODES),
     depthTestMode_(CMP_LESSEQUAL),
     alphaToCoverage_(false),
-    name_(passName)
+    name_(passName),
+    depthWrite_(false)
 {
 
 }
@@ -65,8 +66,11 @@ Technique::~Technique()
 
 }
 
-bool Technique::beginLoad(Deserializer &source)
+bool Technique::beginLoad(Deserializer* source)
 {
+    passes_.clear();
+    cloneTechniques_.clear();
+
     return false;
 }
 

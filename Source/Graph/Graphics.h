@@ -49,6 +49,12 @@ public:
     void setTexture(unsigned index, Texture* texture);
     //绑定纹理并更新纹理。
     void setTextureForUpdate(Texture* texture);
+
+    void setBlendMode(BlendMode mode,bool alphaToCoverage);
+
+    void Graphics::setDepthTest(CompareMode mode);
+
+    void Graphics::setDepthWrite(bool enable);
     //三角形卷绕绘制
     void Draw(PrimitiveType type, unsigned vertexStart, unsigned vertexCount);
     //索引法绘制
@@ -74,6 +80,10 @@ private:
     TextureFilterMode defaultTextureFilterMode_;
     unsigned defaultTextureAnisotropy_;
     Texture* textures_[MAX_TEXTURE_UNITS];
+    BlendMode blendMode_;
+    bool alphaToCoverage_;
+    CompareMode depthTestMode_;
+    bool depthWrite_;
 protected:
 
 };

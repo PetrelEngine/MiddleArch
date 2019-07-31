@@ -101,6 +101,8 @@ void EngineSample::CreateScence(Context *context, int width, int height)
     if(flag)
         LOGE("创建纹理成功。");
 
+
+    renderer_ = new Renderer(context);
 }
 
 void EngineSample::RenderOneFrame(Context *context)

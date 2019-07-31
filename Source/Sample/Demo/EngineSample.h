@@ -9,6 +9,7 @@
 #include "Application.h"
 #include "Batch.h"
 #include "Texture2D.h"
+#include "Renderer.h"
 class EngineSample: public Application
 {
 public:
@@ -29,4 +30,6 @@ private:
     View*                       view_;
     Camera*                     camera_;
     Texture2D*                  texture2D_;
+
+    Renderer*                   renderer_;
 };

@@ -19,6 +19,7 @@
 #include "ShadowMapingDepthSample.h"
 #include "FresnelReflectionSample.h"
 #include "BilateralFilterSample.h"
+#include "XMLLoadSample.h"
 using namespace std;
 
 #define JNI_METHOD(return_type, method_name) \
@@ -55,6 +56,9 @@ JNI_METHOD(void ,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong Applicati
 
     EngineSample* helloTriangleSample = new EngineSample();
     applicationSystem_->RegisteredApplication(helloTriangleSample);
+
+//    XMLLoadSample* xmlLoadSample = new XMLLoadSample();
+//    applicationSystem_->RegisteredApplication(xmlLoadSample);
 
     applicationSystem_->CreateScence(width,height);
 }
