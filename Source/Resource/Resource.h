@@ -22,6 +22,7 @@ public:
 private:
     string name_;
 protected:
+    string bufferData_;
 //    Image*  image_;
 };
 

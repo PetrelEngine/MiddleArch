@@ -4,6 +4,7 @@
 #include "ResourceCache.h"
 #include "Resource.h"
 #include "File.h"
+#include "XMLFile.h"
 ResourceCache::ResourceCache(Context *context):
     Object(context)
 {
@@ -26,7 +27,7 @@ Resource* ResourceCache::getResource(std::string type, const std::string &name,
     if(existing)
         return existing;
 
-    Resource* resource = new Resource(context_);
+    Resource* resource = new XMLFile(context_);
     File* file = getSubsystem<File>();
     if(!resource->load(file))
     {

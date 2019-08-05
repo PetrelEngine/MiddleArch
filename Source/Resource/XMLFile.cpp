@@ -4,7 +4,8 @@
 #include "XMLFile.h"
 #include "XMLElement.h"
 XMLFile::XMLFile(Context *context):
-        Resource(context)
+        Resource(context),
+        document_(new pugi::xml_document())
 {
 }
 
@@ -15,14 +16,21 @@ XMLFile::~XMLFile()
 
 bool XMLFile::beginLoad(Deserializer* source)
 {
-
+    unsigned int dataSize = bufferData_.length();
+    LOGE("XMLFile dataBuffer length:%d",dataSize);
+    if (!document_->load_buffer(const_cast<char*>(bufferData_.c_str()),dataSize))
+    {
+        LOGE("Zero sized XML data");
+        document_->reset();
+        return false;
+    }
+    XMLElement rootElem = getRoot();
     return true;
 }
 
 XMLElement XMLFile::getRoot(const string &name)
 {
-    LOGE("getRoot start.");
-    pugi::xml_node root = document_.first_child();
+    pugi::xml_node root = document_->first_child();
     if (root.empty())
         return XMLElement();
 

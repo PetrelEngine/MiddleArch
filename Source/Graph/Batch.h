@@ -17,10 +17,17 @@ class Texture2D;
 class Material;
 class Pass;
 class Zone;
+class Graphics;
 //Queued 3D geometry draw call.
 struct Batch
 {
-    Batch()
+    Batch():
+            zone_(NULL),
+            geometry_(NULL),
+            vertexShader_(NULL),
+            pixelShader_(NULL),
+            material_(NULL),
+            pass_(NULL)
     {
     }
 

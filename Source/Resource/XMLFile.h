@@ -23,5 +23,5 @@ public:
     XMLElement getRoot(const std::string& name = "");
 
 private:
-    pugi::xml_document document_;
+    pugi::xml_document* document_;
 };

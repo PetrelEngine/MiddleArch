@@ -52,9 +52,9 @@ public:
 
     void setBlendMode(BlendMode mode,bool alphaToCoverage);
 
-    void Graphics::setDepthTest(CompareMode mode);
-
-    void Graphics::setDepthWrite(bool enable);
+    void setDepthTest(CompareMode mode);
+//
+    void setDepthWrite(bool enable);
     //三角形卷绕绘制
     void Draw(PrimitiveType type, unsigned vertexStart, unsigned vertexCount);
     //索引法绘制

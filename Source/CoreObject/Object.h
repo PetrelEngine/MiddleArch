@@ -88,3 +88,48 @@ template <class T> T* Object::getSubsystem() const
 {
     return static_cast<T*>(getSubsystem(T::GetTypeNameStatic()));
 }
+
+class ObjectFactory
+{
+public:
+    ObjectFactory(Context* context):
+            context_(context)
+    {
+    }
+
+    /// Create an object. Implemented in templated subclasses.
+    virtual Object* CreateObject() = 0;
+
+    /// Return execution context.
+    Context* GetContext() const { return context_; }
+
+    /// Return type info of objects created by this factory.
+    const TypeInfo* GetTypeInfo() const { return typeInfo_; }
+
+    /// Return type hash of objects created by this factory.
+    std::string GetType() const { return typeInfo_->getType(); }
+
+    /// Return type name of objects created by this factory.
+    const std::string& GetTypeName() const { return typeInfo_->getTypeName(); }
+
+protected:
+    Context* context_;
+    const TypeInfo* typeInfo_;
+};
+
+template <class T> class ObjectFactoryImpl : public ObjectFactory
+{
+public:
+    /// Construct.
+    ObjectFactoryImpl(Context* context) :
+            ObjectFactory(context)
+    {
+        typeInfo_ = T::getTypeInfoStatic();
+    }
+
+    /// Create an object of the specific type.
+    virtual Object* CreateObject() override
+    {
+        return new T(context_);
+    }
+};

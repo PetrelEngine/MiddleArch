@@ -84,23 +84,23 @@ bool XMLElement::notNull() const
     return node_ || (xpathNode_ && !xpathNode_->operator !());
 }
 
-//XMLElement XMLElement::getOrCreateChild(const std::string& name)
-//{
-//    XMLElement child = getChild(name);
-//    if (child.notNull())
-//        return child;
-//    else
-//        return createChild(name);
-//}
+XMLElement XMLElement::getOrCreateChild(const std::string& name)
+{
+    XMLElement child = getChild(name);
+    if (child.notNull())
+        return child;
+    else
+        return createChild(name);
+}
 
-//XMLElement XMLElement::getOrCreateChild(const char* name)
-//{
-//    XMLElement child = getChild(name);
-//    if (child.notNull())
-//        return child;
-//    else
-//        return createChild(name);
-//}
+XMLElement XMLElement::getOrCreateChild(const char* name)
+{
+    XMLElement child = getChild(name);
+    if (child.notNull())
+        return child;
+    else
+        return createChild(name);
+}
 
 bool XMLElement::appendChild(XMLElement element, bool asCopy)
 {
@@ -325,6 +325,11 @@ bool XMLElement::setBuffer(const std::string& name, const std::vector<unsigned c
         return setAttribute(name, "");
     else
         return setBuffer(name, &value[0], value.size());
+}
+
+XMLElement XMLElement::getChild(const std::string& name) const
+{
+    return getChild(name.c_str());
 }
 
 XMLElement XMLElement::getChild(const char* name) const

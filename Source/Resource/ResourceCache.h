@@ -46,5 +46,6 @@ private:
 template <class T> T* ResourceCache::getResource(const std::string& name, bool sendEventOnFailure)
 {
     std::string type = T::GetTypeStatic();
+    LOGE("type:%s",type.c_str());
     return static_cast<T*>(getResource(type, name, sendEventOnFailure));
 }

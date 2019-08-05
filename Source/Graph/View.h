@@ -3,8 +3,10 @@
 //
 #pragma once
 #include "Object.h"
+#include "Batch.h"
 class Graphics;
 class Camera;
+class Drawable;
 class View: public Object
 {
     ENGINE_OBJECT(View,Object);
@@ -15,12 +17,17 @@ public:
 
     void setCameraShaderParameters(Camera* camera);
 
-    void Update();
+    void update(const FrameInfo& frame);
 
-    void Render();
+    void render();
 
-    Graphics* GetGraphics() const;
+    Graphics* getGraphics() const;
 private:
     Graphics* graphics_;
 
+    FrameInfo frame_;
+
+    Camera* cullCamera_;
+
+    glm::vec2 viewSize_;
 };

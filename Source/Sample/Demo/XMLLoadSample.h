@@ -4,6 +4,7 @@
 #pragma once
 #include "Application.h"
 #include "XMLFile.h"
+#include "RenderPath.h"
 class XMLLoadSample: public Application
 {
 public:
@@ -19,4 +20,5 @@ public:
 
 private:
     XMLFile* xmlFile_;
+    RenderPath* defaultRenderPath_;
 };

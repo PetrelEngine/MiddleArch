@@ -416,6 +416,7 @@ void Graphics::setDepthTest(CompareMode mode)
     }
 }
 
+
 void Graphics::setDepthWrite(bool enable)
 {
     if (enable != depthWrite_)

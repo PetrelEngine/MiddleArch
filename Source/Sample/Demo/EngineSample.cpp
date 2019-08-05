@@ -97,12 +97,12 @@ void EngineSample::CreateScence(Context *context, int width, int height)
     image->loadImage("/sdcard/SkySnowResources/CoreData/Textures/nobeauty.png");
     texture2D_ = new Texture2D(context);
     bool flag = texture2D_->setData(image);
-    view_->GetGraphics()->setTexture(0,texture2D_);
+    view_->getGraphics()->setTexture(0,texture2D_);
     if(flag)
         LOGE("创建纹理成功。");
 
 
-    renderer_ = new Renderer(context);
+//    renderer_ = new Renderer(context);
 }
 
 void EngineSample::RenderOneFrame(Context *context)
