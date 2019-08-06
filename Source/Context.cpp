@@ -4,7 +4,7 @@
 #include "Context.h"
 #include "Object.h"
 #include "Common.h"
-#include <vector>
+
 #include "File.h"
 #include "Graphics.h"
 Context::~Context()
@@ -16,6 +16,33 @@ Context::~Context()
         delete iter->second;
     }
     subsystem_.clear();
+}
+
+Object* Context::createObject(std::string type)
+{
+    SN_HashMap<std::string,ObjectFactory*>::const_iterator i = factories_.find(type);
+    if(i != factories_.end())
+        return i->second->createObject();
+    else
+        return nullptr;
+}
+
+void Context::registerFactory(ObjectFactory* factory)
+{
+    if (!factory)
+        return;
+
+    factories_[factory->getType()] = factory;
+}
+
+void Context::registerFactory(ObjectFactory* factory, const char* category)
+{
+    if (!factory)
+        return;
+
+    registerFactory(factory);
+    if (string(category).length())
+        objectCategories_[category].push_back(factory->getType());
 }
 
 void Context::registerSubsystem(Object* subsystem)

@@ -34,6 +34,8 @@ public:
     template <class T> T* getResource(const std::string& name, bool sendEventOnFailure = true);
 
 private:
+    void registerResourceLibrary(Context* context);
+
     Resource* findResource(std::string type,string name);
 
     Resource* findResource(string name);
@@ -45,7 +47,7 @@ private:
 
 template <class T> T* ResourceCache::getResource(const std::string& name, bool sendEventOnFailure)
 {
-    std::string type = T::GetTypeStatic();
-    LOGE("type:%s",type.c_str());
+    std::string type = T::getTypeStatic();
+    LOGI("type:%s",type.c_str());
     return static_cast<T*>(getResource(type, name, sendEventOnFailure));
 }

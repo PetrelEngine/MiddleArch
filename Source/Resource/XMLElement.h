@@ -9,6 +9,7 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
+#include "Common.h"
 class XMLFile;
 struct xml_node_struct;
 class xpath_node;
@@ -133,6 +134,19 @@ public:
     XMLElement getChild(const char* name) const;
 
     XMLElement getParent() const;
+
+    std::string getAttribute(const char* name) const;
+
+    const char* getAttributeCString(const char* name) const;
+
+    /// Return next sibling element.
+    XMLElement getNext(const string& name = "") const;
+    /// Return next sibling element.
+    XMLElement getNext(const char* name) const;
+
+    std::string getAttributeLower(const string& name) const;
+    /// Return attribute in lowercase, or empty if missing.
+    std::string getAttributeLower(const char* name) const;
 
 private:
     XMLFile* file_;

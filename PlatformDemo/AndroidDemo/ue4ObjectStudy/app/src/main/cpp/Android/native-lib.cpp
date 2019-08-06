@@ -54,11 +54,11 @@ JNI_METHOD(void ,RendererCreateJNI)(JNIEnv *env,jobject jobject1,jlong Applicati
 //    TestDAG* testDAG = new TestDAG();
 //    applicationSystem_->RegisteredApplication(testDAG);
 
-//    EngineSample* helloTriangleSample = new EngineSample();
-//    applicationSystem_->RegisteredApplication(helloTriangleSample);
+    EngineSample* helloTriangleSample = new EngineSample();
+    applicationSystem_->RegisteredApplication(helloTriangleSample);
 
-    XMLLoadSample* xmlLoadSample = new XMLLoadSample();
-    applicationSystem_->RegisteredApplication(xmlLoadSample);
+//    XMLLoadSample* xmlLoadSample = new XMLLoadSample();
+//    applicationSystem_->RegisteredApplication(xmlLoadSample);
 
     applicationSystem_->CreateScence(width,height);
 }

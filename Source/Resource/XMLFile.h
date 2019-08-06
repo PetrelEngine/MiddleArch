@@ -17,6 +17,8 @@ public:
 
     virtual ~XMLFile();
 
+    static void registerObject(Context* context);
+
     virtual bool beginLoad(Deserializer* source) override;
 
 

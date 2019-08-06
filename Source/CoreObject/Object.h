@@ -51,8 +51,8 @@ private:
             virtual string getType() const{ return getTypeInfoStatic()->getType();}\
             virtual const string& getTypeName() const { return getTypeInfoStatic()->getTypeName(); }\
             virtual const TypeInfo* getTypeInfo() const { return getTypeInfoStatic(); }\
-            static string GetTypeStatic() { return getTypeInfoStatic()->getType(); }\
-            static const string& GetTypeNameStatic() { return getTypeInfoStatic()->getTypeName(); }\
+            static string getTypeStatic() { return getTypeInfoStatic()->getType(); }\
+            static const string& getTypeNameStatic() { return getTypeInfoStatic()->getTypeName(); }\
             static const TypeInfo* getTypeInfoStatic(){static const TypeInfo typeInfoStatic(#typeName,BaseClassName::getTypeInfoStatic()); return &typeInfoStatic;};
 
 class Object
@@ -86,7 +86,7 @@ private:
 
 template <class T> T* Object::getSubsystem() const
 {
-    return static_cast<T*>(getSubsystem(T::GetTypeNameStatic()));
+    return static_cast<T*>(getSubsystem(T::getTypeNameStatic()));
 }
 
 class ObjectFactory
@@ -98,19 +98,31 @@ public:
     }
 
     /// Create an object. Implemented in templated subclasses.
-    virtual Object* CreateObject() = 0;
+    virtual Object* createObject() = 0;
 
     /// Return execution context.
-    Context* GetContext() const { return context_; }
+    Context* getContext() const
+    {
+        return context_;
+    }
 
     /// Return type info of objects created by this factory.
-    const TypeInfo* GetTypeInfo() const { return typeInfo_; }
+    const TypeInfo* getTypeInfo() const
+    {
+        return typeInfo_;
+    }
 
     /// Return type hash of objects created by this factory.
-    std::string GetType() const { return typeInfo_->getType(); }
+    std::string getType() const
+    {
+        return typeInfo_->getType();
+    }
 
     /// Return type name of objects created by this factory.
-    const std::string& GetTypeName() const { return typeInfo_->getTypeName(); }
+    const std::string& getTypeName() const
+    {
+        return typeInfo_->getTypeName();
+    }
 
 protected:
     Context* context_;
@@ -128,7 +140,7 @@ public:
     }
 
     /// Create an object of the specific type.
-    virtual Object* CreateObject() override
+    virtual Object* createObject() override
     {
         return new T(context_);
     }

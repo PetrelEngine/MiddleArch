@@ -19,10 +19,10 @@ void XMLLoadSample::CreateScence(Context *context, int width, int height)
     xmlFile_ = new XMLFile(context);
     ResourceCache* cache = context->getSubsystem<ResourceCache>();
 
-    cache->getResource<XMLFile>("RenderPaths/Forward.xml");
+//    cache->getResource<XMLFile>("RenderPaths/Forward.xml");
 
-//    defaultRenderPath_ = new RenderPath();
-//    defaultRenderPath_->load(cache->getResource<XMLFile>("RenderPaths/Forward.xml"));
+    defaultRenderPath_ = new RenderPath();
+    defaultRenderPath_->load(cache->getResource<XMLFile>("RenderPaths/Forward.xml"));
 }
 
 void XMLLoadSample::RenderOneFrame(Context *context)

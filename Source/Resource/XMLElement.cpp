@@ -344,7 +344,51 @@ XMLElement XMLElement::getChild(const char* name) const
         return XMLElement(file_, node.child(name).internal_object());
 }
 
+std::string XMLElement::getAttribute(const char* name) const
+{
+    return getAttributeCString(name);
+}
 
+const char* XMLElement::getAttributeCString(const char* name) const
+{
+    LOGI("getAttributeCString 0：%s",name);
+    if (!file_ || (!node_ && !xpathNode_))
+        return nullptr;
+    LOGI("getAttributeCString 1");
+    // If xpath_node contains just attribute, return it regardless of the specified name
+    if (xpathNode_ && xpathNode_->attribute())
+        return xpathNode_->attribute().value();
+    const pugi::xml_node& node = xpathNode_ ? xpathNode_->node() : pugi::xml_node(node_);
+    LOGI("getAttributeCString 3");
+    return node.attribute(name).value();
+}
+
+XMLElement XMLElement::getNext(const string& name) const
+{
+    return getNext(name.c_str());
+}
+
+XMLElement XMLElement::getNext(const char* name) const
+{
+    if (!file_ || (!node_ && !xpathNode_))
+        return XMLElement();
+
+    const pugi::xml_node& node = xpathNode_ ? xpathNode_->node() : pugi::xml_node(node_);
+    if (!string(name).length())
+        return XMLElement(file_, node.next_sibling().internal_object());
+    else
+        return XMLElement(file_, node.next_sibling(name).internal_object());
+}
+
+//std::string XMLElement::getAttributeLower(const string& name) const
+//{
+//    return getAttribute(name).ToLower();
+//}
+//
+//std::string XMLElement::getAttributeLower(const char* name) const
+//{
+//    return string(getAttribute(name)).ToLower();
+//}
 
 
 XPathResultSet::XPathResultSet()

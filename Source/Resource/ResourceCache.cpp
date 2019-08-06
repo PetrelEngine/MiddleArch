@@ -8,6 +8,7 @@
 ResourceCache::ResourceCache(Context *context):
     Object(context)
 {
+    registerResourceLibrary(context_);
 }
 
 ResourceCache::~ResourceCache()
@@ -18,8 +19,8 @@ ResourceCache::~ResourceCache()
 Resource* ResourceCache::getResource(std::string type, const std::string &name,
                                      bool sendEventOnFailure)
 {
-    LOGE("Resource Cache getResource start.");
-    LOGE("Resource name:%s",name.c_str());
+    LOGI("Resource Cache getResource start.");
+    LOGI("Resource name:%s",name.c_str());
     if(name.empty())
         return nullptr;
 
@@ -27,8 +28,10 @@ Resource* ResourceCache::getResource(std::string type, const std::string &name,
     if(existing)
         return existing;
 
-    Resource* resource = new XMLFile(context_);
+    Resource* resource = (Resource*)context_->createObject(type);
     File* file = getSubsystem<File>();
+    if(resource == nullptr)
+        LOGE("resource is nullptr.");
     if(!resource->load(file))
     {
         LOGE("打印error数据。并应该记录错误日志数据。");
@@ -38,7 +41,7 @@ Resource* ResourceCache::getResource(std::string type, const std::string &name,
     //
     //这里应该有内存检测的代码，如果超过某个内存限定，那么清理一些不用资源内存占用
     //
-    LOGE("创建Resources成功。");
+    LOGI("创建Resources成功。");
     return resource;
 }
 
@@ -60,4 +63,9 @@ Resource* ResourceCache::findResource(string name)
         }
     }
     return nullptr;
+}
+
+void ResourceCache::registerResourceLibrary(Context *context)
+{
+    XMLFile::registerObject(context);
 }
